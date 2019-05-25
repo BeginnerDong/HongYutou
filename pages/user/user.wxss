@@ -18,6 +18,7 @@ page{
 	left:5%;
 	background: #fff;
 	box-shadow:0 0 2px #999;
+	border-radius: 14rpx;
 }
 .user-card-head image{
 	width:120rpx;
@@ -31,13 +32,14 @@ page{
 	width:100%;
 	margin-top: 120rpx;
 	height:760rpx;
-	box-shadow:0 0 2px #999;
+	box-shadow:0 0 5px #D5D5D5;
 }
 .user-func-item{
 	width:32.8%;
 	border: 1px solid #f4f4f4;
 	height:250rpx;
 	text-align: center;
+	background: #fff;
 }
 .user-func-item image{
 	width:70rpx;

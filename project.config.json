@@ -14,7 +14,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.6.4",
 	"appid": "wxc9d7ab8cae902fef",
-	"projectname": "test",
+	"projectname": "HongYutou",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -39,7 +39,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 17,
+			"current": 19,
 			"list": [
 				{
 					"id": -1,
@@ -166,6 +166,17 @@
 					"pathName": "pages/storeRank/storeRank",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/user/user",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的优惠券",
+					"pathName": "pages/userCoupon/userCoupon"
 				}
 			]
 		}

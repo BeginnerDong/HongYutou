@@ -41,7 +41,7 @@
 			<image src="/images/about-icon7.png" style="margin-top: 60rpx;"></image>
 			<view class="font26 color42" style="margin-top:20rpx;">门店入口</view>
 		</view>
-		<view class="user-func-item" style="width:49%" style="width:49%" data-path="/pages/storeLogin/storeLogin?type=partner" bindtap="intoPath">
+		<view class="user-func-item" style="width:49.7%" style="width:49.7%" data-path="/pages/storeLogin/storeLogin?type=partner" bindtap="intoPath">
 			<image src="/images/about-icon8.png" style="margin-top: 60rpx;"></image>
 			<view class="font26 color42" style="margin-top:20rpx;">合伙人入口</view>
 		</view>

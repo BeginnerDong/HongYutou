@@ -12,9 +12,65 @@
 
 </view>
 <block wx:for="{{web_mainData}}" wx:key="id">
-	<view class="coupon" style="{{num==2?'opacity: 0.5;':''}}">
+	<!-- <view class="coupon" style="{{num==2?'opacity: 0.5;':''}}">
 			<image src="/images/img1.png" />
 			<view class="font60 colorfff" style="position:absolute;top:25%;left:8%">{{item.snap_coupon.title}}</view>
 			<view class="font20 " style="position:absolute;top:70%;height:30rpx;width:320rpx;background: #fff;text-align: center;left:8%;color: #FF7F23;">{{item.snap_coupon.description}}</view>
+	</view> -->
+	<view class="coupon" style="{{num==2?'opacity: 0.5;':''}}">
+		<image src="/images/img1.png" />
+		<view class="coupon-left">
+			<view class="font60 colorfff" style="margin-top: 15%; margin-bottom: 2%;">10元优惠券</view>
+			<view class="font20 " style="background: #fff;text-align: center;color:#FF7F23;width: 76%;margin: 0 auto;">全场满100减10</view>
+		</view>
+		<view class="coupon-right">
+			<view style="font-size:26rpx;margin-top:60rpx;">满减优惠</view>
+			<view style="font-size: 22rpx;">全店通用</view>
+			<button class="btn1">立即使用</button>
+		</view>
 	</view>
+	<view class="coupon" style="{{num==2?'opacity: 0.5;':''}}">
+		<image src="/images/img2.png" />
+		<view class="coupon-left">
+			<view class="font60 colorfff" style="margin-top: 15%; margin-bottom: 2%;">10元优惠券</view>
+			<view class="font20 " style="background: #fff;text-align: center;color:#FF7F23;width: 76%;margin: 0 auto;">全场满100减10</view>
+		</view>
+		<view class="coupon-right">
+			<view style="font-size:26rpx;margin-top:60rpx;">限时优惠</view>
+			<view style="font-size: 22rpx;">全店通用</view>
+			<button class="btn2">立即使用</button>
+		</view>
+	</view>
+	<view class="coupon" style="{{num==2?'opacity: 0.5;':''}}">
+		<image src="/images/img3.png" />
+		<view class="coupon-left">
+			<view class="font60 colorfff" style="margin-top: 15%; margin-bottom: 2%;">10元优惠券</view>
+			<view class="font20 " style="background: #fff;text-align: center;color:#FF7F23;width: 76%;margin: 0 auto;">全场满100减10</view>
+		</view>
+		<view class="coupon-right">
+			<view style="font-size:26rpx;margin-top:60rpx;">直接抵扣</view>
+			<view style="font-size: 22rpx;">全店通用</view>
+			<button class="btn3">立即使用</button>
+		</view>
+	</view>
+	<view style="position: relative;">
+		<view class="coupon" style="opacity: 0.5;">
+			<image src="/images/img1.png"/>
+			<view class=""style="position: absolute; top: 0rpx;width: 100%; height: 100%;">
+				<view class="coupon-left">
+					<view class="font60 colorfff" style="margin-top: 15%; margin-bottom: 2%;">10元优惠券</view>
+					<view class="font20 " style="background: #fff;text-align: center;color:#FF7F23;width: 76%;margin: 0 auto;">全场满100减10</view>
+				</view>
+				<view class="coupon-right">
+					<view style="font-size:26rpx;margin-top:60rpx;">满减优惠</view>
+					<view style="font-size: 22rpx;">全店通用</view>
+					<button class="btn1">立即使用</button>
+				</view>
+			</view>
+		</view>
+		<view class="coupon-text" style="opacity: 0.7;">
+					已过期
+		</view>
+	</view>
+	
 </block>
