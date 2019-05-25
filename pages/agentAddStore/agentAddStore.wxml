@@ -1,0 +1,58 @@
+<view style="width:100%">
+	
+		
+	<view class="form">
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">门店名称：</view>
+			<input class="font26 color426" placeholder="请输入门店名称" placeholder-class="place-holder" 
+			value="{{web_sForm.login_name}}"  data-key="login_name" bindblur="changeBind"></input>
+		</view>
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">登录密码：</view>
+			<input class="font26 color426" placeholder="请输入门店名称" placeholder-class="place-holder"
+			value="{{web_sForm.password}}"  data-key="password" bindblur="changeBind"></input>
+		</view>
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">负责人：</view>
+			<input class="font26 color426" type="number" placeholder="请输入负责人姓名" placeholder-class="place-holder"
+			value="{{web_sForm.name}}"  data-key="name" bindblur="changeBind"></input>
+		</view>
+	
+		<view class="form-item flex ">
+			<view class="font26 color42 form-item-title">联系电话：</view>
+			<input class="font26 color426" placeholder="请输入联系电话" placeholder-class="place-holder"
+			value="{{web_sForm.phone}}"  data-key="phone" bindblur="changeBind"></input>
+		</view>
+		<view class="form-item flex ">
+			<view class="font26 color42 form-item-title">省市县/区：</view>
+			<picker
+				mode="region"
+				bindchange="bindRegionChange"
+				value="{{region}}"
+				custom-item="{{customItem}}"
+			  >
+				<view class="picker" class="font24 color426">
+				  {{web_region?web_region:'请选择省市县/区'}}
+				</view>
+			  </picker>
+		</view>
+		<view class="form-item flex ">
+			<view class="font26 color42 form-item-title">详细地址：</view>
+			<input class="font26 color426" placeholder="请输入详细地址" placeholder-class="place-holder"
+			value="{{web_sForm.address}}"  data-key="address" bindblur="changeBind"></input>
+		</view>
+		<view class="form-item flex " style="border-bottom: none;">
+			<view class="font26 color42 form-item-title" style="width:27%">上传门店图片：</view>
+		</view>
+		<view class="flexCenterX" style="width:100%;margin-top: 20rpx;" wx:if="{{web_sForm.mainImg.length>0}}">
+			<image src="{{web_sForm.mainImg[0].url}}"  style="width:400rpx;height:230rpx"/>
+		</view>
+		<view class="flexCenterX" style="width:100%;margin-top: 20rpx;" bindtap="upLoadImg" wx:if="{{web_sForm.mainImg.length==0}}">
+			<image src="/images/stores-icon15.png"  style="width:400rpx;height:230rpx"/>
+		</view>
+		<view class="submit_info" style="height:80rpx;line-height:80rpx;position: fixed;bottom:0;font-size: 28rpx;" bindtap="{{web_buttonCanClick?'submit':''}}">
+			提交
+		</view>
+	
+	</view>
+</view>

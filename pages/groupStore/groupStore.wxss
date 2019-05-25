@@ -1,0 +1,11 @@
+/* groupStore.wxss */
+.form-item{
+	width:92%;
+	height:90rpx;
+	line-height: 90rpx;
+	border-bottom: 1px solid #f4f4f4;
+	padding: 0 4%;
+}
+.form-item-title{
+	 width:25%
+ }

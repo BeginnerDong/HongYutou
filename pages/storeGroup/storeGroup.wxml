@@ -1,0 +1,51 @@
+<!--index3.wxml-->
+<view class="tab font30 flexRowBetween color6">
+	<view class="tab_item " data-num="0" bindtap="{{web_buttonCanClick?'menuClick':''}}">
+		<text class="{{num ==0?'tab_this':''}}">团购订单</text>
+	</view>
+	<view class="tab_item " data-num="1" bindtap="{{web_buttonCanClick?'menuClick':''}}">
+		<text class="{{num ==1?'tab_this':''}}">当期团购</text>
+	</view>
+
+</view>
+<block wx:for="{{web_mainData}}" wx:key="id" wx:if="{{num==0}}">
+	<view class="product">
+		<view class="order_tlt w690 flexRowBetween bg1">
+			<view class="font26 color426" style="width:65%">团购单号：{{item.group_no}}</view>
+			<view class=" tlt_right color font26" style="width:35%">核销码：5555</view>
+
+		</view>
+		<block wx:for="{{item.products}}" wx:for-item="c_item">
+			<view class="product_box w690 flexRowBetween bg1">
+				<view class="product_left">
+					<image src="{{c_item.snap_product.mainImg[0].url}}"></image>
+				</view>
+				<view class="product_right flex">
+					<view class="product_detail">
+						<view class="font32 color3 product_top avoidOverflow">{{c_item.snap_product.title}}</view>
+						<view class="font24 color9 avoidOverflow" style="height:30%;">{{c_item.snap_product.description}}</view>
+						<view class="flexRowBetween" style="height:30%;">
+							<view class="font28 color4 flex">x{{c_item.count}}</view>
+							<view class="font26 colorFF3B3B product_price flex">¥{{c_item.snap_product.price}}</view>
+						</view>
+					</view>
+				</view>
+
+			</view>
+		</block>
+	</view>
+</block>
+<view class="group" wx:if="{{num==1}}">
+	<block wx:for="{{web_groupData}}" wx:key="id" >
+		<view class="flexRowBetween group-main" bindtap="intoPath" data-path="/pages/groupDetail/groupDetail?id={{item.id}}&type='store'">
+			<view class="group-main-left flex">
+				<image src="{{item.mainImg[0].url}}"></image>
+			</view>
+			<view class="group-main-left">
+				<view class="avoidOverflow2 font28" style="height:35%">{{item.title}}</view>
+				<view class="font26" style="height:45%;line-height:88rpx;">团购倒计时<span style="color: rgb(255,127,35);margin-left: 20rpx;">23:56:56</span></view>
+				<view class="font26" style="height:30%">{{item.standard}}人成团<span style="color: rgb(255,59,59);margin-left: 20rpx;">团购：¥{{item.price}}</span></view>
+			</view>
+		</view>
+	</block>
+</view>

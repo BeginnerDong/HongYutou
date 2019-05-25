@@ -1,0 +1,66 @@
+<view style="width:100%">
+	<view class="tab font30 flexRowBetween color426">
+		<view class="tab_item " data-num="0" bindtap="menuClick">
+			<text class="{{num ==0?'tab_this':''}}">门店信息</text>
+		</view>
+		<view class="tab_item " data-num="1" bindtap="menuClick">
+			<text class="{{num ==1?'tab_this':''}}">商品管理</text>
+		</view>
+	</view>
+	<view class="form" wx:if="{{num==0}}">
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">门店名称</view>
+			<input class="font24 color426" placeholder="请输入门店名称" placeholder-class="place-holder"
+			data-key="login_name" bindblur="changeBind"  value="{{web_sForm.login_name}}"></input>
+		</view>
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">门店负责人</view>
+			<input class="font24 color426"  placeholder="请输入门店负责人" placeholder-class="place-holder"
+			data-key="name" bindblur="changeBind"  value="{{web_sForm.name}}"></input>
+		</view>
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">联系方式</view>
+			<input class="font24 color426" type="number" placeholder="请输入门店负责人的联系方式" placeholder-class="place-holder"
+			data-key="phone" bindblur="changeBind"  value="{{web_sForm.phone}}"></input>
+		</view>
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">门店地址</view>
+			<input class="font24 color426"  placeholder="请输入门店地址" placeholder-class="place-holder"
+			data-key="address" bindblur="changeBind"  value="{{web_sForm.address}}"></input>
+		</view>
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">合伙人ID</view>
+			<input class="font24 color426" disabled="disabled"  placeholder="请输入合伙人ID" placeholder-class="place-holder"
+			data-key="parent_no" bindblur="changeBind"  value="{{web_sForm.parent_no}}"></input>
+		</view>
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">店铺余额</view>
+			<input class="font24 color426" disabled="disabled"  placeholder-class="place-holder"
+			data-key="balance" bindblur="changeBind"  value="{{web_sForm.balance}}"></input>
+		</view>
+	</view>
+	<view class="submit_info" style="position: fixed;bottom:0" wx:if="{{num==0}}" bindtap="{{web_buttonCanClick?'submit':''}}">
+		提交
+	</view>
+	<view class="store-product" wx:if="{{num==1}}">
+		<block wx:for="{{web_mainData}}" wx:key="id">
+			<view class="flexRowBetween group-main">
+				<view class="group-main-left flexCenter">
+					<image src="{{item.mainImg[0].url}}"></image>
+				</view>
+				<view class="group-main-right">
+					<view class="avoidOverflow2 font28" style="height:35%">{{item.title}}</view>
+					<view class="font26" style="height:45%;"></view>
+					<view class="font26 flexRowBetween" style="height:30%">
+						<view class="font26" style="color: rgb(255,59,59);" wx:if="{{!web_isEdit[index]}}">{{item.price}}</view>
+						<input placeholder="请输入商品价格" data-key="price"  bindblur="changeBind"  value="{{web_sForm.price}}" style="border:1px solid #f4f4f4;height:40rpx;width:50%;font-size:20rpx" wx:else/>
+						<view class="submit_info" 
+						style="margin-top:0;width:35%;height:40rpx;line-height: 40rpx;font-size:20rpx;border-radius: 20rpx;" bindtap="{{web_isEdit[index]?'submitTwo':'edit'}}" data-index="{{index}}">
+							{{web_isEdit[index]?'提交':'编辑'}}
+						</view>
+					</view>
+				</view>
+			</view>
+		</block>
+	</view>
+</view>

@@ -1,0 +1,37 @@
+<!--index3.wxml-->
+<view class="w690">
+
+	<view class="cash">
+		<view class="cash-shop font28">{{web_userData.login_name}}</view>
+		<view class="case_box">
+			<view class="cash_tlt color42 font28 bg1">
+				输入金额
+			</view>
+			<view class="cash_input flexRowBetween bg1">
+				<view class="input_masks color2">¥</view>
+				<input data-key="price" bindinput="changeBind" value="{{web_submitData.price}}"></input>
+			</view>
+			<view class="cash_can  bg1 flex">
+				<view class="flexCenter cash_can-img" bindtap="useCoupon" data-id="{{web_couponData[0].id}}">
+					<image src="{{web_pay.coupon.length>0?'/images/icon2.png':'/images/icon.png'}}" />
+				</view>
+				<view class="font24 color426">抵扣卷-{{web_couponData[0].value}}元</view>
+			</view>
+			<view class="cash_cont bg1" style="padding-top:70rpx;padding-bottom:30rpx;">
+				<button class="submit_info bg2" style="height:80rpx;line-height: 80rpx;font-size:28rpx" open-type="getUserInfo" bindgetuserinfo="{{web_buttonCanClick?'submit':''}}">确认</button>
+			</view>
+		</view>
+	</view>
+	<view class="shadow" wx:if="{{web_isDiscount}}"></view>
+	<view class="coupon" wx:if="{{web_isDiscount}}">
+		<image src="/images/img4.png"></image>
+		<view style="margin-top: 100rpx;">
+			<view class="font28 color42" wx:if="{{web_selectFreeCouponData.type==1}}">赠送抵扣券{{web_selectFreeCouponData.value}}元</view>
+			<view class="font28 color42" wx:if="{{web_selectFreeCouponData.type==2}}">赠送折扣券{{web_selectFreeCouponData.discount/10}}折</view>
+			<view class="font24 color426">仅限现金支付时使用</view>
+		</view>
+		<view class="submit_info" style="width:40%;margin: 50rpx auto;border-radius:10rpx" bindtap="close" >
+			确认
+		</view>
+	</view>
+</view>

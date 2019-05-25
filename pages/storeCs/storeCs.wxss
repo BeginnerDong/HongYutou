@@ -1,0 +1,9 @@
+/* storeCs.wxss */
+.main{
+	text-align: center;
+	margin-top: 25%;
+}
+.main image{
+	width:280rpx;
+	height:280rpx
+}

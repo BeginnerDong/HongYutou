@@ -1,0 +1,27 @@
+<!--index3.wxml-->
+<view class="w690">
+  <view class="bank bg1 flex w690">
+    <view class="font28 color42">到账银行卡</view>
+    <view class="font26 color426" style="margin-left: 80rpx;">中国银行(0568)</view>
+  </view>
+  <view class="cash">
+      <view class="case_box">
+        <view class="cash_tlt color42 font28 bg1">
+            提现金额
+        </view>
+        <view class="cash_input flexRowBetween bg1">
+            <view class="input_masks color2">¥</view>
+            <input data-key="count" bindinput="changeBind" value="{{web_submitData.count}}"></input>
+        </view>
+        <view class="cash_can font24 color426 bg1 flex">
+            本次可提现<text>¥5286.00</text>
+            <view class="font24 color42" bindtap="allOut">全部提现</view>
+        </view>
+        <view class="cash_cont bg1" style="padding-top:70rpx;padding-bottom:30rpx;">
+            <button class="submit_info bg2" style="height:80rpx;line-height: 80rpx;font-size:28rpx" bindtap="{{web_buttonCanClick?'submit':''}}">提现</button>
+        </view>
+      </view>
+  </view>
+  
+</view>
+	

@@ -1,0 +1,55 @@
+<view style="width:100%;">
+	<view class="banner">
+		<image src="/images/stores-img1.png"></image>
+	</view>
+	<view class="store-infomation">
+		<view class="font28" style="height:60rpx;line-height: 60rpx;">{{web_mainData.login_name}}</view>
+		<view class="font28 flexRowBetween" style="height:60rpx;line-height: 60rpx;">
+			<view class="title-left flexRowBetween">
+				<span class="font28">门店咨询</span>
+			</view>
+			<view class="title-right flexRowBetween">
+				<image src="/images/index-icon2.png"></image>			
+			</view>
+		</view>
+		<view class="font28 flexRowBetween" style="height:60rpx;line-height: 60rpx;">
+			<view class="title-left flexRowBetween">
+				<image src="/images/about-icon5.png"></image>
+				<span class="font24" style="margin-left: 20rpx;">{{web_mainData.info.address}}</span>
+			</view>
+			<view class="title-right flexRowBetween">
+				
+				<image src="/images/icon1.png" ></image>
+				<span class="font24 color3" style="margin-left: 20rpx;">1.4km</span>
+			</view>
+		</view>
+		
+	</view>
+	<view class="store-product">
+		<block wx:for="{{web_productData}}" wx:key="id">
+			<view class="flexRowBetween group-main">
+				<view class="group-main-left flexCenter">
+					<image src="{{item.mainImg[0].url}}"></image>
+				</view>
+				<view class="group-main-right">
+					<view class="avoidOverflow2 font28" style="height:35%">{{item.title}}</view>
+					<view class="font26" style="height:45%;"></view>
+					<view class="font26" style="height:30%;color:rgb(255,59,59)">¥{{item.price}}</view>
+				</view>
+			</view>
+		</block>
+	</view>
+	<view class="shadow" wx:if="{{web_isDiscount}}"></view>
+	<view class="coupon" wx:if="{{web_isDiscount}}">
+		<image src="/images/img4.png"></image>
+		<view>
+			<view class="font28 colorfff">赠送抵扣券{{web_couponData.value}}元</view>
+			<view class="font24 colorfff">仅限现金支付时使用</view>
+		</view>
+		<view class="submit_info" style="width:40%;margin: 50rpx auto;border-radius:10rpx" bindtap="couponAdd" data-id="{{web_couponData.id}}">
+			确认
+		</view>
+	</view>
+	<view style="width:100%;height:115rpx"></view>
+	<view class="submit_info" style="position: fixed;bottom: 0;font-size:28rpx" bindtap="intoPath" data-path="/pages/scan/scan?user_no={{web_mainData.user_no}}">现金支付</view>
+</view>

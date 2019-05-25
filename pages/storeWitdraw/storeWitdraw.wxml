@@ -1,0 +1,59 @@
+<view style="width:100%">
+	<view class="has-card  font28" bindtap="intoPath" data-path="/pages/storeAddCard/storeAddCard"  wx:if="{{web_mainData.info.enc_bank_no}}">
+		{{web_mainData.info.bank_code}}<span class="font28" style="margin-left: 15rpx;">{{web_mainData.info.enc_bank_no}}</span>
+	</view>
+	<view class="add-card color font28" bindtap="intoPath" data-path="/pages/storeAddCard/storeAddCard" wx:else>
+		+添加银行卡
+	</view>
+
+	<view class="card-detail">
+		<view class="flexRowBetween store-main">
+			<view class="store-main-item">
+				<view class="font28 color42">收益总金额</view>
+				<view class="font28 colorFF3B3B" >¥{{web_mainData.Payment.payment}}</view>
+			</view>
+			<view class="store-main-item">
+				<view class="font28 color42">账户余额</view>
+				<view class="font28 colorFF3B3B" >¥{{web_mainData.info.balance}}</view>
+			</view>
+			<view class="store-main-item">
+				<view class="font28 color42">提现总金额</view>
+				<view class="font28 colorFF3B3B" >¥{{web_mainData.Payment.withdraw}}</view>
+			</view>
+		</view>
+		<view class="submit flexCenter">
+			<view  bindtap="intoPath" data-path="/pages/storeWitdrawDetail/storeWitdrawDetail" class="submit_info" style="height:50rpx;line-height:50rpx;width:20%;border-radius:30rpx;font-size: 28rpx;margin-top: 0;">
+				提现
+			</view>
+		</view>
+	</view>
+	<view class="credit_cont">
+		<block wx:for="{{web_mainData.Payment}}" wx:key="id" wx:if="{{item.count<0}}">
+			<view class="credit_list bg1">
+				<view class="credit_item">
+					<view class="credit_left">
+						<view class="credit_reson font28 color42">
+						   {{item.trade_info}}
+						</view>
+						<view class="credit_dates font26 color426" style="margin-top: 20rpx;">
+							 {{item.create_time}}
+						</view>
+					</view>
+					<view class="credit_right font26 color" wx:if="{{item.status==0}}">
+						审核中
+					</view>
+					<view class="credit_right font26 color426" wx:if="{{item.status==1}}">
+						已通过
+					</view>
+					<view class="credit_right font26 colorFF3B3B" wx:if="{{item.status==-1}}">
+						未通过
+					</view>
+					<view class="credit_right font26 color426" style="width:18%;text-align: right;">
+						{{item.count}}
+					</view>	
+				</view>
+			</view>
+		</block>
+	</view>
+	
+</view>

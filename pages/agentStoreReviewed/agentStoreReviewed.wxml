@@ -1,0 +1,53 @@
+<view style="width:100%">
+	<view class="tab font30 flexRowBetween color6">
+		<view class="tab_item " data-num="0" bindtap="{{web_buttonCanClick?'menuClick':''}}">
+			<text class="{{web_num ==0?'tab_this':''}}">待审核</text>
+		</view>
+		<view class="tab_item " data-num="1" bindtap="{{web_buttonCanClick?'menuClick':''}}">
+			<text class="{{web_num ==1?'tab_this':''}}">已通过</text>
+		</view>
+		<view class="tab_item" data-num="2" bindtap="{{web_buttonCanClick?'menuClick':''}}">
+			<text class="{{web_num ==2?'tab_this':''}}">未通过</text>
+		</view>
+	</view>
+	<block wx:for="{{web_mainData}}" wx:key="id">
+		<view class="form">
+			<view class="form-item flex">
+				<view class="font26 color42 form-item-title">门店名称：</view>
+				<view class="font26 color426">{{item.login_name}}</view>
+			</view>
+
+			<view class="form-item flex">
+				<view class="font26 color42 form-item-title">门店地址：</view>
+				<view class="font26 color426">{{item.info.address}}</view>
+			</view>
+			<view class="form-item flex">
+				<view class="font26 color42 form-item-title">负责人：</view>
+				<view class="font26 color426">{{item.info.name}}</view>
+			</view>
+			<view class="form-item flex">
+				<view class="font26 color42 form-item-title">联系电话：</view>
+				<view class="font26 color426">{{item.info.phone}}</view>
+			</view>
+
+			<view class="form-item flex " style="border-bottom: none;">
+				<view class="font26 color42 form-item-title" style="width:30%">上传门店图片：</view>
+			</view>
+			<view class="flexCenterX" style="width:100%;">
+				<image src="/images/stores-icon15.png" style="width:400rpx;height:230rpx" />
+			</view>
+			<view class="flexCenterX" style="width:100%;" wx:if="{{web_num==0}}">
+				<view class="submit_info" style="margin-right: 30rpx;height:50rpx;line-height:50rpx;width:140rpx;border-radius:20rpx;font-size: 26rpx;"
+				 bindtap="{{web_buttonCanClick?'userUpdate':''}}" data-num="1" data-user_no ="{{item.user_no}}">
+					通过
+				</view>
+				<view class="submit_info" style="margin-left: 30rpx;height:50rpx;line-height:50rpx;width:140rpx;border-radius:20rpx;font-size: 26rpx;"
+				 bindtap="{{web_buttonCanClick?'userUpdate':''}}" data-num="-1" data-user_no ="{{item.user_no}}">
+					不通过
+				</view>
+			</view>
+
+
+		</view>
+	</block>
+</view>

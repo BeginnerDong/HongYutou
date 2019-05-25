@@ -1,0 +1,64 @@
+page{
+	min-height:100%;
+	background-color:#F4F4F4 ;
+}
+.banner{
+	height:330rpx;
+	width:100%
+}
+.banner image{
+	height:100%;
+	width:100%
+}
+.store-infomation{
+	height:180rpx;
+	width:92%;
+	padding: 20rpx 4%;
+	background: #fff;
+	position: relative;
+}
+.title-left{
+	justify-content: flex-start;
+	width:50%
+}
+.title-left image{
+	width:30rpx;
+	height:30rpx
+}
+.title-right image{
+	width:20rpx;
+	height:20rpx
+}
+.title-right{
+	justify-content: flex-end;
+	width:50%
+}
+.group-detail{
+	margin-top: 20rpx;
+	width:92%;
+	background: #fff;
+	padding: 0 4%;
+}
+.group-detail-title{
+	height:100rpx;
+	line-height: 100rpx;
+}
+.group-detail-detail{
+	
+}
+.share{
+	position: absolute;
+	top:5%;
+	right:5%
+}
+.share-img image{
+	width:40rpx;
+	height:40rpx
+}
+.button-hover {
+	color:rgba(0, 0, 0, 0.6);
+	background-color:none;
+}
+button{
+	line-height: 1;
+}

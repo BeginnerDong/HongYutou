@@ -1,0 +1,186 @@
+/**index.wxss**/
+page{
+	background: #f4f4f4;
+}
+.product{
+	border-bottom:solid 1px #f4f4f4;
+}
+.product_box{
+	height:260rpx;
+}
+.product_detail{
+	width:100%;
+	height:200rpx;
+}
+.product_left{
+	width:35%;
+	height:200rpx;
+}
+.product_left image{
+	width:200rpx;
+	height:200rpx;
+}
+.product_right{
+	width:65%;
+	height:200rpx;
+}
+.order_handle{
+
+	float:right;
+	height:120rpx;
+}
+.product_price{
+	text-align:right;
+}
+.test{
+	height:100%;
+	display:flex;
+	flex-flow: row wrap;
+	align-content:space-between;
+}
+.product_top{
+	height:30%;
+}
+.submit_info{
+	width:140rpx;
+	height:50rpx;
+	line-height:50rpx;
+	margin:0;
+	background:#fff;
+	color:#666;
+	border: 1px solid #f4f4f4;
+	font-size:26rpx;
+	margin-left: 20rpx;
+	border-radius:10rpx
+}
+.order_tlt{
+	height:78rpx;
+
+}
+.tlt_left{
+	width:50%;
+	overflow:hidden;
+	font-size:26rpx;
+	color:#666;
+}
+.tlt_right{
+	text-align:right;
+}
+
+.confirm{
+	border-top:solid 1px #e0e0e0;
+}
+.confirm_btn{
+	height:100rpx;
+	line-height: 100rpx;
+	text-align: center;
+	width:100%;
+	position: fixed;
+	bottom: 0;
+
+}
+#confirmOrder{
+	border-top:solid 1px #e0e0e0;
+}
+.confirm_left{
+	width:60%;
+	padding-right: 10%;
+	text-align: right;
+	background:#fff ;
+}
+.confirm_right{
+	width: 30%;
+	height:100%;
+	background:#FF7F23 ;
+	text-align: center;
+	color: #fff;
+}
+.choose_number{
+	align-items:center;
+}
+
+.type_right{
+	flex-wrap:wrap;
+	padding-bottom:30rpx;
+}
+
+.message{
+	width:100%;
+	height:88rpx;
+}
+.message_left{
+	width:20%;
+	height:88rpx;
+	line-height:88rpx;
+}
+.message_right{
+	width:80%;
+	height:88rpx;
+	line-height:88rpx;
+}
+.message_right input{
+	width:100%;
+	height:88rpx;
+	line-height:88rpx;
+}
+.product_right text{
+	margin-right:10rpx;
+}
+.form{
+	width:100%;
+	background: #fff;
+}
+.form-item{
+	width:92%;
+	height:90rpx;
+	line-height: 90rpx;
+	border-bottom: 1px solid #f4f4f4;
+	padding: 0 4%;
+}
+.submit{
+	width:100%;
+	height:180rpx;
+}
+.place-holder {
+	 /* placeholder颜色  */
+	 color:rgba(45,15,6,0.6);
+	font-size:24rpx
+ }
+ .form-item-title{
+	 width:25%
+ }
+ .form-item input{
+	 width:75%
+ }
+ .manage_cont{
+ 	width:50%;
+ 	font-size:34rpx;
+ }
+ .address_left{
+ 	width:20%;
+ }
+ .address_right{
+ 	width:71%;
+ 	text-align:right;
+ }
+ .edit_number{
+ 	width:140rpx;
+ 	height:40rpx;
+ 	line-height:42rpx;
+ 	border:solid 1px #e5e5e5;
+ 	font-size:20rpx;
+ }
+ .edit_number .minus,.edit_number .add{
+ 	width:40rpx;
+ 	height:100%;
+ 	text-align:center;
+ 	color:#aeaeae;
+ 	font-size:40rpx;
+ 	background:#e8e9e9;
+ }
+ .number{
+ 	width:50rpx;
+ 	text-align:center;
+ 	color:#878787;
+ 	border-right:solid 1px #e5e5e5; 
+ 	}

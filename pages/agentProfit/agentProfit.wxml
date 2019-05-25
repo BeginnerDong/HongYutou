@@ -1,0 +1,109 @@
+<view class="piece_top flex">
+    <view class="piece_main">
+		<view class="color42 font34" style="text-align:center;margin-top: 20rpx;">¥{{web_count}}</view>
+        <view class="piece_row flexCenter">
+            <view class="color428 font24"  wx:if="{{web_num==0}}">总采购收益</view>
+			<view class="color428 font24"  wx:if="{{web_num==1}}">总购买收益</view>
+			<view class="color428 font24"  wx:if="{{web_num==2}}">总奖励收益</view>
+        </view> 
+    </view>
+</view>
+<view class="tab font30 flexRowBetween color6">
+    <view class="tab_item " data-num="0" bindtap="tab">
+        <text class="{{web_num ==0?'tab_this':''}}">采购分润</text>
+    </view>
+    <view class="tab_item " data-num="1" bindtap="tab">
+        <text class="{{web_num ==1?'tab_this':''}}">购买分润</text>
+    </view>
+	<view class="tab_item " data-num="2" bindtap="tab">
+		<text class="{{web_num ==2?'tab_this':''}}">奖励收益</text>
+	</view>
+</view>
+<view class="date font30">
+    <view class="date_item">
+        <view style="width:45%;display:flex;align-items:center;">
+            <view class="date_left" style="width:100%;">
+                <picker  mode="date"  value="{{web_startTime}}" data-type="startTime" bindchange="bindTimeChange">
+                    <view style="display:flex;align-items:center;width:100%;height:100%;">
+                        <view style="width:85%;height:70rpx;">
+                            <view class="picker text">
+                              起始日期
+                            </view>
+                            <view class="text  font22" >{{web_startTime}}</view>
+                        </view>
+                        <view style="width:15%;height:70rpx;align-items:center;">
+                            <image src="/images/up.jpg"></image>
+                        </view>
+                    </view> 
+                </picker>
+                
+            </view>
+            
+        </view> 
+    </view>
+    <view class="date_item">
+        <view style="width:45%;display:flex;align-items:center;">
+            <view class="date_left" style="width:100%;">
+                <picker  mode="date" value="{{web_endTime}}" data-type="endTime" bindchange="bindTimeChange" >
+                    <view style="display:flex;align-items:center;width:100%;height:100%;">
+                        <view style="width:85%;height:70rpx;">
+                            <view class="picker text">
+                              截至日期
+                            </view>
+                            <view class="text font22">{{web_endTime}}</view>
+                        </view>
+                        <view style="width:15%;height:70rpx;">
+                            <image src="/images/up.jpg"></image>
+                        </view>
+                    </view>
+                </picker>
+            </view>
+            
+        </view> 
+    </view>     
+</view>
+<block wx:for="{{web_mainData}}" wx:key="id">
+	<view class="member-item flex" wx:if="{{web_num==1}}">
+		<view class="member-item-img flex" style="width:15%">
+			<image src="{{item.user.headImgUrl}}"></image>
+		</view>
+		<view class="member-item-name" style="width:45%">
+			<view class="color42 font26" style="margin-top: 28rpx;">{{item.user.nickname}}</view>
+			<view class="color426 font24">{{item.create_time}}</view>
+		</view>
+		<view class="member-item-name" style="text-align:center" style="width:20%">
+			<view class="color42 font26" style="margin-top: 30rpx;">{{item.product[0].title}}</view>
+			<view class="color426 font24"  >￥{{item.product[0].price}}</view>
+		</view>
+		<view class="member-item-time " style="text-align: right;" style="width:20%">
+			<text class="color42 font26">{{item.count}}</text>
+		</view>
+	</view>
+	<view class="member-item flex" wx:if="{{web_num==0}}">
+		<view class="member-item-name">
+			<!-- <view class="color42 font26" style="margin-top: 30rpx;">门店名称</view> -->
+			<view class="color426 font24"  style="height:100%;line-height: 120rpx;">{{item.create_time}}</view>
+		</view>
+		<view class="member-item-name" style="text-align:center">
+			<view class="color42 font26" style="margin-top: 30rpx;">{{item.order[0].products[0].snap_product.title}}等</view>
+			<view class="color426 font24"  >￥{{item.order[0].price}}</view>
+		</view>
+		<view class="member-item-time " style="text-align: right;">
+			<text class="color42 font26" >+{{item.count}}</text>
+		</view>
+	</view>
+	<view class="member-item flex" wx:if="{{web_num==2}}">
+		<view class="member-item-time " >
+			<text class="color42 font26" >2018-12-14</text>
+		</view>
+		<view class="member-item-name" style="text-align:center">
+			<view class="color42 font26" style="margin-top: 30rpx;">当月收益</view>
+			<view class="color426 font24"  >￥5646</view>
+		</view>
+		<view class="member-item-name" style="text-align: right;">
+			<view class="color42 font26" style="margin-top: 30rpx;">当月奖励</view>
+			<view class="color426 font24"  >￥5646</view>
+		</view>
+		
+	</view>
+</block>

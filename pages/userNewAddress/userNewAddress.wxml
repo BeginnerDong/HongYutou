@@ -1,0 +1,33 @@
+
+
+<view class="list bg1">
+	<view class="ilblock color1 font26">收货人</view>
+	<input class="ilblock color2 font22" value="{{web_mainData.name}}"  data-key="name" bindblur="inputChange" placeholder="请输入真实姓名" style="margin-left: 30rpx;position: relative; top: 17rpx;" />
+</view>
+<view class="list bg1">
+	<view class="ilblock color1 font26">手机号码</view>
+	<input class="ilblock color2 font22" value="{{web_mainData.phone}}"  data-key="phone" bindblur="inputChange" placeholder="请输入电话号码" style="margin-left: 30rpx;position: relative; top: 17rpx;" />
+
+</view>
+<view class="list bg1">
+	<view class="ilblock color1 font26">所在地区</view>
+	<picker class="ilblock" mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}" style="margin-left: 30rpx;">
+		<view  class="font22 color2">
+			{{web_region?web_region:'请选择省市县/区'}}
+		</view>
+	</picker>
+
+</view>
+<view class="list bg1">
+	<view class="ilblock color1 font26">详细地址</view>
+	<input class="ilblock color3 font22" value="{{web_mainData.detail}}"  data-key="detail" bindblur="inputChange" placeholder="如街道、门牌号" style="margin-left: 30rpx;position: relative; top: 17rpx;" />
+</view>
+<view class="list bg1">
+	<view class="ilblock color1 font26">设为默认地址</view>
+	<view class="color2 font22 flo-right">
+		<switch bindchange="switch2Change" checked="{{web_isdefault==1?true:''}}" />
+	</view>
+
+</view>
+
+<button class="bg3 radiu40 font24 color5" style="line-height: 60rpx;width:60%;margin: 0 auto;margin-top: 200rpx;" type="button" bindtap="{{web_buttonCanClick?'submit':''}}">保存</button>

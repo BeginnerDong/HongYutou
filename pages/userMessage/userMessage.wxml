@@ -1,0 +1,15 @@
+<!--userMessage.wxml-->
+<view style="width:100%">
+	<block wx:for="{{web_artData}}">
+		<view class="messgae">
+			<view class="font28 color42">{{item.title}}</view>
+			<view class="font26 color426" style="margin: 10rpx 0;">
+				<view class="content ql-editor" >
+				    <import src="../../wxParse/wxParse.wxml"/>
+				    <template is="wxParse" data="{{wxParseData:item.content}}"/>
+				</view> 
+			</view>
+			<view class="font26 color428">{{item.create_time}}</view>
+		</view>
+	</block>
+</view>

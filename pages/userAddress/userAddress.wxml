@@ -1,0 +1,41 @@
+<view style="width:100%">
+<!-- 	<view class="tab font30 flexRowBetween color6">
+		<view class="tab_item " data-num="0" bindtap="{{web_buttonCanClick?'menuClick':''}}">
+			<text class="{{num ==0?'tab_this':''}}">送货上门</text>
+		</view>
+		<view class="tab_item " data-num="1" bindtap="{{web_buttonCanClick?'menuClick':''}}">
+			<text class="{{num ==1?'tab_this':''}}">自提门店</text>
+		</view>
+		
+	</view> -->
+<block wx:for="{{web_mainData}}" wx:key="id">
+<view class="manage_cont w690">
+	<view class="user_address flex">
+		<view class="address_left font28 color2">
+			{{item.name}}
+		</view>
+		<view class="address_right font26 color2">
+			{{item.phone}}
+		</view>
+	</view>
+	<view class="avoidOverflow address_infor font26 color2">{{item.province+item.city+item.country+item.detail}}</view>
+</view>
+<view class="w690 manage_address">
+	<view class="address_handle flex font28">
+		<view class="handle_left flex  {{item.isdefault=='1'?'color5':''}}" bindtap="{{item.isdefault=='0'?(web_buttonCanClick?'updateAddress':''):''}}" data-id="{{item.id}}">
+			<image src="{{item.isdefault=='0'?'/images/icon.png':'/images/icon2.png'}}"></image> {{item.isdefault=='0'?'设为默认地址':'默认地址'}}
+		</view>
+		<view class="handle_right flexRowBetween">
+			<view class="edit color4" data-path="/pages/userNewAddress/userNewAddress?id={{item.id}}" bindtap="intoPath">
+				<image src="/images/edit.jpg"></image> 编辑
+			</view>
+			<view class="edit color4" data-id="{{item.id}}" bindtap="{{web_buttonCanClick?'deleteAddress':''}}">
+				<image src="/images/del.jpg"></image> 删除
+			</view>
+		</view>
+	</view>
+</view>
+</block>
+	<button class="submit_info" style="width:60%;border-radius:40rpx;"  bindtap="intoPath" data-path="/pages/userNewAddress/userNewAddress">添加新地址</button>
+</view>
+

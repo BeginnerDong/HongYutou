@@ -1,0 +1,173 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.6.4",
+	"appid": "wxc9d7ab8cae902fef",
+	"projectname": "test",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 17,
+			"list": [
+				{
+					"id": -1,
+					"name": "店铺详情",
+					"pathName": "pages/storeDetail/storeDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "团购详情",
+					"pathName": "pages/groupDetail/groupDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "产品详情",
+					"pathName": "pages/productDetail/productDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/user/user",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "pages/storeLogin/storeLogin",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "门店",
+					"pathName": "pages/store/store",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的会员",
+					"pathName": "pages/storeMember/storeMember",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "合伙人",
+					"pathName": "pages/agent/agent",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "下级门店",
+					"pathName": "pages/agentStore/agentStore",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 9,
+					"name": "确认订单",
+					"pathName": "pages/confirmOrder/confirmOrder",
+					"query": "id=3",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "团购确认订单",
+					"pathName": "pages/groupDetail/groupDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "参团门店",
+					"pathName": "pages/groupStore/groupStore",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "确认团购",
+					"pathName": "pages/groupConfirmOrder/groupConfirmOrder",
+					"query": "id=4",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "结算",
+					"pathName": "pages/groupConfirmOrder/groupConfirmOrder",
+					"query": "id=5",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "门店1",
+					"pathName": "pages/storeDetail/storeDetail",
+					"query": "user_no=U418722699092269",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "团购单",
+					"pathName": "pages/storeGroup/storeGroup",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 16,
+					"name": "团购单",
+					"pathName": "pages/groupConfirmOrder/groupConfirmOrder",
+					"query": "user_no=U422188659238373&id=5",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "门店排行",
+					"pathName": "pages/storeRank/storeRank",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

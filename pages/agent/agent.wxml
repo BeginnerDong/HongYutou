@@ -1,0 +1,79 @@
+<view style="width:100%;">
+	<view class="user-banner">	
+	</view>
+	<view class="flexRowBetween" style="position: absolute;top:0;left:4%;width: 105rpx;">
+		<view class="top-item" data-path="/pages/userMessage/userMessage" bindtap="intoPath">
+			<image src="/images/partner-icon10.png"></image>
+			<view class="font20 colorfff">消息</view>
+		</view>
+		<view class="top-item"  data-path="/pages/storeCs/storeCs" bindtap="intoPath">
+			<image src="/images/partner-icon11.png"></image>
+			<view class="font20 colorfff">客服</view>
+		</view>
+	</view>
+	<view class="font28 colorfff" style="position: absolute;top:0;right:4%"  bindtap="removeStorageSync">退出</view>
+	<view class="user-card ">	
+		<view class="flexCenterX">
+			<view class="user-card-head">
+				<open-data type="userAvatarUrl" class="openData-head"></open-data>
+			</view>
+		</view>
+		<view class="font26 color42" style="margin-top: 80rpx;text-align: center;">{{web_mainData.login_name}}</view>
+		<view class="flexRowBetween store-main">
+			<view class="store-main-item">
+				<view class="font28 color426">收益总金额</view>
+				<view class="font26 colorFF3B3B" >¥{{web_mainData.Payment.payment}}</view>
+			</view>
+			<view class="store-main-item">
+				<view class="font28 color426">账户余额</view>
+				<view class="font26 colorFF3B3B" >¥{{web_mainData.info.balance}}</view>
+			</view>
+			<view class="store-main-item">
+				<view class="font28 color426">提现总金额</view>
+				<view class="font26 colorFF3B3B" >¥{{web_mainData.Payment.withdraw}}</view>
+			</view>
+		</view>
+	</view>
+	<view class="user-func flex1" style="flex-wrap: wrap;">
+		<view class="user-func-item" data-path="/pages/agentStore/agentStore" bindtap="intoPath">
+			<image src="/images/partner-icon1.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">下级门店</view>
+		</view>
+		<view class="user-func-item" data-path="/pages/agentStoreReviewed/agentStoreReviewed" bindtap="intoPath">
+			<image src="/images/partner-icon2.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">门店审核</view>
+		</view>
+		<view class="user-func-item" data-path="/pages/agentOrder/agentOrder" bindtap="intoPath">
+			<image src="/images/partner-icon3.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">采购订单</view>
+		</view>
+		<view class="user-func-item" data-path="/pages/agentOrderView/agentOrderView" bindtap="intoPath">
+			<image src="/images/partner-icon4.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">订单查看</view>
+		</view>
+		<view class="user-func-item" data-path="/pages/agentDeliver/agentDeliver" bindtap="intoPath">
+			<image src="/images/partner-icon5.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">我的配送</view>
+		</view>
+		<view class="user-func-item" data-path="/pages/agentProfit/agentProfit" bindtap="intoPath">
+			<image src="/images/partner-icon6.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">我的收益</view>
+		</view>
+		<view class="user-func-item"  data-path="/pages/storeWitdraw/storeWitdraw" bindtap="intoPath">
+			<image src="/images/partner-icon7.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">提现</view>
+		</view>
+		<view class="user-func-item"   data-path="/pages/agentRank/agentRank" bindtap="intoPath">
+			<image src="/images/partner-icon8.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">排行榜</view>
+		</view>
+		<view class="user-func-item"  data-path="/pages/agentGoods/agentGoods" bindtap="intoPath">
+			<image src="/images/partner-icon9.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">货款</view>
+		</view>
+	</view>
+	<view class="submit_info" style="width:80%;border-radius:40rpx;margin:50rpx 10% 50rpx 10%;font-size: 32rpx;" 
+	bindtap="intoPath" data-path="/pages/agentCart/agentCart">
+		采购下单
+	</view>
+</view>

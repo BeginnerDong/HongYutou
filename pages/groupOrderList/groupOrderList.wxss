@@ -1,0 +1,16 @@
+.title-left{
+	justify-content: flex-start;
+	width:50%
+}
+.title-left image{
+	width:30rpx;
+	height:30rpx
+}
+.title-right image{
+	width:20rpx;
+	height:20rpx
+}
+.title-right{
+	justify-content: flex-end;
+	width:50%
+}

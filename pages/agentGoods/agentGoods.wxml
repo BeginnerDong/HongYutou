@@ -1,0 +1,32 @@
+<!--index3.wxml-->
+<view style="width:100%;">
+	<view class="credit_top" style="text-align: center;">
+
+		<view class="font30 color42" style="margin-top:25rpx;">
+		   ¥{{web_count}}
+		</view>
+		<view class=" font26 color426" >
+		   货款
+		</view>
+
+	</view>
+	<block wx:for="{{web_mainData}}" wx:key="id">
+		<view class="credit_cont">
+			<view class="credit_list bg1">
+				<view class="credit_item">
+					<view class="credit_left">
+						<view class="credit_reson font28 color42">
+						   {{item.store.login_name}}
+						</view>
+						<view class="credit_dates font26 color426" style="margin-top: 20rpx;">
+							订单编号：{{item.order_no}}
+						</view>
+					</view>
+					<view class="credit_right font28 colorFF3B3B">
+						{{item.count}}
+					</view>
+				</view>
+			</view>
+		</view>
+	</block>
+</view>

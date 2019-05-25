@@ -1,0 +1,35 @@
+<!--index3.wxml-->
+<view style="width:100%;">
+	<view class="credit_top">
+		<view class="flexCenter" style="margin-top:50rpx;">
+			<view class="credit_top-img">
+				<image src="/images/about-icon2.png"></image>
+			</view>	
+			<view class=" font26" style="margin-left:20rpx;">
+			   薯币
+			</view>
+		</view>
+		<view class="font28" style="text-align: center;margin-top:10rpx;">
+		   ¥{{web_count}}
+		</view>
+	</view>
+	<block wx:for="{{web_mainData}}" wx:key="id">
+		<view class="credit_cont">
+			<view class="credit_list bg1">
+				<view class="credit_item">
+					<view class="credit_left">
+						<view class="credit_reson font26">
+						   {{item.store.login_name?item.store.login_name:'平台'}}
+						</view>
+						<view class="credit_dates font28 color9" style="margin-top: 20rpx;">
+							{{item.create_time}}
+						</view>
+					</view>
+					<view class="credit_right font28 color9">
+						{{item.count>0?'+'+item.count:item.count}}
+					</view>
+				</view>
+			</view>
+		</view>
+	</block>
+</view>

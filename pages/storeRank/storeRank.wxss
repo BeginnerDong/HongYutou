@@ -1,0 +1,108 @@
+@import "../../wxParse/wxParse.wxss"; 
+.user-card{
+	margin-top: 20rpx;
+	height:180rpx;
+
+	width:100%;
+
+	background: #fff;
+
+}
+.user-card-head image{
+	width:120rpx;
+	height:120rpx
+}
+.user-card-title{
+	margin-left: 20rpx;
+}
+
+.reward-rule{
+	width:92%;
+	margin: 0 4%;
+	border:1px solid #f4f4f4;
+	height:80rpx;
+	line-height: 80rpx;
+	text-align: center;
+	box-shadow:0 0 2px #999;
+}
+.date{
+	height:90rpx;
+	border-top:solid 1px #f4f4f4;
+	border-bottom:solid 1rpx #f4f4f4;
+	display:flex;
+	align-items: center;
+  	justify-content: center;
+  	color:#666;
+	margin-top: 30rpx;
+}
+.date_left{
+	height:70rpx;
+}
+.date_item{
+	height:90rpx;
+	border-right:solid 1px #f4f4f4;
+	width:100%;
+	text-align:center;
+	display:flex;
+	align-items: center;
+  	justify-content: center;
+	box-shadow:0 0 1px #999;
+}
+.date_item .text{
+	height:50%;
+}
+.date_item image{
+	width:22rpx;
+	height:12rpx;
+	margin-left:10rpx;
+}
+.rank-list{
+	width:94%;
+	margin: 0 3%;
+	flex-wrap: wrap;
+}
+.rank-item{
+	width:48%;
+	margin-top:20rpx;
+	height:140rpx;
+	border:1px solid #f4f4f4;
+	box-shadow:0 0 1px #999;
+}
+.rank-item-img{
+	width:20%;
+}
+.rank-item-img image{
+	width:45rpx;
+	height:70rpx
+}
+.rank-item-main{
+	width:80%
+}
+.rank-item-main-head{
+	width:40%;
+}
+.rank-item-main-head image{
+	width:90rpx;
+	height:90rpx
+}
+.rank-item-main-content{
+	width:60%
+}
+.shadow{
+	width:100%;
+	height:100%;
+	position: absolute;
+	background: #000000;
+	opacity: 0.6;
+	top:0;
+	z-index:888
+}
+.rule{
+	width:90%;
+	height:90%;
+	position: absolute;
+	background: #fff;
+	top:5%;
+	left:5%;
+	z-index:999
+}

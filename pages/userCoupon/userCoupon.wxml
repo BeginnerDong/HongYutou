@@ -1,0 +1,20 @@
+<!--index3.wxml-->
+<view class="tab font30 flexRowBetween color6">
+	<view class="tab_item " data-num="0" bindtap="{{web_buttonCanClick?'menuClick':''}}">
+		<text class="{{num ==0?'tab_this':''}}">未使用</text>
+	</view>
+	<view class="tab_item " data-num="1" bindtap="{{web_buttonCanClick?'menuClick':''}}">
+		<text class="{{num ==1?'tab_this':''}}">已使用</text>
+	</view>
+	<view class="tab_item" data-num="2" bindtap="{{web_buttonCanClick?'menuClick':''}}">
+		<text class="{{num ==2?'tab_this':''}}">已过期</text>
+	</view>
+
+</view>
+<block wx:for="{{web_mainData}}" wx:key="id">
+	<view class="coupon" style="{{num==2?'opacity: 0.5;':''}}">
+			<image src="/images/img1.png" />
+			<view class="font60 colorfff" style="position:absolute;top:25%;left:8%">{{item.snap_coupon.title}}</view>
+			<view class="font20 " style="position:absolute;top:70%;height:30rpx;width:320rpx;background: #fff;text-align: center;left:8%;color: #FF7F23;">{{item.snap_coupon.description}}</view>
+	</view>
+</block>

@@ -1,0 +1,54 @@
+<view style="width:100%">
+	<view class="register-art">
+		<view class="register-title font28 color42">
+			{{web_mainData.title}}
+		</view>
+		<view class="register-content font28 color426">
+			<view class="content ql-editor" >
+			    <import src="../../wxParse/wxParse.wxml"/>
+			    <template is="wxParse" data="{{wxParseData:web_mainData.content}}"/>
+			</view> 
+		</view>
+		<view class="form">
+			<view class="form-item flex">
+				<view class="font26 color42 form-item-title">联系人姓名：</view>
+				<input class="font24 color426" placeholder="请输入姓名" placeholder-class="place-holder" value="{{web_sForm.name}}"  data-key="name" bindblur="changeBind"></input>
+			</view>
+			<view class="form-item flex">
+				<view class="font26 color42 form-item-title">联系人电话：</view>
+				<input class="font24 color426" type="number" placeholder="请输入电话" placeholder-class="place-holder" value="{{web_sForm.phone}}"  data-key="phone" bindblur="changeBind"></input>
+			</view>
+			<view class="form-item flex">
+				<view class="font26 color42 form-item-title" >验证码：</view>
+				<input class="font24 color426" type="number" placeholder="请输入验证码" placeholder-class="place-holder" style="width:54%" value="{{web_sForm.code}}"  data-key="code" bindblur="changeBind"></input>
+				<view class="font26 color" bindtap="{{web_buttonCanClick?'getCode':''}}"  style="background-color:{{color}}">{{text}}</view>
+			</view>
+			<view class="form-item flex ">
+				<view class="font26 color42 form-item-title">登录密码：</view>
+				<input class="font24 color426" placeholder="6-16位字母和数字组成" placeholder-class="place-holder" value="{{web_sForm.password}}"  data-key="password" bindblur="changeBind"></input>
+			</view>
+			<view class="form-item flex ">
+				<view class="font26 color42 form-item-title">省市县/区：</view>
+				<picker
+					mode="region"
+					bindchange="bindRegionChange"
+					value="{{region}}"
+					custom-item="{{customItem}}"
+				  >
+					<view class="picker" class="font24 color426">
+					  {{web_region?web_region:'请选择省市县/区'}}
+					</view>
+				  </picker>
+			</view>
+			<view class="form-item flex ">
+				<view class="font26 color42 form-item-title">详细地址：</view>
+				<input class="font24 color426" placeholder="请输入详细地址" placeholder-class="place-holder" value="{{web_sForm.address}}"  data-key="address" bindblur="changeBind"></input>
+			</view>
+			<view class="submit flexCenter">
+				<view class="submit_info" style="height:60rpx;line-height:60rpx;width:60%;border-radius:20rpx;font-size: 28rpx;" bindtap="{{web_buttonCanClick?'submit':''}}">
+					提交
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

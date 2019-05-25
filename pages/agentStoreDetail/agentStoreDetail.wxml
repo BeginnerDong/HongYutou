@@ -1,0 +1,31 @@
+<view style="width:100%">
+	
+		
+	<view class="form">
+		<view class="store-img flex">
+			<image src="/images/index-img1.png" />
+		</view>
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">门店名称：</view>
+			<view class="font26 color426">{{web_mainData.login_name}}</view>
+		</view>
+
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">门店地址：</view>
+			<view class="font26 color426" >{{web_mainData.info.address}}</view>
+		</view>
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">负责人：</view>
+			<view class="font26 color426" >{{web_mainData.info.name}}</view>
+		</view>
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">联系电话：</view>
+			<view class="font26 color426" >{{web_mainData.info.phone}}</view>
+		</view>
+		<view class="form-item flex">
+			<view class="font26 color42 form-item-title">累计总金额：</view>
+			<view class="font26 color426" >￥{{web_mainData.Payment.payment}}</view>
+		</view>
+	</view>
+
+</view>

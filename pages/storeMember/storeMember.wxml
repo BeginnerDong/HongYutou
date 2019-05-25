@@ -1,0 +1,32 @@
+<view style="width:100%">
+	<view class="all-member flex">
+		<view style="height:72rpx;width:100%">
+			<view class="font28 color42" style="width:100%;text-align: center;">会员总量</view>
+			<view class="font26 colorFF3B3B" style="width:100%;text-align: center;">{{web_mainData.length}}</view>
+		</view>
+	</view>
+	<view class="tab font30 flexRowBetween color426">
+		<view class="tab_item " data-id="0" bindtap="tab">
+			<text class="{{web_currentId ==0?'tab_this':''}}">会员列表</text>
+		</view>
+		<view class="tab_item " data-id="1" bindtap="tab">
+			<text class="{{web_currentId ==1?'tab_this':''}}">今日新增</text>
+		</view>
+		<view class="tab_item" data-id="2" bindtap="tab">
+			<text class="{{web_currentId ==2?'tab_this':''}}">本月新增</text>
+		</view>
+	</view>
+	<block wx:for="{{web_mainData}}" wx:key="id">
+		<view class="member-item flex">
+			<view class="member-item-img flex">
+				<image src="{{item.userInfo.headImgUrl}}" class="user_img"></image>
+			</view>
+			<view class="member-item-name">
+				<text class="color426 font26" >{{item.userInfo.nickname}}</text>
+			</view>
+			<view class="member-item-time " style="text-align: right;">
+				<text class="color428 font26" >{{item.create_time}}</text>
+			</view>
+		</view>
+	</block>
+</view>

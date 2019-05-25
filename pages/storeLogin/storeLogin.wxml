@@ -1,0 +1,26 @@
+<view wx:if="{{web_show}}">
+<view style="width:100%;height: 100%;">
+	<view class="login">
+		<image src="/images/login.png"></image>
+		<view class="login-card">
+			<view class="login-card-input flex" style="margin-top:60rpx;">
+				<view class="login-card-input-image flex" >
+					<image src="/images/login-phone.png"></image>
+				</view>
+				<input placeholder="请输入登录手机号码" placeholder-class="place-holder" data-key="login_name" bindinput="bindInputChange"></input>
+			</view>
+			<view class="login-card-input flex">
+				<view class="login-card-input-image flex">
+					<image src="/images/login-password.png"></image>
+				</view>
+				<input placeholder="请输入登录密码" type="password" placeholder-class="place-holder" data-key="password" bindinput="bindInputChange"></input>
+			</view>
+			<view class="submit_info" style="width:80%;border-radius:10rpx;margin:50rpx 10% 25rpx 10%;font-size: 28rpx;" 
+			bindtap="submit">
+				登录
+			</view>
+			<view class="font24 color42" style="margin-left: 10%;" bindtap="intoPath" data-path="/pages/register/register?type={{web_type}}">没有账号，去注册</view>
+		</view>
+	</view>
+</view>
+</view>

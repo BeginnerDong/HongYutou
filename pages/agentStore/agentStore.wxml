@@ -1,0 +1,68 @@
+<!--agentStore.wxml-->
+<view style="width:100%">
+	<view class="search flex">
+		<view class="search-input">
+			<input placeholder="搜索" style="border:1px solid #f4f4f4;font-size:26rpx;text-align: center;border-radius:30rpx;" data-key="login_name" value="{{web_submitData.login_name}}" bindblur="changeBind"/>
+			<image src="/images/icon6.png" bindtap="search"></image>
+		</view>
+	</view>
+	<view class="date font28 color42">
+	    <view class="date_item">
+	        <view style="width:45%;display:flex;align-items:center;">
+	            <view class="date_left" style="width:100%;">
+	                <picker  mode="date"  value="{{web_startTime}}" data-type="startTime" bindchange="bindTimeChange">
+	                    <view style="display:flex;align-items:center;width:100%;height:100%;">
+	                        <view style="width:85%;height:70rpx;">
+	                            <view class="picker text">
+	                              起始日期
+	                            </view>
+	                            <view class="text  font22" >{{web_startTime}}</view>
+	                        </view>
+	                      <!--  <view style="width:15%;height:70rpx;align-items:center;">
+	                            <image src="/images/up.jpg"></image>
+	                        </view> -->
+	                    </view> 
+	                </picker>
+	                
+	            </view>
+	            
+	        </view> 
+	    </view>
+	    <view class="date_item">
+	        <view style="width:45%;display:flex;align-items:center;">
+	            <view class="date_left" style="width:100%;">
+	                <picker  mode="date" value="{{web_endTime}}" data-type="endTime" bindchange="bindTimeChange" >
+	                    <view style="display:flex;align-items:center;width:100%;height:100%;">
+	                        <view style="width:85%;height:70rpx;">
+	                            <view class="picker text">
+	                              截至日期
+	                            </view>
+	                            <view class="text font22">{{web_endTime}}</view>
+	                        </view>
+	                        <!-- <view style="width:15%;height:70rpx;">
+	                            <image src="/images/up.jpg"></image>
+	                        </view> -->
+	                    </view>
+	                </picker>
+	            </view>
+	            
+	        </view> 
+	    </view>     
+	</view>
+	<view class="store-list flexRowBetween">
+		<block wx:for="{{web_mainData}}" wx:key="id">
+			<view class="store-item" bindtap="intoPath" data-path="/pages/agentStoreDetail/agentStoreDetail?user_no={{item.child_no}}">
+				<view class="store-item-img">
+					<image src="{{item.info.mainImg[0].url}}" />
+				</view>
+				<view class="store-item-name font30 color42">
+					{{item.login_name}}
+				</view>
+			</view>
+		</block>
+	</view>
+	<view class="submit_info" style="width:60%;border-radius:40rpx;margin:150rpx 20% 50rpx 20%;font-size: 32rpx;" 
+	data-path="/pages/agentAddStore/agentAddStore" bindtap="intoPath">
+		添加门店
+	</view>
+</view>

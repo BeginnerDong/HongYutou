@@ -1,0 +1,21 @@
+<block wx:for="{{web_mainData}}" wx:key="id">
+<view style="width:100%;">
+	<view class="credit_cont">
+		<view class="credit_list bg1">
+			<view class="credit_item">
+				<view class="credit_left">
+					<view class="credit_reson font26">
+					   {{item.user.login_name?item.user.login_name:'未知'}}
+					</view>
+					<view class="credit_dates font28 color9" style="margin-top: 20rpx;">
+						{{item.create_time}}
+					</view>
+				</view>
+				<view class="credit_right font28 color9">
+					{{item.count}}
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+</block>

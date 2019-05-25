@@ -1,0 +1,81 @@
+page{
+	min-height:100%;
+	background-color:#F4F4F4 ;
+}
+.banner{
+	height:330rpx;
+	width:100%
+}
+.banner image{
+	height:100%;
+	width:100%
+}
+.store-infomation{
+	height:220rpx;
+	width:92%;
+	padding: 20rpx 4%;
+	background: #fff;
+}
+.title-left{
+	justify-content: flex-start;
+	width:80%
+}
+.title-left image{
+	width:30rpx;
+	height:30rpx
+}
+.title-right image{
+	width:20rpx;
+	height:20rpx
+}
+.title-right{
+	justify-content: flex-end;
+	width:20%
+}
+.store-product{
+	
+	width:92%;
+	padding: 0 4%;
+}
+.group-main{
+	width:100%;
+	height:270rpx;
+	background: #fff;
+	border-radius:15rpx;
+	margin-top: 20rpx;
+}
+.group-main-left{
+	width:50%;
+	height:100%;
+}
+.group-main-right{
+	width:50%;
+	height:80%;
+}
+.group-main-left image{
+	width:90%;
+	height:80%;
+}
+.shadow{
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	background:black;
+	opacity: 0.5;
+	z-index:99
+}
+.coupon{
+	width:100%;
+	height:80%;
+	position:fixed;
+	top:20%;
+	left:0;
+	z-index:999;
+	text-align: center;
+}
+.coupon image{
+	width:70%;
+	height:50%;
+}

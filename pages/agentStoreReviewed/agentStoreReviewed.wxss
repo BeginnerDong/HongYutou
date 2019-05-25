@@ -1,0 +1,56 @@
+page{
+	width:100%;
+	min-height:100%;
+	
+}
+.tab{
+	height:80rpx;
+	border-bottom:solid 1px #f4f4f4;
+}
+.tab_item{
+	width:25%;
+	text-align:center;
+	height:80rpx;
+	line-height:80rpx;
+}
+.tab_this{
+	color:#FF7F23;
+	border-bottom:solid 2px #FF7F23;
+}
+.tab_item text{
+	height:78rpx;
+	line-height:78rpx;
+	display:inline-block;
+}
+
+.form{
+	width:92%;
+	margin: 0 auto;
+	height:800rpx;
+	border: 1px solid #f4f4f4;
+	border-radius:10rpx;
+	box-shadow:0 0 1px #f4f4f4;
+	margin-top: 30rpx;
+}
+.form-item{
+	width:92%;
+	height:90rpx;
+	line-height: 90rpx;
+	border-bottom: 1px solid #f4f4f4;
+	padding: 0 4%;
+}
+.submit{
+	width:100%;
+	height:180rpx;
+}
+.place-holder {
+	 /* placeholder颜色  */
+	 color:rgba(45,15,6,0.6);
+	font-size:24rpx
+ }
+ .form-item-title{
+	 width:25%
+ }
+ .form-item input{
+	 width:75%
+ }

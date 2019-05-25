@@ -1,0 +1,45 @@
+<view style="width:100%">
+
+	<view class="form">
+		<view class="form-item flex">
+			<view class="font28 color42 form-item-title">持卡人：</view>
+			<input class="font26 color426" placeholder="请输入持卡人姓名" placeholder-class="place-holder" value="{{web_submitData.enc_true_name}}"
+			 data-key="enc_true_name" bindblur="changeBind"></input>
+		</view>
+		<view class="form-item flex">
+			<picker bindchange="bankChange" value="{{index}}" range="{{bankData}}" range-key="name" style="width:100%;">
+				<view class="picker flex">
+					<view class="font28 color42 form-item-title">开户行：</view>
+					<view class="things_right flexRowBetween font28" style="width:70%;">
+						<view class="thing1  flexRowBetween">
+							<view class="font26 color426" style="text-align: center;width:100%;">{{bankData[web_index].name?bankData[web_index].name:'请选择开户行'}}</view>
+						</view>
+					</view>
+				</view>
+			</picker>
+		</view>
+		<view class="form-item flex">
+			<view class="font28 color42 form-item-title">银行卡号：</view>
+			<input class="font26 color426" type="number" placeholder="请输入银行卡号" placeholder-class="place-holder" value="{{web_submitData.enc_bank_no}}"
+			 data-key="enc_bank_no" bindblur="changeBind"></input>
+		</view>
+		<view class="form-item flex">
+			<view class="font28 color42 form-item-title">绑定电话：</view>
+			<input class="font26 color426" type="number" placeholder="请输入绑定电话" placeholder-class="place-holder" value="{{web_submitData.phone}}"
+			 data-key="phone" bindblur="changeBind"></input>
+		</view>
+		<view class="form-item flex">
+			<view class="font28 color42 form-item-title">验证码：</view>
+			<input class="font26 color426" type="number" placeholder="请输入验证码" placeholder-class="place-holder" style="width:54%"></input>
+			<view class="font28 color" bindtap="{{web_buttonCanClick?'getCode':''}}"  style="background-color:{{color}}">{{text}}</view>
+		</view>
+
+
+		<view class="submit_info" style="height:80rpx;line-height:80rpx;width:60%;border-radius:40rpx;font-size: 28rpx;margin: 460rpx auto 0 auto;"
+		 bindtap="{{web_buttonCanClick?'submit':''}}">
+			提交
+		</view>
+
+	</view>
+
+</view>

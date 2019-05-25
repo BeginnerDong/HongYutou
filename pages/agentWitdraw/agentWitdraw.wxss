@@ -1,0 +1,68 @@
+.add-card{
+	width:92%;
+	margin: 20rpx 4%;
+	text-align: center;
+	height:100rpx;
+	line-height: 100rpx;
+	border: 1px solid #f4f4f4;
+}
+.card-detail{
+	width:92%;
+	margin: 20rpx 4%;
+	text-align: center;
+	height:250rpx;
+	border: 1px solid #f4f4f4;
+}
+.credit_list{
+	padding:0 34rpx;
+	height:130rpx;
+	border-bottom:solid 1px #f4f4f4;
+}
+.credit_item{
+	width:100%;
+	height:130rpx;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	
+}
+.credit_reson{
+	color:#444;
+}
+.credit_left{
+	width:75%;
+	
+}
+.credit_right{
+	width:15%;
+
+}
+.credit{
+	height:200rpx;
+}
+.credit_user{
+	width:28%;
+}
+.credit_infor{
+	width:40%;
+}
+.credit_number{
+	width:32%;
+}
+.credit_cont{
+	width:100%;
+	height:160rpx;
+}
+.store-main{
+	width:100%;
+	margin-top: 30rpx;
+}
+.store-main-item{
+	width:33%;
+	text-align:center;
+	line-height: 50rpx;
+}
+.submit{
+	width:100%;
+	height:120rpx;
+}

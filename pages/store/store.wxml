@@ -1,0 +1,69 @@
+<view style="width:100%;">
+	<view class="user-banner">	
+	</view>
+	<view class="font28 colorfff" style="position: absolute;top:0;right:4%" bindtap="removeStorageSync">退出</view>
+	<view class="user-card ">	
+		<view class="flexCenterX">
+			<view class="user-card-head">
+				<open-data type="userAvatarUrl" class="openData-head"></open-data>
+			</view>
+		</view>
+		<view class="font26 color42" style="margin-top: 80rpx;text-align: center;">{{web_mainData.login_name}}</view>
+		<view class="flexRowBetween store-main">
+			<view class="store-main-item">
+				<view class="font28 color426">收益总金额</view>
+				<view class="font26 colorFF3B3B" >¥{{web_mainData.Payment.payment}}</view>
+			</view>
+			<view class="store-main-item">
+				<view class="font28 color426">账户余额</view>
+				<view class="font26 colorFF3B3B" >¥{{web_mainData.info.balance}}</view>
+			</view>
+			<view class="store-main-item">
+				<view class="font28 color426">提现总金额</view>
+				<view class="font26 colorFF3B3B" >¥{{web_mainData.Payment.withdraw}}</view>
+			</view>
+		</view>
+	</view>
+	<view class="user-func flex1" style="flex-wrap: wrap;">
+		<view class="user-func-item" data-path="/pages/storeMember/storeMember" bindtap="intoPath">
+			<image src="/images/stores-icon1.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">我的会员</view>
+		</view>
+		<view class="user-func-item" data-path="/pages/storeManner/storeManner" bindtap="intoPath">
+			<image src="/images/stores-icon2.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">门店管理</view>
+		</view>
+		<view class="user-func-item" data-path="/pages/storeOrder/storeOrder" bindtap="intoPath">
+			<image src="/images/stores-icon3.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">采购订单</view>
+		</view>
+		<view class="user-func-item" data-path="/pages/storeGroup/storeGroup" bindtap="intoPath">
+			<image src="/images/stores-icon4.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">团购</view>
+		</view>
+		<view class="user-func-item" data-path="/pages/storeProfit/storeProfit" bindtap="intoPath">
+			<image src="/images/stores-icon5.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">我的收益</view>
+		</view>
+		<view class="user-func-item" data-path="/pages/storeWitdraw/storeWitdraw" bindtap="intoPath">
+			<image src="/images/stores-icon6.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">提现</view>
+		</view>
+		<view class="user-func-item"  data-path="/pages/storeRank/storeRank" bindtap="intoPath">
+			<image src="/images/stores-icon7.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">排行榜</view>
+		</view>
+		<view class="user-func-item"   data-path="/pages/userMessage/userMessage" bindtap="intoPath">
+			<image src="/images/stores-icon8.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">消息</view>
+		</view>
+		<view class="user-func-item"  data-path="/pages/storeCs/storeCs" bindtap="intoPath">
+			<image src="/images/stores-icon9.png" style="margin-top: 60rpx;"></image>
+			<view class="font26 color42" style="margin-top:20rpx;">客服电话</view>
+		</view>
+	</view>
+	<view class="submit_info" style="width:80%;border-radius:40rpx;margin:50rpx 10% 50rpx 10%;font-size: 28rpx;"
+	bindtap="intoPath" data-path="/pages/storeCart/storeCart">
+		采购下单
+	</view>
+</view>

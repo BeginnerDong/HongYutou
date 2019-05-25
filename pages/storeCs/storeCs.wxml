@@ -1,0 +1,7 @@
+<!--storeCs.wxml-->
+<view class="width:100%">
+	<view class="main">
+		<image src="../../images/service-icon@2x.png" bindtap="phoneCall"/>
+		<view class="font30" style="margin-top: 5%;">{{web_mainData.description}}</view>
+	</view>
+</view>

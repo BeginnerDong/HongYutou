@@ -1,0 +1,157 @@
+<view style="width:100%;">
+	<view class="banner">
+		<image src="{{web_mainData.bannerImg[0].url}}"></image>
+	</view>
+	<view class="store-infomation">
+		<view class="font30" style="height:60rpx;line-height: 60rpx;">{{web_mainData.title}}</view>
+		
+		<view class="font28 flexRowBetween" style="height:60rpx;line-height: 60rpx;">
+			<view class="title-left flexRowBetween">
+				<span class="font24" style="color: rgb(255,59,59);">¥{{web_mainData.price}}</span>
+			</view>
+			
+		</view>
+		
+	</view>
+	<view class="group-detail">
+		<view class="flexRowBetween" style="height:100rpx;line-height: 100rpx;">
+			<view class="title-left flexRowBetween">
+				<span class="font28" >{{web_orderData.length}}人正在拼团，可直接参与</span>
+			</view>
+			<view class="title-right flexRowBetween"  bindtap="intoPath" data-path="/pages/groupOrderList/groupOrderList?id={{web_mainData.id}}">
+				<span class="font24 color96">查看更多</span>
+			
+			</view>
+		</view>
+		<block wx:for="{{web_orderData}}" wx:key="id" wx:if="{{web_orderData.length>0}}">
+			<view class="flexRowBetween" style="height:120rpx;line-height: 120rpx;" >
+				<view class="title-left flexRowBetween" >
+					<image src="{{item.user[0].headImgUrl}}" style="width:80rpx;height:80rpx;border-radius:50%"></image>	
+					<span class="font28" style="margin-left: 20rpx;">{{item.user[0].nickname}}</span>
+				</view>
+				<view class="title-right flexRowBetween">
+					<view>					
+						<view class="font24 color96" style="margin-right: 20rpx;">剩余23：23：48</view>
+					</view>
+					<view  bindtap="groupData" data-id="{{item.id}}" data-group_no="{{item.group_no}}" class="submit_info" style="border-radius:10rpx;width:120rpx;font-size:20rpx;height:50rpx;line-height: 50rpx;margin-top: 0;">去拼单</view>		
+				</view>
+			</view>
+		</block>
+		<view class="flexRowBetween" style="height:120rpx;line-height: 120rpx;text-align: center;" wx:if="{{web_orderData.length==0}}">
+			<view class="font26 color96" style="text-align: center">
+				还没有人正在拼团,赶快去拼团吧~
+			</view>
+			
+		</view>
+	</view>
+	<view class="mask" wx:if="{{web_isShow1}}" catchtouchmove="true" bindtap="mask">
+	</view>
+	<view id="group2" wx:if="{{web_isShow1}}" catchtouchmove="true">
+		<view class="group1 group2">
+			<view class="close" bindtap="isShow1">
+				<image src="/images/stores-icon10.png"></image>
+			</view>
+			<view class="font32 color3">参与{{web_groupData.user[0].nickname}}的拼团</view>
+			<view class="font28 color6">仅剩<text>{{web_lessNum}}个</text>名额</view>
+			<view class="group_member flexCenter;">
+				<view class="member">
+					<view class="member_cont">
+						<view class="group_leader font22 color1">拼主</view>
+						<view class="user_img">
+							<image src="{{web_groupData.user[0].headImgUrl}}" class="user_img"></image>
+						</view>
+					</view>
+				</view>
+			</view>
+	
+			<button class="submit_info" bindtap="intoPath" data-path="/pages/confirmOrder/confirmOrder?id={{web_mainData.id}}&type=group&group_no={{web_groupData.group_no}}" form-type="submit" style="width:100%;margin:50rpx auto 0;font-size:26rpx">参与拼团</button>
+	
+		</view>
+	</view>
+	<!-- <view class="group-detail" style="width: 100%;padding:0;">
+		<view class="group-detail-title font30 flex">
+			<view class="group-detail-title-item font30 " style="border-right:1px solid #f4f4f4">
+				<view class="text this-text">详情介绍</view>
+			</view>
+			<view class="group-detail-title-item font30">
+				评论(15)
+			</view>
+		</view>
+		<view class="group-detail font28" style="margin:0;padding-top: 25rpx;">
+			<view class="content ql-editor ">
+			    <import src="../../wxParse/wxParse.wxml"/>
+			    <template is="wxParse" data="{{wxParseData:web_mainData.content}}"/>
+			</view>
+		</view>
+	</view> -->
+	<view class=" bg1">
+		<view class="group-detail flexRowBetween" style="border-bottom: 1px solid #f4f4f4;">
+			<view class="group-detail-title-item font30 {{tabCurrent == 0?'this-text':''}}" data-current="0" bindtap="select_this" style="border-right:1px solid #f4f4f4">
+				商品详情
+			</view>
+			<view class="group-detail-title-item font30 {{tabCurrent == 1?'this-text':''}}" data-current="1" bindtap="select_this">
+				评论({{web_messageData.length}})
+			</view>
+		</view>
+		<view class="detail_show">
+			<view id="detail" class="group-detail font28" style="border:none; {{tabCurrent == 0?'display:block':'display:none'}}">
+				
+					<view class="content ql-editor font26">
+						<import src="../../wxParse/wxParse.wxml" />
+						<template is="wxParse" data="{{wxParseData:web_mainData.content}}" />
+					</view>
+				
+			</view>
+	
+			<view id="comment" style="{{tabCurrent == 1?'display:block':'display:none'}}">
+				<view class="w710 comment_cont">
+	
+					<block wx:for="{{web_messageData}}" wx:key="id">
+						<view class="comment_user flex">
+							<view class="comment_left">
+								<view class="user_img">
+									<image src="{{item.user[0].headImgUrl}}" style="width:52rpx;height:52rpx;border-radius:50%"></image>
+								</view>
+							</view>
+							<view class="comment_name font28">{{item.user[0].nickname}}</view>
+							<view class="comment_data color6 font24">{{item.creta_time}}</view>
+						</view>
+						<view class="font28 color6">{{item.content}}</view>
+					</block>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view style="width:100%;height:115rpx"></view>
+	<view style="position: fixed;bottom: 0;width:100%;">
+
+		<view class="navbar flex" style="width: 50%;">
+			<view class="navbar_item" style="width:50%">
+				<view class="nav_img bg1">
+					<image src="/images/icon3.png" ></image>
+				</view>
+				<view class="text">返回首页</view>
+			</view>
+			
+			<view class="navbar_item  bg1" style="width:50%">
+				<view class="nav_img" >
+					<image src="/images/icon4.png" ></image>
+				</view>
+				<contact-button type="default-light" size="27" session-from="weapp" style="height:100%;position:absolute;opacity:0;">
+				</contact-button>
+				<view class="text">联系客服</view>
+			</view>
+		</view>
+		
+		<view  style="float: right;width:50%;">
+			<view class="submit_info" bindtap="intoPath" data-path="/pages/confirmOrder/confirmOrder?id={{web_mainData.id}}&type=group" style="float: left;width:50%;background:#FF9F5A;margin-top: 0;height: 102rpx;line-height: 50rpx;font-size:26rpx" >
+				拼团购买
+				<view style="font-size:26rpx">¥{{web_mainData.group_price}}</view>
+			</view>
+			<view class="submit_info" bindtap="intoPath" data-path="/pages/confirmOrder/confirmOrder?id={{web_mainData.id}}" style="float: left;width:50%;margin-top: 0;height: 102rpx;line-height:50rpx;font-size:26rpx">
+				单独购买
+				<view style="font-size:26rpx">¥{{web_mainData.price}}</view>
+			</view>
+		</view>
+	</view>
+</view>

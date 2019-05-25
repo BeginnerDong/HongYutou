@@ -1,0 +1,116 @@
+<view style="width:100%;">
+	<view class="page-body">
+		<view class="page-section page-section-spacing swiper">
+			<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
+			 interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" tyle="width:100%;height:330rpx">
+				<block wx:for="{{web_sliderData.mainImg}}" wx:index="{{index}}" wx:key="id">
+					<swiper-item>
+						<image src="{{item.url}}" style="width:100%;height:330rpx"></image>
+					</swiper-item>
+				</block>
+			</swiper>
+		</view>
+	</view>
+	<view class="outLineStory">
+		<view class="flexRowBetween outLineStory-title">
+			<view class="title-left flexRowBetween">
+				<image src="/images/index-icon3.png"></image>
+				<span class="font28" style="margin-left: 20rpx;">线下门店</span>
+			</view>
+			<view class="title-right flexRowBetween" bindtap="intoPath" data-path="/pages/storeList/storeList">
+				<span class="font24 color426">店铺名称</span>
+				<image src="/images/index-icon2.png" style="margin-left: 20rpx;"></image>			
+			</view>
+		</view>
+		<view class="flexRowBetween outLineStory-mainImg" bindtap="intoPath" data-path="/pages/storeDetail/storeDetail?user_no={{web_storeData.user_no}}">
+			<image src="{{web_storeData.info.mainImg[0].url}}"></image>
+			<div class="outLineStory-infomation">
+				<div class="outLineStory-infomation-item font28 colorfff">
+					{{web_storeData.login_name}}
+				</div>
+				<div class="outLineStory-infomation-item flexRowBetween">
+					<view class=" flexRowBetween" style="height:100%">
+						<!-- <image src="/images/index-icon3.png"></image> -->
+						<span class="font20 colorfff">{{web_storeData.info.address}}</span>
+					</view>
+					<view class=" flexRowBetween" style="height:100%">
+						<!-- <image src="/images/index-icon3.png"></image> -->
+						<span class="font20 colorfff">{{web_storeData.distance}}km</span>
+					</view>
+				</div>
+			</div>
+		</view>
+	</view>
+	<view style="width:100%;height:20rpx;background: #e5e5e5;"></view>
+	<view class="group">
+		<view class="flexRowBetween outLineStory-title">
+			<view class="title-left flexRowBetween">
+				<image src="/images/index-icon4.png"></image>
+				<span class="font28" style="margin-left: 20rpx;">社区团购</span>
+			</view>
+		</view>
+		<block wx:for="{{web_groupData}}" wx:key="id" >	
+			<view class="flexRowBetween group-main" bindtap="intoPath" data-path="/pages/groupDetail/groupDetail?id={{item.id}}">
+				<view class="group-main-left flex">
+					<image src="{{item.mainImg[0].url}}"></image>
+				</view>
+				<view class="group-main-left">
+					<view class="avoidOverflow2 font28" style="height:35%">{{item.title}}</view>
+					
+					<view class="font26" style="height:45%;line-height:88rpx;">团购倒计时
+					
+					<span style="color: rgb(255,127,35);margin-left: 20rpx;">{{countDownList[index].hou}}:{{countDownList[index].min}}:{{countDownList[index].sec}}</span>
+					
+					</view>
+					
+					<view class="font26" style="height:30%">{{item.standard}}人成团<span style="color: rgb(255,59,59);margin-left: 20rpx;">团购：¥{{item.price}}</span></view>
+				</view>
+			</view>
+		</block>
+		
+	</view>
+	<view style="width:100%;height:20rpx;background: #e5e5e5;"></view>
+	<view class="product">
+		<view class="flexRowBetween outLineStory-title">
+			<view class="title-left flexRowBetween">
+				<image src="/images/index-icon1.png"></image>
+				<span class="font28" style="margin-left: 20rpx;">线上产品</span>
+			</view>
+		</view>
+		<view class="flexRowBetween">
+			<block wx:for="{{web_onlineData}}" wx:key="id">
+				<view class="product-item" bindtap="intoPath" data-path="/pages/productDetail/productDetail?id={{item.id}}">
+					<view class="product-item-img">
+						<image src="{{item.mainImg[0].url}}"></image>
+					</view>
+					<view class="product-item-text">
+						<view class="avoidOverflow2 font28" style="height:76rpx">{{item.title}}</view>
+						<view class=" font24" style="color: rgb(255,59,59);">¥{{item.price}}</view>
+					</view>
+				</view>
+			</block>
+		</view>
+	</view>
+	<view class="loadMore">
+		<view class="loadMore-img">
+			<image src="/images/index-icon5.png"></image>
+		</view>	
+		<span class="font20 color96">上拉加载更多</span>
+	</view>
+	<view style="width:100%;height:105rpx"></view>
+	<view class="navbar flex">
+		<view class="navbar_item">
+			<view class="nav_img bg1">
+				<image src="/images/index-a.png" ></image>
+			</view>
+			<view class="text this-text">首页</view>
+		</view>
+		
+		<view class="navbar_item  bg1" bindtap="intoPathRedi" data-path="/pages/user/user">
+			<view class="nav_img" >
+				<image src="/images/index-2.png" ></image>
+			</view>
+			<view class="text">我的</view>
+		</view>
+	</view>
+</view>
