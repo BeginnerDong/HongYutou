@@ -15,7 +15,7 @@
 		<view class="flexRowBetween outLineStory-title">
 			<view class="title-left flexRowBetween">
 				<image src="/images/index-icon3.png"></image>
-				<span class="font28" style="margin-left: 20rpx;">线下门店</span>
+				<span class="font28" style="margin-left: 20rpx;">红芋头线下体验店</span>
 			</view>
 			<view class="title-right flexRowBetween" bindtap="intoPath" data-path="/pages/storeList/storeList">
 				<span class="font24 color426">店铺名称</span>
