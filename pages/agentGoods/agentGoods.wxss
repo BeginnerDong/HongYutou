@@ -73,11 +73,10 @@ page{
 	overflow:hidden;
 }
 .credit_top{
-	width:92%;	
-	height:130rpx;
-	border:1px solid #f4f4f4;
-	box-shadow:0 0 1px #FF7F23;
-	margin: 20rpx 4%;
+	height:360rpx;
+	width:100%;
+	background:#FF7F23;
+
 }
 .credit_top-img image{
 	width:40rpx;	

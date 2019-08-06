@@ -36,6 +36,12 @@ Page({
 		self.getMainData()
 
 	},
+	
+	
+	showToast(){
+		const self = this;
+		api.showToast('商品未开启团购','none')
+	},
 
 	getMainData() {
 		const self = this;
@@ -132,15 +138,23 @@ Page({
 				},
 				condition: '='
 			},
+			groupMember: {
+				tableName: 'Order',
+				middleKey: 'group_no',
+				key: 'group_no',
+				searchItem: {
+					status: 1,
+			
+				},
+				condition: '='
+			},
 		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
 				self.data.orderData.push.apply(self.data.orderData, res.info.data)
-				/*        for (var i = 0; i < self.data.orderData.length; i++) {
-				          if(self.data.orderData[i].user_no==wx.getStorageSync('info').user_no){
-				            self.data.hasGroup = true;
-				          }
-				        }*/
+				       for (var i = 0; i < self.data.orderData.length; i++) {
+				          self.data.orderData[i].lessNum = self.data.orderData[i].standard - self.data.orderData[i].groupMember.length
+				        }
 			};
 			self.setData({
 				/*web_hasGroup:self.data.hasGroup,*/

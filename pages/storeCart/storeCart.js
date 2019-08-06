@@ -23,22 +23,38 @@ Page({
 	onLoad(options) {
 		const self = this;
 		api.commonInit(self);
+		var week = new Date().getDay().toString();
+		if(week==1||week==2){
+			self.setData({
+				web_canOrder: true,
+			});
+		}else{
+			self.setData({
+				web_canOrder: false,
+			});
+		}
+		console.log(week);
 		self.getMainData();
 		self.getLabelData()
+	},
+	
+	showMsg() {
+		const self = this;
+		api.showToast('今日限制下单', 'none');
 	},
 
 	getLabelData() {
 		const self = this;
-	
+
 		const postData = {};
-	
+
 		postData.searchItem = {
-			title:'店铺下单图'
+			title: '店铺下单图'
 		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
-				self.data.labelData = res.info.data[0]			
-			} 
+				self.data.labelData = res.info.data[0]
+			}
 			self.setData({
 				web_labelData: self.data.labelData,
 			})
@@ -56,7 +72,7 @@ Page({
 		postData.paginate = api.cloneForm(self.data.paginate);
 		postData.searchItem = {
 			category_id: 8,
-			partner_no: wx.getStorageSync('threeInfo').partner_no
+			partner_no: wx.getStorageSync('threeInfo').parent_no
 		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
@@ -125,50 +141,125 @@ Page({
 	addOrder(e) {
 		const self = this;
 
-		api.buttonCanClick(self);
+		
 		var key = api.getDataSet(e, 'key');
 		if (self.data.orderId) {
 			self.pay(key)
 		}
-		console.log('key', key)
-		const productData = [];
-		for (var i = 0; i < self.data.mainData.length; i++) {
-			if (self.data.mainData[i].isSelect) {
-				productData.push({
-					id: self.data.mainData[i].id,
-					count: self.data.mainData[i].count,
-
-				})
+		self.data.pay = {};
+		if (key == "wx") {
+			api.buttonCanClick(self);
+			self.data.pay.wxPay = {
+				price: self.data.totalPrice.toFixed(2)
 			}
+			const productData = [];
+			for (var i = 0; i < self.data.mainData.length; i++) {
+				if (self.data.mainData[i].isSelect) {
+					productData.push({
+						id: self.data.mainData[i].id,
+						count: self.data.mainData[i].count,
 
-		};
-		var orderList = [{
-			product: productData,
+					})
+				}
 
-		}];
-		if (productData.length == 0) {
-			api.buttonCanClick(self, true);
-			api.showToast('没有选择商品', 'none');
-			return
-		};
-		const postData = {
-			tokenFuncName: 'getThreeToken',
-			orderList: orderList,
-			data: {
-				shop_no: wx.getStorageSync('threeInfo').parent_no
-			},
-			type: 1
-		};
-		const callback = (res) => {
-			if (res && res.solely_code == 100000) {
-				self.data.orderId = res.info.id;
-
-				self.getOrderData(key);
-			} else {
-				api.showToast(res.msg, 'none')
 			};
+			var orderList = [{
+				product: productData,
+
+			}];
+			if (productData.length == 0) {
+				api.buttonCanClick(self, true);
+				api.showToast('没有选择商品', 'none');
+				return
+			};
+			const postData = {
+				tokenFuncName: 'getThreeToken',
+				orderList: orderList,
+				data: {
+					shop_no: wx.getStorageSync('threeInfo').parent_no,
+					express_info:self.data.pay.wxPay.price
+				},
+				type: 1
+			};
+			const callback = (res) => {
+				if (res && res.solely_code == 100000) {
+					self.data.orderId = res.info.id;
+
+					self.getOrderData(key);
+				} else {
+					api.showToast(res.msg, 'none')
+				};
+			};
+			api.addOrder(postData, callback)
+		} else if (key == "balance") {
+			
+			var ratio = wx.getStorageSync('threeInfo').thirdApp.custom_rule.balanceDiscount;
+			if (ratio && ratio > 0) {
+				self.data.pay = {
+					balance: (self.data.totalPrice * (ratio / 100)).toFixed(2),
+					other: {
+						price: (self.data.totalPrice - self.data.totalPrice * (ratio / 100)).toFixed(2)
+					}
+				}
+			} else {
+				api.buttonCanClick(self, true);
+				api.showToast('折扣设置错误', 'none');
+				return
+			}
+			wx.showModal({
+				title: '确认订单',
+				content: '余额支付,享受优惠'+self.data.pay.other.price+'元',
+				cancelText: '取消',
+				confirmText: '确认',
+				success(res) {
+					if (res.cancel) {
+			
+					} else if (res.confirm) {
+						api.buttonCanClick(self);
+						const productData = [];
+						for (var i = 0; i < self.data.mainData.length; i++) {
+							if (self.data.mainData[i].isSelect) {
+								productData.push({
+									id: self.data.mainData[i].id,
+									count: self.data.mainData[i].count,
+						
+								})
+							}
+						
+						};
+						var orderList = [{
+							product: productData,
+						
+						}];
+						if (productData.length == 0) {
+							api.buttonCanClick(self, true);
+							api.showToast('没有选择商品', 'none');
+							return
+						};
+						const postData = {
+							tokenFuncName: 'getThreeToken',
+							orderList: orderList,
+							data: {
+								shop_no: wx.getStorageSync('threeInfo').parent_no,
+								express_info:self.data.pay.balance
+							},
+							type: 1
+						};
+						const callback = (res) => {
+							if (res && res.solely_code == 100000) {
+								self.data.orderId = res.info.id;
+						
+								self.getOrderData(key);
+							} else {
+								api.showToast(res.msg, 'none')
+							};
+						};
+						api.addOrder(postData, callback)
+			
+					}
+				}
+			})
 		};
-		api.addOrder(postData, callback);
 	},
 
 	getOrderData(key) {
@@ -204,28 +295,7 @@ Page({
 	pay(key) {
 		const self = this;
 		console.log(key)
-		self.data.pay = {};
-		if (key == "wx") {
-			self.data.pay.wxPay = {
-				price: self.data.totalPrice.toFixed(2)
-			}
-		} else if (key == "balance") {
 
-			var ratio = wx.getStorageSync('threeInfo').thirdApp.custom_rule.balanceDiscount;
-			if (ratio && ratio > 0) {
-				self.data.pay = {
-					balance: self.data.totalPrice * (ratio / 100),
-					other: {
-						price: self.data.totalPrice - self.data.totalPrice * (ratio / 100)
-					}
-				}
-			} else {
-				api.buttonCanClick(self, true);
-				api.showToast('折扣设置错误', 'none');
-				return
-			}
-
-		};
 		console.log('self.data.pay', self.data.pay)
 		const postData = self.data.pay;
 		postData.openid = wx.getStorageSync('info').openid;
@@ -261,9 +331,10 @@ Page({
 					};
 					api.realPay(res.info, payCallback);
 				} else {
-					api.showToast('支付成功', 'none', 1000, function() {
+					const cc_callback = () => {
 						api.pathTo('/pages/storeOrder/storeOrder', 'redi');
-					});
+					};
+					api.showToast('支付成功', 'none', 1000, cc_callback);
 				};
 			} else {
 				api.showToast(res.msg, 'none');

@@ -13,9 +13,9 @@ Page({
 		mainData: [],
 		searchItem: {
 			type: 3,
-			count:['not in',0]
+			count: ['not in', 0]
 		},
-		isFirstLoadAllStandard: ['getMainData'],
+		isFirstLoadAllStandard: ['getMainData','getUserInfoData'],
 		count: 0,
 
 	},
@@ -25,13 +25,27 @@ Page({
 		const self = this;
 		api.commonInit(self);
 		self.getMainData();
-		self.setData({
-			web_count: self.data.count
-		})
+		self.getUserInfoData()
 	},
 
 
-
+	getUserInfoData() {
+		const self = this;
+		const postData = {};
+		postData.tokenFuncName = 'getProjectToken';
+		const callback = (res) => {
+			if (res.solely_code == 100000) {
+				self.data.userInfoData = res.info.data[0]
+			} else {
+				api.showToast(res.msg, 'none')
+			}
+			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getUserInfoData', self);
+			self.setData({
+				web_userInfoData: self.data.userInfoData,
+			});
+		};
+		api.userInfoGet(postData, callback)
+	},
 
 
 
@@ -49,33 +63,29 @@ Page({
 			create_time: 'desc',
 		};
 		postData.getAfter = {
-				store: {
-					tableName: 'User',
-					middleKey: 'relation_user',
-					key: 'user_no',
-					searchItem: {
-						status: 1
-					},
-					condition: '=',
-					info: ['login_name']
+			store: {
+				tableName: 'UserInfo',
+				middleKey: 'relation_user',
+				key: 'user_no',
+				searchItem: {
+					status: 1
 				},
+				condition: '=',
+				info: ['shop_name']
+			},
+		};
+		const callback = (res) => {
+			if (res.info.data.length > 0) {
+				self.data.mainData.push.apply(self.data.mainData, res.info.data);
+			} else {
+				self.data.isLoadAll = true;
+				api.showToast('没有更多了', 'none');
 			};
-			const callback = (res) => {
-				if (res.info.data.length > 0) {
-					self.data.mainData.push.apply(self.data.mainData, res.info.data);
-					for (var i = 0; i < self.data.mainData.length; i++) {
-						self.data.count += parseFloat(self.data.mainData[i].count)
-					}
-				} else {
-					self.data.isLoadAll = true;
-					api.showToast('没有更多了', 'none');
-				};
-				api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getMainData', self);
-				self.setData({
-					web_count: self.data.count,
-					web_mainData: self.data.mainData,
-				});
-			};
+			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getMainData', self);
+			self.setData({
+				web_mainData: self.data.mainData,
+			});
+		};
 		api.flowLogGet(postData, callback);
 	},
 

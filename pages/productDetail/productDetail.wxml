@@ -3,7 +3,7 @@
 		<image src="{{web_mainData.bannerImg[0].url}}"></image>
 	</view>
 	<view class="store-infomation">
-		<view class="font30" style="height:60rpx;line-height: 60rpx;">{{web_mainData.title}}</view>
+		<view class="font30" >{{web_mainData.title}}</view>
 		
 		<view class="font28 flexRowBetween" style="height:60rpx;line-height: 60rpx;">
 			<view class="title-left flexRowBetween">
@@ -31,7 +31,7 @@
 				</view>
 				<view class="title-right flexRowBetween">
 					<view>					
-						<view class="font24 color96" style="margin-right: 20rpx;">剩余23：23：48</view>
+						<view class="font24" style="margin-right: 20rpx;color:red">还差{{item.lessNum}}人拼成</view>
 					</view>
 					<view  bindtap="groupData" data-id="{{item.id}}" data-group_no="{{item.group_no}}" class="submit_info" style="border-radius:10rpx;width:120rpx;font-size:20rpx;height:50rpx;line-height: 50rpx;margin-top: 0;">去拼单</view>		
 				</view>
@@ -44,11 +44,11 @@
 			
 		</view>
 	</view>
-	<view class="mask" wx:if="{{web_isShow1}}" catchtouchmove="true" bindtap="mask">
+	<view class="mask" wx:if="{{web_isShow1}}" catchtouchmove="true">
 	</view>
 	<view id="group2" wx:if="{{web_isShow1}}" catchtouchmove="true">
 		<view class="group1 group2">
-			<view class="close" bindtap="isShow1">
+			<view class="close" bindtap="showGroupMember">
 				<image src="/images/stores-icon10.png"></image>
 			</view>
 			<view class="font32 color3">参与{{web_groupData.user[0].nickname}}的拼团</view>
@@ -144,7 +144,8 @@
 		</view>
 		
 		<view  style="float: right;width:50%;">
-			<view class="submit_info" bindtap="intoPath" data-path="/pages/confirmOrder/confirmOrder?id={{web_mainData.id}}&type=group" style="float: left;width:50%;background:#FF9F5A;margin-top: 0;height: 102rpx;line-height: 50rpx;font-size:26rpx" >
+			<view class="submit_info" style="{{web_mainData.is_group==1?'background: #969696;':'background:#FF9F5A'}}float: left;width:50%;margin-top: 0;height: 102rpx;line-height: 50rpx;font-size:26rpx"   
+			bindtap="{{web_mainData.is_group==1?'showToast':'intoPath'}}" data-path="/pages/confirmOrder/confirmOrder?id={{web_mainData.id}}&type=group" >
 				拼团购买
 				<view style="font-size:26rpx">¥{{web_mainData.group_price}}</view>
 			</view>

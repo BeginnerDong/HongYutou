@@ -19,7 +19,9 @@ Page({
 			password:'',
 			address:'',
 			mainImg:[],
-			login_name:''
+			shop_name:'',
+			longitude:'',
+			latitude:'',
 		},
 		isFirstLoadAllStandard: ['getMainData'],
 		region: '',
@@ -116,7 +118,27 @@ Page({
 		api.addShop(postData, callback);
 	},
 
-
+	chooseLocation(e){
+	  var self = this;
+	  wx.chooseLocation({
+	    success: function(res){
+	      self.data.sForm.address = res.address,
+	      self.data.sForm.longitude = res.longitude,
+	      self.data.sForm.latitude = res.latitude,
+	 
+		self.setData({
+			web_sForm:self.data.sForm
+		})
+	    
+	    },
+	    fail: function() {
+	    // fail
+	    },
+	    complete: function() {
+	    // complete
+	    }
+	  })
+	},
 
 	submit() {
 		const self = this;

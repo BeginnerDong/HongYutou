@@ -42,7 +42,8 @@ Page({
     postData.tokenFuncName = 'getProjectToken';
     postData.searchItem = api.cloneForm(self.data.searchItem);
     postData.searchItem.thirdapp_id = getApp().globalData.thirdapp_id;
-	 postData.searchItem.type = ['in',[3,4]];
+		postData.searchItem.type = ['in',[3,4]];
+		postData.searchItem.user_no = wx.getStorageSync('info').user_no;
     postData.order = {
       create_time:'desc'
     }
@@ -132,9 +133,10 @@ Page({
 
   pay(e){
     const self = this;
+	console.log(e)
     var id = api.getDataSet(e,'id');
     
-    api.pathTo('/pages/confirmOrder/confirmOrder?order_id='+id,'nav'); 
+    api.pathTo('/pages/confirmOrder/confirmOrder?id='+id,'nav'); 
   },
 
 
@@ -167,8 +169,8 @@ Page({
     }else if(num=='4'){
       self.data.searchItem.pay_status = '1';
       self.data.searchItem.transport_status = '1';
-      self.data.searchItem.order_step = '0';
-    }else if(num=='4'){
+      self.data.searchItem.order_step = ['in',[0,5]];
+    }else if(num=='5'){
       self.data.searchItem.pay_status = '1';
       self.data.searchItem.transport_status = '2';
       self.data.searchItem.order_step = '3';

@@ -4,17 +4,18 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"autoAudits": false
+		"autoAudits": false,
+		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.6.4",
 	"appid": "wxc9d7ab8cae902fef",
-	"projectname": "HongYutou",
+	"projectname": "test",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -39,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 19,
+			"current": 20,
 			"list": [
 				{
 					"id": -1,
@@ -169,14 +170,24 @@
 				},
 				{
 					"id": -1,
-					"name": "我的",
-					"pathName": "pages/user/user",
-					"query": ""
+					"name": "111",
+					"pathName": "pages/groupConfirmOrder/groupConfirmOrder",
+					"query": "",
+					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "我的优惠券",
-					"pathName": "pages/userCoupon/userCoupon"
+					"name": "确认团购",
+					"pathName": "pages/groupConfirmOrder/groupConfirmOrder",
+					"query": "id=5&user_no=U530853926309194",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/groupConfirmOrder/groupConfirmOrder",
+					"pathName": "pages/groupConfirmOrder/groupConfirmOrder",
+					"query": "id=22",
+					"scene": null
 				}
 			]
 		}

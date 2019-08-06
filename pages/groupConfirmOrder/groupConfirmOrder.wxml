@@ -2,7 +2,7 @@
 <view class="product">
 	<view class="product_box w690 flexCenter bg1">
 		<view class="product_left">
-			<image src="/images/img7.png"></image>
+			<image src="{{web_mainData.mainImg[0].url}}"></image>
 		</view>
 		<view class="product_right flex">
 			<view class="product_detail">
@@ -19,26 +19,26 @@
 <view class="form">
 	<view wx:if="{{web_parentStoreData}}">
 		<view class="form-item flex" style="height:65rpx;line-height: 65rpx;border-bottom: none;">
-			<view class="font26 color42 form-item-title" style="width:42%">参团门店：<span class="font24 color426">(到店自提)</span></view>
+			<view class="font32 color42 form-item-title" style="width:42%;font-weight: 700;">参团门店<span class="font26" style="rgb(107,74,63)">(到店自提)</span></view>
 			<view style="width:33%"></view>
-			<view style="width:25%;justify-content: flex-end;" class="flex" bindtap="{{web_user_no?'noSelect':'intoPath'}}" data-path="/pages/groupStore/groupStore?id={{web_mainData.id}}&standard={{web_mainData.standard}}">
+			<view style="width:25%;justify-content: flex-end;height:100%" class="flex" bindtap="{{web_user_no?'noSelect':'intoPath'}}" data-path="/pages/groupStore/groupStore?id={{web_mainData.id}}&standard={{web_mainData.standard}}">
 				<image src="/images/left.png" style="width:10rpx;height:20rpx"/>
 			</view>
 		</view>
 		<view class="form-item flex" style="line-height: 40rpx;border-bottom: none;">
 			<view class="font26 color42 form-item-title" style="width:70%;border-right: 1px solid #FF7F23;height:70rpx">
-				<view class="color428 font26">{{web_parentStoreData.login_name}}</view>
+				<view class="color428 font26">{{web_parentStoreData.info.shop_name}}</view>
 				<view class="color426 font24">地址：{{web_parentStoreData.info.address}}</view>
 		
 			</view>
 			
-			<view style="width:30%;justify-content: flex-end;" class="flex">
-				<image src="/images/icon1.png" style="width:70rpx;height:70rpx"/>
+			<view style="width:30%;justify-content: flex-end;" class="flex" bindtap="intoMap">
+				<image src="/images/about-icon5.png" style="width:70rpx;height:70rpx"/>
 				
 			</view>
 		</view>
 		<view class="form-item flex" style="height:50rpx">
-			<progress percent="20" style="width:55%" activeColor="#FF7F23"></progress>
+			<progress percent="{{web_parentStoreData.percent}}" style="width:55%" activeColor="#FF7F23"></progress>
 			<view class="font20 colorFF3B3B" style="margin-left: 20rpx;">{{web_parentStoreData.minNum==0?'已成团':'还差'+web_parentStoreData.minNum+'人成团'}}</view>
 		</view>
 	</view>
@@ -49,33 +49,47 @@
 			<image src="/images/left.png" style="width:10rpx;height:20rpx"/>
 		</view>
 	</view>
-	<view class="form-item flex" style="{{web_showCoupon?'border-bottom:none':''}}">
+	<view class="form-item flex" bindtap="showCoupon">
 		<view class="font26 color42 form-item-title">优惠券：</view>
-		<view style="width:50%"></view>
-		<view style="width:25%;justify-content: flex-end;" class="flex" bindtap="showCoupon">
-			<image src="/images/left.png" style="width:10rpx;height:20rpx"/>
+		<view class="flex font26 color42" style="width:70%;justify-content: flex-end;">{{web_couponData.length==0?'无可用优惠券':(web_pay.coupon.length>0?web_couponData[web_couponIndex].snap_coupon.title:'请选择')}}</view>
+		<view class="flex" style="width:5%;justify-content: flex-end;">
+			<image src="/images/left.png" style="width:10rpx;height:20rpx" />
 		</view>
 	</view>
 	<block wx:for="{{web_couponData}}" wx:key="id" wx:if="{{web_showCoupon}}">
-	<view class="form-item flex" style="border-bottom: none;">
-		<view class="font26 color42 form-item-title" bindtap="useCoupon" data-id="{{item.id}}">
-			
-			<image src="/images/icon.png" />
+		<view class="form-item flex" style="border-bottom: none;">
+			<view class="font26 color42 form-item-title" style="display: flex;align-items: center;" bindtap="useCoupon" data-index="{{index}}">
 	
+				<image src="{{web_couponIndex==index?'/images/icon2.png':'/images/icon.png'}}" style="width:15px;height:15px"/>
+	
+			</view>
+			<view style="width:50%" class="font26 color42">
+				{{item.type==2?'抵扣券':'折扣券'}}{{item.type==2?item.discount/10+'折':item.discount+'元'}}
+			</view>
+			<view style="width:25%;">
+			</view>
 		</view>
-		<view style="width:50%" class="font26 color42">
-			{{item.type==2?'抵扣券':'折扣券'}}{{item.type==2?item.discount/10+'折':item.value+'元'}}
-		</view>
-		<view style="width:25%;">
-		</view>
-	</view>
 	</block>
-	<view class="form-item flex" style="border-top:1px solid #f4f4f4">
+	<view class="form-item flex" style="border: none;">
 		<view class="font26 color42 form-item-title" >薯币：</view>
-		<input class="font24 color426" type="number" placeholder="请输入您想使用的薯币数量" placeholder-class="place-holder"
-		 value="{{web_sForm.score}}" bindblur="inputBind" data-key="score"></input>
+		<view style="height:100%;display: flex;align-items: center;border-bottom:1px solid #f4f4f4;width:75%">
+			<input class="font24 color426" type="number" placeholder="请输入您想使用的薯币数量" placeholder-class="place-holder"
+			 value="{{web_sForm.score}}" bindblur="inputBind" data-key="score"></input>
+		</view>
+		
 	</view>
-
+	<view class="form-item flex">
+		<view class="font26 color42 form-item-title" ></view>
+		<view style="display: flex;">
+			<view style="font-size: 22rpx;" class="color428">
+				现有薯币：¥{{web_userData.score}}
+			</view>
+			<!-- <view style="font-size: 22rpx;margin-left: 50rpx;" class="color428">
+				最高抵扣薯币：¥500
+			</view> -->
+		</view>
+		
+	</view>
 </view>
 <view class="confirm_btn flex font30">
    <view class="confirm_left color6">合计:<text class="colorFF3B3B"> ¥{{web_pay.wxPay&&web_pay.wxPay.price||0}}</text></view> 

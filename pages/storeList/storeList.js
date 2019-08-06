@@ -16,12 +16,14 @@ Page({
 		mainData: [],
 		isFirstLoadAllStandard: ['getMainData'],
 		submitData: {
-			login_name: ''
+			shop_name: ''
 		},
 		searchItem: {
 			user_type: 1,
-			primary_scope: 30
-		}
+		},
+		La1: '',
+		lo1: '',
+		order:{}
 	},
 
 	onLoad(options) {
@@ -30,7 +32,7 @@ Page({
 		console.log('options', options)
 		api.commonInit(self);
 		self.getLocation();
-		self.getMainData()
+
 
 	},
 
@@ -38,8 +40,11 @@ Page({
 		const self = this;
 		const callback = (res) => {
 			if (res.errMsg == "getLocation:ok") {
-				self.data.location = res
+					self.data.la1 = res.latitude;
+					self.data.lo1 = res.longitude
 			}
+			console.log(res)
+			self.getMainData()
 		};
 		api.getLocation('getGeocoder', callback)
 	},
@@ -47,28 +52,52 @@ Page({
 
 	getMainData() {
 		const self = this;
+		var lat = self.data.la1;
+		var lon = self.data.lo1;
+		var orderKey = 'ACOS(SIN(('+ lat +'* 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) +COS(('+ lat +' * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(('+ lon +' * 3.1415) / 180 - (longitude * 3.1415) / 180 ) ) * 6379';
+		self.data.order[orderKey]= 'asc';
 		const postData = {};
 		postData.paginate = api.cloneForm(self.data.paginate);
 		postData.tokenFuncName = 'getProjectToken';
 		postData.searchItem = api.cloneForm(self.data.searchItem);
-
+		postData.order = api.cloneForm(self.data.order);
+		
+		postData.order = api.cloneForm(self.data.order)
+		postData.getBefore = {
+			shop: {
+				tableName: 'User',
+				middleKey: 'status',
+				key: 'status',
+				searchItem: {
+					primary_scope: ['in', [30]],
+				},
+				condition: 'in'
+			}
+		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
 				self.data.mainData.push.apply(self.data.mainData, res.info.data);
 				for (var i = 0; i < self.data.mainData.length; i++) {
-					self.data.mainData[i].distance = api.distance(self.data.location.latitude,self.data.location.longitude,
-					self.data.mainData[i].info.latitude,self.data.mainData[i].info.longitude);
-				}
+					self.data.mainData[i].distance =
+						api.distance(self.data.la1, self.data.lo1, self.data.mainData[i].latitude, self.data.mainData[i].longitude)
+					console.log('self.data.mainData[i].distance', self.data.mainData[i].distance)
+					
+				};
+
 				
 				
-			};
+			}else {
+				self.data.isLoadAll = true;
+				api.showToast('没有更多了', 'none')
+			}
 			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getMainData', self);
 			self.setData({
 				web_mainData: self.data.mainData,
+				//web_testObject:testObject
 			});
 			console.log(self.data.mainData)
 		};
-		api.userGet(postData, callback);
+		api.userInfoGet(postData, callback);
 	},
 
 	changeBind(e) {
@@ -78,11 +107,11 @@ Page({
 		self.setData({
 			web_submitData: self.data.submitData
 		});
-		if (self.data.submitData.login_name) {
-			self.data.searchItem.login_name = ['LIKE', ['%' + self.data.submitData.login_name + '%']],
+		if (self.data.submitData.shop_name) {
+			self.data.searchItem.shop_name = ['LIKE', ['%' + self.data.submitData.shop_name + '%']],
 				self.getMainData(true)
 
-		} else if (self.data.submitData.login_name == '') {
+		} else if (self.data.submitData.shop_name == '') {
 			api.showToast('输入门店名查询', 'none');
 			return
 		}

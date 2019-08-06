@@ -44,19 +44,20 @@ Page({
     postData.searchItem.thirdapp_id = getApp().globalData.thirdapp_id;
     postData.searchItem.type = 1;
 	postData.searchItem.user_no = wx.getStorageSync('threeInfo').user_no;
+	postData.searchItem.pay_status =1
     postData.order = {
       create_time:'desc'
     }
 	postData.getAfter = {
 		 user:{
-			 tableName:'User',
+			 tableName:'UserInfo',
 			 middleKey:'user_no',
 			 key:'user_no',
 			 searchItem:{
 				 status:1
 			 },
 			 condition:'=',
-			 info:['login_name']
+			 info:['shop_name']
 		 }
 	};
     const callback = (res)=>{

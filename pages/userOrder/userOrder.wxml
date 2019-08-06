@@ -24,7 +24,7 @@
 	<view class="product">
 		<view class="order_tlt w690 flexRowBetween bg1">
 		
-			<view class="font26 color426" style="width:70%">交易时间：{{item.create_time}}</view>
+			<view class="font24 color426" style="width:70%">交易时间：{{item.create_time}}</view>
 			<view class=" tlt_right colorFF3B3B font26"  style="width:30%"  wx:if="{{item.pay_status=='0'}}">待付款</view>
 			<view class="tlt_left tlt_right colorFF3B3B"  wx:if="{{item.order_step=='3'}}">已完成</view>
 			<view class="tlt_left tlt_right colorFF3B3B"  wx:if="{{item.pay_status == '1'&&item.transport_status =='0'}}">待发货</view>
@@ -37,11 +37,11 @@
 				</view>
 				<view class="product_right flex">
 					<view class="product_detail">
-						<view class="font32 color3 product_top avoidOverflow">{{c_item.snap_product.title}}</view>
+						<view class="font28 color3 product_top avoidOverflow">{{c_item.snap_product.title}}</view>
 						<view class="font24 color9 avoidOverflow" style="height:30%;">{{c_item.snap_product.description}}</view>
 						<view class="flexRowBetween" style="height:30%;">
 							<view class="font28 color4 flex">x{{c_item.count}}</view>
-							<view class="font26 colorFF3B3B product_price flex">¥{{c_item.snap_product.price}}</view>
+							<view class="font28 colorFF3B3B product_price flex">¥{{c_item.snap_product.price}}</view>
 						</view>
 					</view>
 				</view>
@@ -51,9 +51,9 @@
 	   <view class="w690" style="height:100rpx;">
 			<view class="order_handle flexRowBetween">
 				 
-				  <view class="submit_info font24 color426" data-id="{{item.id}}" data-price="{{item.price}}" bindtap="pay" wx:if="{{item.pay_status==0}}">去支付</view>
-				 
-					
+				  <view class="submit_info font24 color426" data-id="{{item.products[0].snap_product.id}}"  bindtap="pay" wx:if="{{item.pay_status==0}}">去支付</view>
+					<view class="submit_info font24 color426" bindtap="orderUpdate"  wx:if="{{item.pay_status == '1'&&item.transport_status == '1'&&(item.order_step == '0'||item.order_step == '5')}}" data-id="{{item.id}}">确认收货</view>
+					<view class="submit_info font24 color426"    wx:if="{{item.transport_status==2&&item.products[0].snap_product.category_id==7}}">去评价</view>
 			</view>
 		</view>
 	</view>

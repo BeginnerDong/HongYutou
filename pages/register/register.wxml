@@ -9,7 +9,11 @@
 			    <template is="wxParse" data="{{wxParseData:web_mainData.content}}"/>
 			</view> 
 		</view>
-		<view class="form">
+		<view class="form" style="{{web_type=='store'?'height:820rpx':''}}">
+			<view class="form-item flex" wx-if="{{web_type=='store'}}">
+				<view class="font26 color42 form-item-title">店铺名称：</view>
+				<input class="font24 color426" placeholder="请输入店铺名称" placeholder-class="place-holder" value="{{web_sForm.shop_name}}"  data-key="shop_name" bindblur="changeBind"></input>
+			</view>
 			<view class="form-item flex">
 				<view class="font26 color42 form-item-title">联系人姓名：</view>
 				<input class="font24 color426" placeholder="请输入姓名" placeholder-class="place-holder" value="{{web_sForm.name}}"  data-key="name" bindblur="changeBind"></input>
@@ -27,7 +31,11 @@
 				<view class="font26 color42 form-item-title">登录密码：</view>
 				<input class="font24 color426" placeholder="6-16位字母和数字组成" placeholder-class="place-holder" value="{{web_sForm.password}}"  data-key="password" bindblur="changeBind"></input>
 			</view>
-			<view class="form-item flex ">
+			<view class="form-item flex" bindtap="chooseLocation" wx:if="{{web_type=='store'}}">
+				<view class="font26 color42 form-item-title" style="width:33%">选择店铺地址：</view>
+				<input class="font24 color426" disabled="true" placeholder="请选择店铺地址" placeholder-class="place-holder" value="{{web_sForm.address}}"  data-key="address" bindblur="changeBind"></input>
+			</view>
+			<view class="form-item flex " wx:if="{{web_type!='store'}}">
 				<view class="font26 color42 form-item-title">省市县/区：</view>
 				<picker
 					mode="region"
@@ -40,7 +48,7 @@
 					</view>
 				  </picker>
 			</view>
-			<view class="form-item flex ">
+			<view class="form-item flex" wx:if="{{web_type!='store'}}">
 				<view class="font26 color42 form-item-title">详细地址：</view>
 				<input class="font24 color426" placeholder="请输入详细地址" placeholder-class="place-holder" value="{{web_sForm.address}}"  data-key="address" bindblur="changeBind"></input>
 			</view>

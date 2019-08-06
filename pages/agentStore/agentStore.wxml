@@ -2,7 +2,7 @@
 <view style="width:100%">
 	<view class="search flex">
 		<view class="search-input">
-			<input placeholder="搜索" style="border:1px solid #f4f4f4;font-size:26rpx;text-align: center;border-radius:30rpx;" data-key="login_name" value="{{web_submitData.login_name}}" bindblur="changeBind"/>
+			<input placeholder="搜索" style="border:1px solid #f4f4f4;font-size:26rpx;text-align: center;border-radius:30rpx;" data-key="shop_name" value="{{web_submitData.shop_name}}" bindblur="changeBind"/>
 			<image src="/images/icon6.png" bindtap="search"></image>
 		</view>
 	</view>
@@ -51,12 +51,12 @@
 	</view>
 	<view class="store-list flexRowBetween">
 		<block wx:for="{{web_mainData}}" wx:key="id">
-			<view class="store-item" bindtap="intoPath" data-path="/pages/agentStoreDetail/agentStoreDetail?user_no={{item.child_no}}">
+			<view class="store-item" bindtap="intoPath" data-path="/pages/agentStoreDetail/agentStoreDetail?user_no={{item.user_no}}">
 				<view class="store-item-img">
-					<image src="{{item.info.mainImg[0].url}}" />
+					<image src="{{item.mainImg[0].url}}" />
 				</view>
 				<view class="store-item-name font30 color42">
-					{{item.login_name}}
+					{{item.shop_name}}
 				</view>
 			</view>
 		</block>

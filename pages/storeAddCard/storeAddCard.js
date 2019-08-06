@@ -100,8 +100,8 @@ Page({
 				self.data.submitData.enc_true_name = res.info.data[0].info.enc_true_name;
 				self.data.submitData.bank_code = res.info.data[0].info.bank_code;
 				self.data.submitData.phone = res.info.data[0].info.phone;
-				for (var i = 0; i < bankData.length; i++) {
-					if (bankData[i].value == self.data.mainData.info.bank_code) {
+				for (var i = 0; i < self.data.bankData.length; i++) {
+					if (self.data.bankData[i].value == self.data.mainData.info.bank_code) {
 						self.setData({
 							web_index: i
 						})
@@ -131,9 +131,9 @@ Page({
 	getCode() {
 		var self = this;
 		api.buttonCanClick(self);
-		var phone = self.data.sForm.phone;
+		var phone = self.data.submitData.phone;
 		var currentTime = self.data.currentTime //把手机号跟倒计时值变例成js值
-		if (self.data.sForm.phone == '') {
+		if (self.data.submitData.phone == '') {
 			api.buttonCanClick(self, true);
 			api.showToast('手机号码不能为空', 'none');
 			return
@@ -146,7 +146,7 @@ Page({
 			const postData = {
 				data: {
 					thirdapp_id: 2,
-					phone: self.data.sForm.phone
+					phone: self.data.submitData.phone
 				}
 			};
 			const callback = (res) => {

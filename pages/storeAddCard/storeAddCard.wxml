@@ -30,7 +30,8 @@
 		</view>
 		<view class="form-item flex">
 			<view class="font28 color42 form-item-title">验证码：</view>
-			<input class="font26 color426" type="number" placeholder="请输入验证码" placeholder-class="place-holder" style="width:54%"></input>
+			<input class="font26 color426" type="number" placeholder="请输入验证码" placeholder-class="place-holder" style="width:54%" value="{{web_submitData.code}}"
+			 data-key="code" bindblur="changeBind"></input>
 			<view class="font28 color" bindtap="{{web_buttonCanClick?'getCode':''}}"  style="background-color:{{color}}">{{text}}</view>
 		</view>
 

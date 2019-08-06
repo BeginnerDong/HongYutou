@@ -16,7 +16,7 @@ Page({
 		submitData: {
 			price: ''
 		},
-		isFirstLoadAllStandard: ['getUserData'],
+		isFirstLoadAllStandard: ['getUserData', 'getCouponData'],
 		couponData: [],
 		pay: {
 
@@ -26,19 +26,100 @@ Page({
 		},
 		freeCouponData: [],
 		isDiscount: false,
-		freeCouponId: []
+		freeCouponId: [],
+		isDiscount1:false,
+		
 	},
 
 	onLoad(options) {
 		const self = this;
 		api.commonInit(self);
-		self.data.user_no = options.user_no;
+		if(options.scene){
+			var scene=decodeURIComponent(options.scene);
+			console.log('scene',scene)
+			self.data.user_no = scene
+		};
 		self.getUserData();
 		self.getFreeCouponData();
+		
+		self.getCouponData();
 		self.setData({
+			web_isDiscount1: self.data.isDiscount1,
 			web_isDiscount: self.data.isDiscount,
 			web_pay: self.data.pay
 		})
+	},
+	
+	
+	/* getUserCouponData() {
+		const self = this;
+		const postData = {};
+		postData.tokenFuncName = 'getProjectToken';
+		postData.searchItem = {
+			behavior: 1,
+			user_no: wx.getStorageSync('info').user_no
+		};
+		const callback = (res) => {
+			if (res.info.data.length > 0) {
+	
+			} else {
+				self.data.isDiscount = true;
+				self.setData({
+					web_isDiscount1: self.data.isDiscount1
+				})
+				
+			}
+		};
+		api.userCouponGet(postData, callback);
+	}, */
+	
+	getCouponData() {
+		const self = this;
+		const postData = {};
+		/* postData.tokenFuncName='getProjectToken'; */
+		postData.searchItem = {
+			behavior: 1
+		};
+		const callback = (res) => {
+			if (res.info.data.length > 0) {
+				self.data.couponData1 = res.info.data[0]
+			};
+			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getCouponData', self);
+			self.setData({
+				web_couponData1: self.data.couponData1,
+			});
+		};
+		api.couponGet(postData, callback);
+	},
+	
+	couponAdd1(e) {
+		const self = this;
+		api.buttonCanClick(self);
+		console.log(e);
+		var id = api.getDataSet(e, 'id');
+		const postData = {
+			tokenFuncName: 'getProjectToken',
+			coupon_id: id,
+			pay: {
+				score: 0
+			},
+		};
+		console.log('postData', postData)
+		const callback = (res) => {
+			api.buttonCanClick(self, true);
+			if (res && res.solely_code == 100000) {
+				api.showToast('领取成功！', 'none', 2000)
+				self.data.isDiscount1 = false;
+				self.setData({
+					web_isDiscount1: self.data.isDiscount1
+				})
+			} else {
+				api.showToast(res.msg, 'none')
+			}
+			
+		};
+		api.couponAdd(postData, callback);
+	
 	},
 
 	getUserData() {
@@ -90,10 +171,14 @@ Page({
 
 	getUserCouponData() {
 		const self = this;
+		var now = Date.parse(new Date());
 		const postData = {};
 		postData.tokenFuncName = 'getProjectToken';
 		postData.searchItem = {
-			behavior: 1
+			behavior: 1,
+			use_step:1,
+			
+			type:['in',[1,2]]
 		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
@@ -163,10 +248,11 @@ Page({
 					price: wxPay.toFixed(2),		
 			};
 			self.data.pay.wxPayStatus = 0
+			/* self.data.pay.score = wxPay.toFixed(2); */
 		}
-		/* else{
-				  delete self.data.pay.pay;
-				}; */
+		else{
+		  delete self.data.pay.wxPay;
+		};
 		self.setData({
 			web_pay: self.data.pay
 		})
@@ -178,7 +264,7 @@ Page({
 	pay() {
 		const self = this;
 		api.buttonCanClick(self);
-
+		var ratio = wx.getStorageSync('info').thirdApp.custom_rule.shubi;
 		const postData = {};
 		postData.pay = self.data.pay;
 		postData.tokenFuncName = 'getProjectToken';
@@ -200,7 +286,8 @@ Page({
 				tableName: 'FlowLog',
 				FuncName: 'add',
 				data: {
-					count: 1000,
+					count: self.data.pay.wxPay.price*(100/ratio),
+					/* count:self.data.pay.score*(100/ratio), */
 					type: 3,
 					user_no: wx.getStorageSync('info').user_no,
 					thirdapp_id: 2,
@@ -211,7 +298,7 @@ Page({
 				tableName: 'FlowLog',
 				FuncName: 'add',
 				data: {
-					count: 1000,
+					count: self.data.pay.wxPay.price*(100/ratio),
 					type: 2,
 					user_no: self.data.user_no,
 					thirdapp_id: 2,
@@ -234,17 +321,19 @@ Page({
 							api.showToast('调起微信支付失败', 'none');
 						};
 
-						self.data.submitData.price = 0;
+						self.data.submitData.price = '';
 
 					};
 					api.realPay(res.info, payCallback);
 				} else {
-					console.log(777)
+					api.showToast('支付成功', 'none', 1000, function() {
+						self.couponAdd()
+					});
 				};
 			} else {
 				api.showToast(res.msg, 'none');
 
-				self.data.submitData.price = 0;
+				self.data.submitData.price = '';
 
 			};
 			self.setData({
@@ -298,10 +387,30 @@ Page({
 
 	close() {
 		const self = this;
+		api.buttonCanClick(self);
 		self.data.isDiscount = false;
 		self.setData({
 			web_isDiscount: self.data.isDiscount
-		})
+		});
+		wx.removeStorageSync('info');
+		wx.removeStorageSync('token');
+		self.getMeData()
+	},
+	
+	getMeData() {
+		const self = this;
+		
+		const postData = {};
+		postData.tokenFuncName = 'getProjectToken';
+		postData.refreshToken = true;
+		const callback = (res) => {
+			if (res.info.data.length > 0) {
+				setTimeout(function() {
+					api.pathTo('/pages/index/index','rela')
+				}, 1000)
+			};
+		};
+		api.userGet(postData, callback);
 	},
 
 	changeBind(e) {

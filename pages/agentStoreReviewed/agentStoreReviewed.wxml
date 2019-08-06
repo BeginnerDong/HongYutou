@@ -14,12 +14,12 @@
 		<view class="form">
 			<view class="form-item flex">
 				<view class="font26 color42 form-item-title">门店名称：</view>
-				<view class="font26 color426">{{item.login_name}}</view>
+				<view class="font26 color426">{{item.info.shop_name}}</view>
 			</view>
 
 			<view class="form-item flex">
 				<view class="font26 color42 form-item-title">门店地址：</view>
-				<view class="font26 color426">{{item.info.address}}</view>
+				<view class="font26 color426 avoidOverflow">{{item.info.address}}</view>
 			</view>
 			<view class="form-item flex">
 				<view class="font26 color42 form-item-title">负责人：</view>
@@ -34,7 +34,7 @@
 				<view class="font26 color42 form-item-title" style="width:30%">上传门店图片：</view>
 			</view>
 			<view class="flexCenterX" style="width:100%;">
-				<image src="/images/stores-icon15.png" style="width:400rpx;height:230rpx" />
+				<image src="{{item.info.mainImg[0].url}}" style="width:400rpx;height:230rpx" />
 			</view>
 			<view class="flexCenterX" style="width:100%;" wx:if="{{web_num==0}}">
 				<view class="submit_info" style="margin-right: 30rpx;height:50rpx;line-height:50rpx;width:140rpx;border-radius:20rpx;font-size: 26rpx;"

@@ -18,8 +18,13 @@ Page({
 		const self = this;
 		api.commonInit(self);
 
-		self.getMainData()
+		
 
+	},
+	
+	onShow(){
+		const self = this;
+		self.getMainData()
 	},
 
 	getMainData() {

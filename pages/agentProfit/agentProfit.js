@@ -23,6 +23,9 @@ Page({
 	onLoad() {
 		const self = this;
 		api.commonInit(self);
+		wx.setNavigationBarTitle({
+			title: '我的收益',
+		});
 		self.getMainData();
 		self.setData({
 			web_num: self.data.num,
@@ -44,6 +47,7 @@ Page({
 		postData.tokenFuncName = 'getThreeToken';
 		postData.searchItem = api.cloneForm(self.data.searchItem);
 		postData.searchItem.type = 2;
+		postData.searchItem.user_no = wx.getStorageSync('threeInfo').user_no;
 		postData.getAfter = {
 			user: {
 				tableName: 'User',

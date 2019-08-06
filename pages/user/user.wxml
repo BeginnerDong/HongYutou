@@ -3,7 +3,7 @@
 	</view>
 	<view class="user-card flexCenter">	
 		<view class="flexCenter">
-			<view class="user_img">
+			<view class="user_img" data-path="/pages/scan/scan?scene=U624480367886851" bindtap="intoPath">
 				<open-data type="userAvatarUrl"></open-data>
 			</view>
 			<view class="user-card-title">
@@ -12,44 +12,50 @@
 			</view>
 		</view>
 	</view>
-	<view class="user-func flex1" style="flex-wrap: wrap;">
-		<view class="user-func-item" data-path="/pages/userOrder/userOrder" bindtap="intoPath">
-			<image src="/images/about-icon1.png" style="margin-top: 60rpx;"></image>
-			<view class="font26 color42" style="margin-top:20rpx;">我的订单</view>
+	<view class="user-func">
+		<view style="width:100%" class="flexRowBetween">
+			<view class="user-func-item" data-path="/pages/userOrder/userOrder" bindtap="intoPath">
+				<image src="/images/about-icon1.png" style="margin-top: 60rpx;"></image>
+				<view class="font26 color42" style="margin-top:20rpx;">我的订单</view>
+			</view>
+			<view class="user-func-item" data-path="/pages/userCredit/userCredit" bindtap="intoPath">
+				<image src="/images/about-icon2.png" style="margin-top: 60rpx;"></image>
+				<view class="font26 color42" style="margin-top:20rpx;">我的薯币</view>
+			</view>
+			<view class="user-func-item" data-path="/pages/userFlow/userFlow" bindtap="intoPath">
+				<image src="/images/about-icon3.png" style="margin-top: 60rpx;"></image>
+				<view class="font26 color42" style="margin-top:20rpx;">我的流水</view>
+			</view>
 		</view>
-		<view class="user-func-item" data-path="/pages/userCredit/userCredit" bindtap="intoPath">
-			<image src="/images/about-icon2.png" style="margin-top: 60rpx;"></image>
-			<view class="font26 color42" style="margin-top:20rpx;">我的薯币</view>
+		<view style="width:100%" class="flexRowBetween">
+			<view class="user-func-item" data-path="/pages/userCoupon/userCoupon" bindtap="intoPath">
+				<image src="/images/about-icon4.png" style="margin-top: 60rpx;"></image>
+				<view class="font26 color42" style="margin-top:20rpx;">我的优惠券</view>
+			</view>
+			<view class="user-func-item" data-path="/pages/userAddress/userAddress" bindtap="intoPath">
+				<image src="/images/about-icon5.png" style="margin-top: 60rpx;"></image>
+				<view class="font26 color42" style="margin-top:20rpx;">收货地址</view>
+			</view>
+			<view class="user-func-item" data-path="/pages/userMessage/userMessage" bindtap="intoPath">
+				<image src="/images/about-icon6.png" style="margin-top: 60rpx;"></image>
+				<view class="font26 color42" style="margin-top:20rpx;">我的消息</view>
+			</view>
 		</view>
-		<view class="user-func-item" data-path="/pages/userFlow/userFlow" bindtap="intoPath">
-			<image src="/images/about-icon3.png" style="margin-top: 60rpx;"></image>
-			<view class="font26 color42" style="margin-top:20rpx;">我的流水</view>
-		</view>
-		<view class="user-func-item" data-path="/pages/userCoupon/userCoupon" bindtap="intoPath">
-			<image src="/images/about-icon4.png" style="margin-top: 60rpx;"></image>
-			<view class="font26 color42" style="margin-top:20rpx;">我的优惠券</view>
-		</view>
-		<view class="user-func-item" data-path="/pages/userAddress/userAddress" bindtap="intoPath">
-			<image src="/images/about-icon5.png" style="margin-top: 60rpx;"></image>
-			<view class="font26 color42" style="margin-top:20rpx;">收货地址</view>
-		</view>
-		<view class="user-func-item" data-path="/pages/userMessage/userMessage" bindtap="intoPath">
-			<image src="/images/about-icon6.png" style="margin-top: 60rpx;"></image>
-			<view class="font26 color42" style="margin-top:20rpx;">我的消息</view>
-		</view>
-		<view class="user-func-item" style="width:49%" data-path="/pages/storeLogin/storeLogin?type=store" bindtap="intoPath">
-			<image src="/images/about-icon7.png" style="margin-top: 60rpx;"></image>
-			<view class="font26 color42" style="margin-top:20rpx;">门店入口</view>
-		</view>
-		<view class="user-func-item" style="width:49.7%" style="width:49.7%" data-path="/pages/storeLogin/storeLogin?type=partner" bindtap="intoPath">
-			<image src="/images/about-icon8.png" style="margin-top: 60rpx;"></image>
-			<view class="font26 color42" style="margin-top:20rpx;">合伙人入口</view>
+		<view style="width:100%" class="flexRowBetween">
+			<view class="user-func-item" style="width:49%" data-path="/pages/storeLogin/storeLogin?type=store" bindtap="intoPath">
+				<image src="/images/about-icon7.png" style="margin-top: 60rpx;"></image>
+				<view class="font26 color42" style="margin-top:20rpx;">门店入口</view>
+			</view>
+			<view class="user-func-item" style="width:49%" style="width:49%" data-path="/pages/storeLogin/storeLogin?type=partner" bindtap="intoPath">
+				<image src="/images/about-icon8.png" style="margin-top: 60rpx;"></image>
+				<view class="font26 color42" style="margin-top:20rpx;">合伙人入口</view>
+			</view>
 		</view>
 	</view>
 	<view style="width:100%;height:105rpx"></view>
 	<view class="navbar flex">
-		<view class="navbar_item">
-			<view class="nav_img bg1" bindtap="intoPathRedi" data-path="/pages/index/index">
+		<view class="navbar_item" bindtap="intoPathRedi" data-path="/pages/index/index">
+			<view class="nav_img bg1">
 				<image src="/images/about-1.png" ></image>
 			</view>
 			<view class="text ">首页</view>

@@ -3,23 +3,23 @@
 	<block wx:for="{{web_mainData}}" wx:key="id">
 		<view class="form-item flex" style="line-height: 40rpx;border-bottom: none;padding-top: 20rpx;">
 			<view class="font26 color42 form-item-title" style="width:70%;border-right: 1px solid #FF7F23;height:70rpx">
-				<view class="color42 font26">{{item.login_name}}</view>
+				<view class="color42 font26">{{item.info.shop_name}}</view>
 				<view class="color428 font24">地址：{{item.info.address}}</view>
 		
 			</view>
 			
-			<view style="width:30%;justify-content: flex-end;" class="flex">
-				<image src="/images/icon1.png" style="width:70rpx;height:70rpx"/>
+			<view style="width:30%;justify-content: flex-end;" class="flex" bindtap="intoMap" data-index="{{index}}">
+				<image src="/images/about-icon5.png" style="width:70rpx;height:70rpx"/>
 				
 			</view>
 		</view>
 		<view class="form-item flex" style="height:50rpx;border-bottom: none;">
-			<progress percent="20" style="width:55%" activeColor="#FF7F23"></progress>
+			<progress percent="{{item.percent}}" style="width:55%" activeColor="#FF7F23"></progress>
 			<view class="font20 colorFF3B3B" style="margin-left: 20rpx;">还差{{item.minNum}}人成团</view>
 		</view>
-		<view class="form-item flex" style="height:50rpx">
-			<view class="flexCenter" bindtap="choose" data-user_no="{{item.user_no}}">
-				<image src="/images/icon2.png" style="width:20rpx;height:20rpx;" />
+		<view class="form-item flex" style="height:50rpx" bindtap="choose" data-user_no="{{item.user_no}}">
+			<view class="flexCenter" >
+				<image src="{{web_user_no==item.user_no?'/images/icon2.png':'/images/icon.png'}}" style="width:20rpx;height:20rpx;" />
 			</view>
 			<view class="font20 color426" style="margin-left: 20rpx;"> 
 				选择门店

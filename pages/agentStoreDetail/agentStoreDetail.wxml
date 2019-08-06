@@ -7,7 +7,7 @@
 		</view>
 		<view class="form-item flex">
 			<view class="font26 color42 form-item-title">门店名称：</view>
-			<view class="font26 color426">{{web_mainData.login_name}}</view>
+			<view class="font26 color426">{{web_mainData.info.shop_name}}</view>
 		</view>
 
 		<view class="form-item flex">

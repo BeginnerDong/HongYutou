@@ -5,7 +5,7 @@
 			<view class="credit_item">
 				<view class="credit_left">
 					<view class="credit_reson font26">
-					   {{item.user.login_name?item.user.login_name:'未知'}}
+					   {{item.user.shop_name?item.user.shop_name:'微信支付'}}
 					</view>
 					<view class="credit_dates font28 color9" style="margin-top: 20rpx;">
 						{{item.create_time}}

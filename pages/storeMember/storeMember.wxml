@@ -1,8 +1,8 @@
 <view style="width:100%">
 	<view class="all-member flex">
 		<view style="height:72rpx;width:100%">
-			<view class="font28 color42" style="width:100%;text-align: center;">会员总量</view>
-			<view class="font26 colorFF3B3B" style="width:100%;text-align: center;">{{web_mainData.length}}</view>
+			<view class="font28 color42" style="width:100%;text-align: center;font-size:60rpx;color: #fff;">会员总量</view>
+			<view class="font30 colorFF3B3B" style="width:100%;text-align: center;color: #fff;">{{web_mainData.length}}</view>
 		</view>
 	</view>
 	<view class="tab font30 flexRowBetween color426">

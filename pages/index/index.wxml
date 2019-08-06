@@ -2,10 +2,10 @@
 	<view class="page-body">
 		<view class="page-section page-section-spacing swiper">
 			<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
-			 interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" tyle="width:100%;height:330rpx">
-				<block wx:for="{{web_sliderData.mainImg}}" wx:index="{{index}}" wx:key="id">
-					<swiper-item>
-						<image src="{{item.url}}" style="width:100%;height:330rpx"></image>
+			 interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" tyle="width:100%;height:360rpx">
+				<block wx:for="{{web_sliderData}}" wx:index="{{index}}" wx:key="id">
+					<swiper-item bindtap="intoPath" data-path="{{item.url}}">
+						<image src="{{item.mainImg[0].url}}" style="width:100%;height:360rpx"></image>
 					</swiper-item>
 				</block>
 			</swiper>
@@ -14,24 +14,24 @@
 	<view class="outLineStory">
 		<view class="flexRowBetween outLineStory-title">
 			<view class="title-left flexRowBetween">
-				<image src="/images/index-icon3.png"></image>
-				<span class="font28" style="margin-left: 20rpx;">红芋头线下体验店</span>
+				<image src="/images/index-icon3.png" style="width:35rpx;height:35rpx"></image>
+				<span class="font32" style="margin-left: 20rpx;font-weight: 700;">线下门店<span style="font-size: 24rpx;color: rgba(37,18,4,0.7);margin-left:5rpx">(到店购买)</span></span>
 			</view>
 			<view class="title-right flexRowBetween" bindtap="intoPath" data-path="/pages/storeList/storeList">
-				<span class="font24 color426">店铺名称</span>
+				<span class="font24 color426" style="color: rgb(37,18,4);">查看附近门店</span>
 				<image src="/images/index-icon2.png" style="margin-left: 20rpx;"></image>			
 			</view>
 		</view>
 		<view class="flexRowBetween outLineStory-mainImg" bindtap="intoPath" data-path="/pages/storeDetail/storeDetail?user_no={{web_storeData.user_no}}">
-			<image src="{{web_storeData.info.mainImg[0].url}}"></image>
+			<image src="{{web_storeData.mainImg[0].url}}"></image>
 			<div class="outLineStory-infomation">
 				<div class="outLineStory-infomation-item font28 colorfff">
-					{{web_storeData.login_name}}
+					红芋头线下体验店
 				</div>
 				<div class="outLineStory-infomation-item flexRowBetween">
-					<view class=" flexRowBetween" style="height:100%">
+					<view class=" flexRowBetween" style="height:100%;width:80%">
 						<!-- <image src="/images/index-icon3.png"></image> -->
-						<span class="font20 colorfff">{{web_storeData.info.address}}</span>
+						<span class="font20 colorfff avoidOverflow">{{web_storeData.address}}</span>
 					</view>
 					<view class=" flexRowBetween" style="height:100%">
 						<!-- <image src="/images/index-icon3.png"></image> -->
@@ -44,9 +44,9 @@
 	<view style="width:100%;height:20rpx;background: #e5e5e5;"></view>
 	<view class="group">
 		<view class="flexRowBetween outLineStory-title">
-			<view class="title-left flexRowBetween">
-				<image src="/images/index-icon4.png"></image>
-				<span class="font28" style="margin-left: 20rpx;">社区团购</span>
+			<view class="title-left flexRowBetween" style="width:100%">
+				<image src="/images/index-icon4.png" style="width:35rpx;height:35rpx"></image>
+				<span class="font32" style="margin-left: 20rpx;font-weight: 700;">社区团购<span style="font-size: 24rpx;color: rgba(37,18,4,0.7);margin-left:5rpx">(同住一个小区，团购更便宜)</span></span>
 			</view>
 		</view>
 		<block wx:for="{{web_groupData}}" wx:key="id" >	
@@ -56,8 +56,8 @@
 				</view>
 				<view class="group-main-left">
 					<view class="avoidOverflow2 font28" style="height:35%">{{item.title}}</view>
-					
-					<view class="font26" style="height:45%;line-height:88rpx;">团购倒计时
+					<view class="avoidOverflow2 font24" style="height:20%;color: #999;">{{item.description}}</view>
+					<view class="font26" style="height:30%;line-height:88rpx;">团购倒计时
 					
 					<span style="color: rgb(255,127,35);margin-left: 20rpx;">{{countDownList[index].hou}}:{{countDownList[index].min}}:{{countDownList[index].sec}}</span>
 					
@@ -72,31 +72,32 @@
 	<view style="width:100%;height:20rpx;background: #e5e5e5;"></view>
 	<view class="product">
 		<view class="flexRowBetween outLineStory-title">
-			<view class="title-left flexRowBetween">
-				<image src="/images/index-icon1.png"></image>
-				<span class="font28" style="margin-left: 20rpx;">线上产品</span>
+			<view class="title-left flexRowBetween" style="width:100%">
+				<image src="/images/index-icon1.png" style="width:35rpx;height:35rpx"></image>
+				<span class="font32" style="margin-left: 20rpx;font-weight: 700;">线上产品<span style="font-size: 24rpx;color: rgba(37,18,4,0.7);margin-left:5rpx">(线上下单，即刻送达)</span></span>
 			</view>
 		</view>
-		<view class="flexRowBetween">
+		<view class="flexRowBetween" style="flex-wrap: wrap;">
 			<block wx:for="{{web_onlineData}}" wx:key="id">
-				<view class="product-item" bindtap="intoPath" data-path="/pages/productDetail/productDetail?id={{item.id}}">
+				<view class="product-item" bindtap="intoPath" style="margin-bottom: 40rpx;" data-path="/pages/productDetail/productDetail?id={{item.id}}">
 					<view class="product-item-img">
 						<image src="{{item.mainImg[0].url}}"></image>
 					</view>
 					<view class="product-item-text">
-						<view class="avoidOverflow2 font28" style="height:76rpx">{{item.title}}</view>
+						<view class="avoidOverflow font28" >{{item.title}}</view>
+						<view class="avoidOverflow font24" style="height:45%;color: #999;">{{item.description}}</view>
 						<view class=" font24" style="color: rgb(255,59,59);">¥{{item.price}}</view>
 					</view>
 				</view>
 			</block>
 		</view>
 	</view>
-	<view class="loadMore">
+<!-- 	<view class="loadMore">
 		<view class="loadMore-img">
 			<image src="/images/index-icon5.png"></image>
 		</view>	
 		<span class="font20 color96">上拉加载更多</span>
-	</view>
+	</view> -->
 	<view style="width:100%;height:105rpx"></view>
 	<view class="navbar flex">
 		<view class="navbar_item">

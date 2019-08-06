@@ -157,10 +157,10 @@ page{
  	font-size:34rpx;
  }
  .address_left{
- 	width:20%;
+ 	width:50%;
  }
  .address_right{
- 	width:71%;
+ 	width:50%;
  	text-align:right;
  }
  .edit_number{

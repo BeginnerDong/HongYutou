@@ -102,6 +102,20 @@ class Api extends Base {
 		};
 		this.request(allParams);
 	}
+	
+	weekGet(param, callback) {
+		var allParams = {
+			url: '/Project/Solely/getWeeks',
+			type: 'post',
+			data: param,
+			sCallback: function(data) {
+				callback && callback(data);
+			}
+		};
+		this.request(allParams);
+	}
+	
+
 
 	addShop(param, callback) {
 		var allParams = {

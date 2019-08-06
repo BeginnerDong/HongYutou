@@ -1,3 +1,4 @@
+@import "../../wxParse/wxParse.wxss"; 
 .user-card{
 	margin-top: 20rpx;
 	height:180rpx;
@@ -40,7 +41,7 @@
 .date_item{
 	height:90rpx;
 	border-right:solid 1px #f4f4f4;
-	width:50%;
+	width:100%;
 	text-align:center;
 	display:flex;
 	align-items: center;
@@ -86,4 +87,22 @@
 }
 .rank-item-main-content{
 	width:60%
+}
+.shadow{
+	width:100%;
+	height:100%;
+	position: absolute;
+	background: #000000;
+	opacity: 0.6;
+	top:0;
+	z-index:888
+}
+.rule{
+	width:90%;
+	height:90%;
+	position: absolute;
+	background: #fff;
+	top:5%;
+	left:5%;
+	z-index:999
 }

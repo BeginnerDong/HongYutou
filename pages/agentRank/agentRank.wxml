@@ -3,125 +3,77 @@
 	<view class="user-card flexCenter">	
 		<view class="flexCenter">
 			<view class="user-card-head">
-				<image src="/images/about-img.png"></image>
+				<image src="{{web_mainDataMe.user[0].mainImg[0].url}}" style="border-radius:50%"></image>
 			</view>
 			<view class="user-card-title">
-				<view class="font28 color42">商户名称</view>
-				<view class="font28 color42">业绩：10.56</view>
+				<view class="font28 color42">{{web_mainDataMe.user[0].info.shop_name}}</view>
+				<view class="font28 color42">业绩：{{web_mainDataMe.money}}</view>
 			</view>
 		</view>
 	</view>
-	<view class="reward-rule font30">
+	<view class="reward-rule font30" bindtap="isShow">
 		奖励机制
 	</view>
 	<view class="date font30">
 	    <view class="date_item">
-	        <view style="width:45%;display:flex;align-items:center;">
+	        <view style="width:100%;display:flex;align-items:center;">
 	            <view class="date_left" style="width:100%;">
-	                <picker  mode="date"  value="{{web_startTime}}" data-type="startTime" bindchange="bindTimeChange">
-	                    <view style="display:flex;align-items:center;width:100%;height:100%;">
-	                        <view style="width:85%;height:70rpx;">
-	                            <view class="picker text">
-	                              起始日期
-	                            </view>
-	                            <view class="text  font22" >{{web_startTime}}</view>
-	                        </view>
-	                        <!-- <view style="width:15%;height:70rpx;align-items:center;">
-	                            <image src="/images/up.jpg"></image>
-	                        </view> -->
-	                    </view> 
-	                </picker>
 	                
+	                <picker bindchange="weekChange" value="{{index}}" range="{{web_weekData}}" range-key="msg" class="input">
+						<view style="display:flex;align-items:center;width:100%;height:100%;">
+						    <view style="width:100%;height:70rpx;">
+						        <view class="picker text">
+						          选择周期
+						        </view>
+						        <view class="text  font22" >{{web_weekData[web_index].msg?web_weekData[web_index].msg:'本周期'}}</view>
+						    </view>					   
+						</view> 
+	                </picker>
 	            </view>
 	            
 	        </view> 
 	    </view>
-	    <view class="date_item">
-	        <view style="width:45%;display:flex;align-items:center;">
-	            <view class="date_left" style="width:100%;">
-	                <picker  mode="date" value="{{web_endTime}}" data-type="endTime" bindchange="bindTimeChange" >
-	                    <view style="display:flex;align-items:center;width:100%;height:100%;">
-	                        <view style="width:85%;height:70rpx;">
-	                            <view class="picker text">
-	                              截至日期
-	                            </view>
-	                            <view class="text font22">{{web_endTime}}</view>
-	                        </view>
-	                        <!-- <view style="width:15%;height:70rpx;">
-	                            <image src="/images/up.jpg"></image>
-	                        </view> -->
-	                    </view>
-	                </picker>
-	            </view>
-	            
-	        </view> 
-	    </view>   
-	
 	</view>
 	<view class="rank-list flexRowBetween">
+		<block wx:for="{{web_mainData}}" wx:key="id">
 		<view class="rank-item flex">
-			<view class="rank-item-img flexCenter">
-				<image src="/images/stores-icon11.png"></image>
+			<view class="rank-item-img flexCenter" wx:if="{{index==0}}">
+				<image src="/images/stores-icon11.png" ></image>
+			</view>
+			<view class="rank-item-img flexCenter" wx:if="{{index==1}}">
+				<image src="/images/stores-icon12.png" ></image>
+			</view>
+			<view class="rank-item-img flexCenter" wx:if="{{index==2}}">
+				<image src="/images/stores-icon13.png" ></image>
+			</view>
+			<view class="rank-item-img flexCenter" wx:if="{{index>2}}">
+				{{index+1}}
 			</view>
 			<view class="rank-item-main flex">
 				<view class="rank-item-main-head flex">
-					<image src="/images/img6.png"></image>
+					<image src="{{item.user[0].mainImg[0].url}}" style="border-radius:50%"></image>
 				</view>
 				
 				<view class="rank-item-main-content">
-					<view class="color42 font26">商户名称</view>
-					<view class="color426 font24"  >业绩：10.56</view>
+					<view class="color42 font26">{{item.user[0].info.shop_name}}</view>
+					<view class="color426 font24"  >业绩：{{item.money}}</view>
 				</view>
 			
 			</view>
 		</view>
-		<view class="rank-item flex">
-			<view class="rank-item-img flexCenter">
-				<image src="/images/stores-icon12.png"></image>
-			</view>
-			<view class="rank-item-main flex">
-				<view class="rank-item-main-head flex">
-					<image src="/images/img6.png"></image>
-				</view>
-				
-				<view class="rank-item-main-content">
-					<view class="color42 font26">商户名称</view>
-					<view class="color426 font24"  >业绩：10.56</view>
-				</view>
-			
-			</view>
+		</block>
+	</view>
+	<view class="shadow" wx:if="{{showRule}}"></view>
+	<view class="rule" wx:if="{{showRule}}">
+		<view class="font26 color42" style="text-align: center;height:100rpx;line-height:100rpx">{{web_ruleData.title}}</view>
+		<view class="font24 color426">
+			<view class="content ql-editor" >
+			    <import src="../../wxParse/wxParse.wxml"/>
+			    <template is="wxParse" data="{{wxParseData:web_ruleData.content}}"/>
+			</view> 
 		</view>
-		<view class="rank-item flex">
-			<view class="rank-item-img flexCenter">
-				<image src="/images/stores-icon13.png"></image>
-			</view>
-			<view class="rank-item-main flex">
-				<view class="rank-item-main-head flex">
-					<image src="/images/img6.png"></image>
-				</view>
-				
-				<view class="rank-item-main-content">
-					<view class="color42 font26">商户名称</view>
-					<view class="color426 font24"  >业绩：10.56</view>
-				</view>
-			
-			</view>
-		</view>
-		<view class="rank-item flex">
-			<view class="rank-item-img flexCenter color42">
-				4
-			</view>
-			<view class="rank-item-main flex">
-				<view class="rank-item-main-head flex">
-					<image src="/images/img6.png"></image>
-				</view>
-				
-				<view class="rank-item-main-content">
-					<view class="color42 font26">商户名称</view>
-					<view class="color426 font24"  >业绩：10.56</view>
-				</view>
-			
-			</view>
+		<view style="width:100%;height:100rpx;position: absolute;bottom:0;text-align: center;">
+				<image src="../../images/stores-icon10.png" style="width:50rpx;height:50rpx" bindtap="isShow"></image>
 		</view>
 	</view>
 </view>

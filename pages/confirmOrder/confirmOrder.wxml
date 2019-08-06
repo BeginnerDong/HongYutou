@@ -20,14 +20,14 @@
 		<view class="font26 color42 form-item-title">送货上门：</view>
 		<view class="manage_cont">
 			<view class="user_address flex">
-				<view class="address_left font28 color42">
+				<view class="address_left font28 color428">
 					{{web_addressData.name}}
 				</view>
 				<view class="address_right font26 color428">
 					{{web_addressData.phone}}
 				</view>
 			</view>
-			<view class="avoidOverflow address_infor font26 color428">{{web_addressData.detail}}</view>
+			<view class="avoidOverflow address_infor font26 color428">{{web_addressData.city}}{{web_addressData.detail}}</view>
 		</view>
 		<view style="width:25%;justify-content: flex-end;" class="flex" bindtap="intoPath" data-path="/pages/userAddress/userAddress">
 			<image src="/images/left.png" style="width:10rpx;height:20rpx" />
@@ -40,22 +40,22 @@
 			<image src="/images/left.png" style="width:10rpx;height:20rpx" />
 		</view>
 	</view>
-	<view class="form-item flex">
+	<view class="form-item flex" bindtap="showCoupon">
 		<view class="font26 color42 form-item-title">优惠券：</view>
-		<view style="width:50%"></view>
-		<view style="width:25%;justify-content: flex-end;" class="flex">
+		<view class="flex font26 color42" style="width:70%;justify-content: flex-end;">{{web_couponData.length==0?'无可用优惠券':(web_pay.coupon.length>0?web_couponData[web_couponIndex].snap_coupon.title:'请选择')}}</view>
+		<view class="flex" style="width:5%;justify-content: flex-end;">
 			<image src="/images/left.png" style="width:10rpx;height:20rpx" />
 		</view>
 	</view>
 	<block wx:for="{{web_couponData}}" wx:key="id" wx:if="{{web_showCoupon}}">
 		<view class="form-item flex" style="border-bottom: none;">
-			<view class="font26 color42 form-item-title" bindtap="useCoupon" data-id="{{item.id}}">
+			<view class="font26 color42 form-item-title" style="display: flex;align-items: center;" bindtap="useCoupon" data-index="{{index}}">
 
-				<image src="/images/icon.png" />
+				<image src="{{web_couponIndex==index?'/images/icon2.png':'/images/icon.png'}}" style="width:15px;height:15px"/>
 
 			</view>
 			<view style="width:50%" class="font26 color42">
-				{{item.type==2?'抵扣券':'折扣券'}}{{item.type==2?item.discount/10+'折':item.value+'元'}}
+				{{item.type==2?'抵扣券':'折扣券'}}{{item.type==2?item.discount/10+'折':item.discount+'元'}}
 			</view>
 			<view style="width:25%;">
 			</view>

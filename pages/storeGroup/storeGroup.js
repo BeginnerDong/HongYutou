@@ -53,6 +53,7 @@ Page({
 			create_time: 'desc'
 		}
 		const callback = (res) => {
+			api.buttonCanClick(self, true);
 			if (res.solely_code == 100000) {
 				if (res.info.data.length > 0) {
 					self.data.mainData.push.apply(self.data.mainData, res.info.data);
@@ -60,13 +61,13 @@ Page({
 					self.data.isLoadAll = true;
 					api.showToast('没有更多了', 'none', 1000);
 				};
-				api.buttonCanClick(self, true);
+				
 				api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getMainData', self);
 				self.setData({
 					web_mainData: self.data.mainData,
 				});
 			} else {
-				api.showToast('网络故障', 'none')
+				api.showToast(res.msg, 'none')
 			}
 		};
 		api.orderGet(postData, callback);
@@ -74,9 +75,11 @@ Page({
 	
 	groupDataGet() {
 		const self = this;
+		var now = new Date().getTime();
 		const postData = {};
 		postData.searchItem = {
-			category_id: 5
+			category_id: 5,
+			end_time: ['>', now]
 		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {

@@ -31,7 +31,7 @@
 	</view>
 	<view style="width:100%;height:115rpx"></view>
 	<view class="flex" style="position: fixed;bottom: 0;width:100%">
-		<view class="submit_info" style="background: #FF9F5A;" bindtap="addOrder" data-key="wx">微信支付</view>
-		<view class="submit_info" bindtap="addOrder" data-key="balance">余额支付</view>	
+		<view class="submit_info" bindtap="{{web_canOrder?'addOrder':'showMsg'}}"  data-key="wx" style="{{web_canOrder?'background: #FF9F5A':'background:#999'}}">微信支付</view>
+		<view class="submit_info" bindtap="{{web_canOrder?'addOrder':'showMsg'}}"  data-key="balance" style="{{web_canOrder?'background: #FF9F5A':'background:#999'}}">余额支付</view>	
 	</view>
 </view>

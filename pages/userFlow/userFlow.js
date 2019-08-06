@@ -50,14 +50,14 @@ Page({
 		};
 		postData.getAfter = {
 				store: {
-					tableName: 'User',
+					tableName: 'UserInfo',
 					middleKey: 'relation_user',
 					key: 'user_no',
 					searchItem: {
 						status: 1
 					},
 					condition: '=',
-					info: ['login_name']
+					info: ['shop_name']
 				},
 			};
 			const callback = (res) => {

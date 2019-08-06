@@ -13,13 +13,12 @@ const token = new Token();
 Page({
 	data: {
 		submitData:{
-			login_name:''
+			shop_name:''
 		},
 		mainData: [],
 		isFirstLoadAllStandard: ['getMainData'],
 		searchItem:{
-			parent_no: wx.getStorageSync('threeInfo').user_no,
-			user_type:1
+	
 		},
 		searchItemTwo:{
 			status:1
@@ -37,7 +36,7 @@ Page({
 	onShow(){
 		const self = this;
 
-		self.getMainData()
+		self.getMainData(true)
 	},
 
 
@@ -50,7 +49,17 @@ Page({
 		postData.paginate = api.cloneForm(self.data.paginate);
 		postData.tokenFuncName = 'getThreeToken';
 		postData.searchItem = api.cloneForm(self.data.searchItem);
-
+		postData.getBefore = {
+			user: {
+				tableName: 'Distribution',
+				middleKey: 'user_no',
+				key: 'child_no',
+				searchItem: {
+					parent_no: ['=', [wx.getStorageSync('threeInfo').user_no]]
+				},
+				condition: 'in',
+			}
+		}
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
 				self.data.mainData.push.apply(self.data.mainData, res.info.data);
@@ -68,7 +77,7 @@ Page({
 			});
 			console.log(self.data.mainData)
 		};
-		api.userGet(postData, callback);
+		api.userInfoGet(postData, callback);
 	},
 	
 	changeBind(e){
@@ -82,11 +91,11 @@ Page({
 	
 	search(){
 		const self = this;
-		if(self.data.submitData.login_name){  
-	    self.data.searchItem.login_name = ['LIKE',['%'+self.data.submitData.login_name+'%']],
+		if(self.data.submitData.shop_name){  
+	    self.data.searchItem.shop_name = ['LIKE',['%'+self.data.submitData.shop_name+'%']],
 	    self.getMainData(true)
 	    
-	  }else if(self.data.submitData.login_name==''){
+	  }else if(self.data.submitData.shop_name==''){
 	      api.showToast('输入门店名查询','none');
 	      return
 	  }
@@ -98,8 +107,8 @@ Page({
 	  const self = this;
 	  wx.showNavigationBarLoading(); 
 	  delete self.data.searchItem.create_time;
-	  delete self.data.searchItem.login_name;
-	  self.data.submitData.login_name = '';
+	  delete self.data.searchItem.shop_name;
+	  self.data.submitData.shop_name = '';
 	  self.setData({
 	    web_startTime:'',
 	    web_endTime:'',	

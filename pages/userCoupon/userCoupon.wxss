@@ -100,7 +100,6 @@ page{
 	height:100%;
 	
 }
-
 .coupon-left{
 	height: 100%;
 	width:64%;
@@ -134,7 +133,8 @@ page{
 }
 .btn2{
 	color: #EF3857;
-}.btn3{
+}
+.btn3{
 	color: #DF498B;
 }
 

@@ -25,15 +25,24 @@ Page({
 	onLoad(options) {
 		const self = this;
 		api.commonInit(self);
-		self.getMainData()
+		
 		
 
 	},
 
 	onShow() {
 		const self = this;
-
-
+		if (getApp().globalData.user_no) {
+			self.data.searchItem.user_no = getApp().globalData.user_no;
+			
+		}
+		if (getApp().globalData.name) {
+			self.data.name = getApp().globalData.name;
+		}
+		self.setData({
+			web_name:self.data.name
+		})
+		self.getMainData(true)
 	},
 
 
@@ -52,7 +61,7 @@ Page({
 		postData.order = {
 			create_time: 'desc'
 		}
-		if (self.data.num != 2) {
+		if (!self.data.searchItem.user_no&&self.data.num != 2) {
 			postData.getBefore = {
 				user: {
 					tableName: 'Distribution',
@@ -80,16 +89,7 @@ Page({
 			}
 		}
 		postData.getAfter = {
-			user: {
-				tableName: 'User',
-				middleKey: 'user_no',
-				key: 'user_no',
-				searchItem: {
-					status: 1
-				},
-				condition: '=',
-				info: ['login_name']
-			},
+
 			userInfo: {
 				tableName: 'UserInfo',
 				middleKey: 'user_no',
@@ -98,7 +98,7 @@ Page({
 					status: 1
 				},
 				condition: '=',
-				info: ['name', 'phone']
+				info: ['name', 'phone','shop_name']
 			}
 		};
 		const callback = (res) => {

@@ -43,7 +43,7 @@
 			</view>
 			<view class="group-main-left">
 				<view class="avoidOverflow2 font28" style="height:35%">{{item.title}}</view>
-				<view class="font26" style="height:45%;line-height:88rpx;">团购倒计时<span style="color: rgb(255,127,35);margin-left: 20rpx;">23:56:56</span></view>
+				<!-- <view class="font26" style="height:45%;line-height:88rpx;">团购倒计时<span style="color: rgb(255,127,35);margin-left: 20rpx;">23:56:56</span></view> -->
 				<view class="font26" style="height:30%">{{item.standard}}人成团<span style="color: rgb(255,59,59);margin-left: 20rpx;">团购：¥{{item.price}}</span></view>
 			</view>
 		</view>

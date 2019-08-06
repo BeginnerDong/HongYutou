@@ -24,7 +24,9 @@ page{
 	top:-60rpx;
 	text-align: center;
 	width:120rpx;
-	height:120rpx
+	height:120rpx;
+	border-radius:50%;
+	overflow: hidden;
 }
 .user-card-head image{
 	width:120rpx;

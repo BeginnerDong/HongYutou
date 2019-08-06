@@ -18,8 +18,9 @@ Page({
 			type:1,
 			period:''
 		},
-		isFirstLoadAllStandard: ['getMainData','getRuleData'],
-		showRule:false
+		isFirstLoadAllStandard: ['getMainData','getRuleData','getWeekData'],
+		showRule:false,
+		weekData:[]
 	},
 
 
@@ -29,8 +30,9 @@ Page({
 		var now = new Date();
 		self.data.searchItem.period = api.getFirstDayOfWeek(now);
 		self.getUserData();
-		self.getMainData();
-		self.getRuleData()		
+		
+		self.getRuleData();
+		self.getWeekData()
 	},
 
 	onShow() {
@@ -47,12 +49,42 @@ Page({
 		})
 	},
 	
+	getWeekData() {
+		const self = this;
+		const postData = {};
+		postData.tokenFuncName = 'getThreeToken';
+		postData.searchItem = {
+			thirdapp_id: getApp().globalData.thirdapp_id
+		};
+		const callback = (res) => {
+			if (res.info.length > 0) {
+				self.data.weekData.push.apply(self.data.weekData,res.info)
+			}
+			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getWeekData', self);
+			self.setData({
+				web_weekData: self.data.weekData,
+			});
+			console.log(self.data.weekData)
+		};
+		api.weekGet(postData, callback);
+	},
+	
 	getUserData() {
 		const self = this;
 		const postData = {};
 		postData.tokenFuncName = 'getThreeToken';
+		postData.searchItem = {
+			user_no:wx.getStorageSync('threeInfo').user_no
+		};
 		const callback = (res) => {
-			
+			if(res.info.data.length>0){
+				self.data.mainDataMe = res.info.data[0];
+				self.data.mainDataMe.money=0;
+			}
+			self.setData({
+				web_mainDataMe:self.data.mainDataMe 
+			});
+			self.getMainData();
 		};
 		api.userGet(postData, callback);
 	},
@@ -76,6 +108,9 @@ Page({
 				},
 				condition:'='
 			}
+		};
+		postData.order = {
+			money:'desc'
 		};
 		const callback = (res) => {
 			if (res.solely_code == 100000) {
@@ -135,13 +170,14 @@ Page({
 	},
 	
 	
-	bindTimeChange(e){
+	weekChange(e){
 		const self = this;
 		console.log(e);
-		self.data.searchItem.period = api.getFirstDayOfWeek(e.detail.value);
+		self.data.searchItem.period = self.data.weekData[e.detail.value].period;
 		self.setData({
-			web_time:e.detail.value
+			web_index:e.detail.value
 		})
+	
 		self.getMainData(true)
 	},
 

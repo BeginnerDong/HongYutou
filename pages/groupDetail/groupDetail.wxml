@@ -4,18 +4,18 @@
 	</view>
 	<view class="store-infomation">
 		
-		<view class="font30 avoidOverflow" style="height:60rpx;line-height: 60rpx;width:80%">{{web_mainData.title}}</view>
+		<view class="font32 avoidOverflow" style="height:60rpx;line-height: 60rpx;width:80%">{{web_mainData.title}}</view>
 		<view class="flexRowBetween" style="height:60rpx;line-height:60rpx;">
 			<view class=" flexRowBetween">
-				<span class="font30">团购倒计时</span>
+				<span class="font28 color428">团购倒计时</span>
 				<span class="font28" style="color: rgb(255,127,35);margin-left: 15rpx;;" >{{web_mainData.countDownList.hou}}:{{web_mainData.countDownList.min}}:{{web_mainData.countDownList.sec}}</span>
-				<span class="font30" style="margin-left: 30rpx;">{{web_mainData.standard}}人成团</span>
+				<span class="font28 color42" style="margin-left: 30rpx;">{{web_mainData.standard}}人成团</span>
 			</view>
 			
 		</view>
 		<view class="font28 flexRowBetween" style="height:60rpx;line-height: 60rpx;">
 			<view class="title-left flexRowBetween">
-				<span class="font24" style="color: rgb(255,59,59);">团购：¥{{web_mainData.price}}</span>
+				<span class="font30" style="color: rgb(255,59,59);">团购：¥{{web_mainData.price}}</span>
 			</view>
 			
 		</view>
@@ -30,7 +30,7 @@
 		</button>
 	</view>
 	<view class="group-detail">
-		<view class="group-detail-title font30">
+		<view class="group-detail-title font30" style="border-bottom: 1px solid #F4F4F4;">
 			详情介绍
 		</view>
 		<view class="group-detail-detail font28">

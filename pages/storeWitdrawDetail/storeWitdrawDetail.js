@@ -34,9 +34,13 @@ Page({
 		const self = this;
 		const postData = {};
 		postData.tokenFuncName = 'getThreeToken';
+		postData.searchItem = {
+			user_no:wx.getStorageSync('threeInfo').user_no
+		}
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
 				self.data.userInfoData = res.info.data[0];
+				self.data.userInfoData.enc_bank_no = self.data.userInfoData.enc_bank_no.substring(self.data.userInfoData.enc_bank_no.length-4)
 				for (var i = 0; i < self.data.bankData.length; i++) {
 					if(self.data.bankData[i].value==self.data.userInfoData.bank_code){
 						self.data.userInfoData.bank_code = self.data.bankData[i].name
@@ -60,7 +64,9 @@ Page({
 				trade_info: '提现',
 				status: 0,
 				type: 2,
-				thirdapp_id: 2
+				thirdapp_id: 2,
+				withdraw:1,
+				withdraw_type:2
 			}
 		};
 		postData.tokenFuncName = 'getThreeToken';

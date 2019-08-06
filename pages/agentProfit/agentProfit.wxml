@@ -1,13 +1,14 @@
 <view class="piece_top flex">
     <view class="piece_main">
-		<view class="color42 font34" style="text-align:center;margin-top: 20rpx;">¥{{web_count}}</view>
+		<view class="color42 font34" style="text-align:center;margin-top: 20rpx;font-size:80rpx;color: #fff;">¥{{web_count}}</view>
         <view class="piece_row flexCenter">
-            <view class="color428 font24"  wx:if="{{web_num==0}}">总采购收益</view>
-			<view class="color428 font24"  wx:if="{{web_num==1}}">总购买收益</view>
-			<view class="color428 font24"  wx:if="{{web_num==2}}">总奖励收益</view>
+            <view class="color428 font24"  wx:if="{{web_num==0}}" style="color: #fff;">总采购收益</view>
+			<view class="color428 font24"  wx:if="{{web_num==1}}" style="color: #fff;">总购买收益</view>
+			<view class="color428 font24"  wx:if="{{web_num==2}}" style="color: #fff;">总奖励收益</view>
         </view> 
     </view>
 </view>
+
 <view class="tab font30 flexRowBetween color6">
     <view class="tab_item " data-num="0" bindtap="tab">
         <text class="{{web_num ==0?'tab_this':''}}">采购分润</text>
@@ -72,8 +73,8 @@
 			<view class="color426 font24">{{item.create_time}}</view>
 		</view>
 		<view class="member-item-name" style="text-align:center" style="width:20%">
-			<view class="color42 font26" style="margin-top: 30rpx;">{{item.product[0].title}}</view>
-			<view class="color426 font24"  >￥{{item.product[0].price}}</view>
+			<!-- <view class="color42 font26" style="margin-top: 30rpx;">{{item.product[0].title}}</view>
+			<view class="color426 font24"  >￥{{item.product[0].price}}</view> -->
 		</view>
 		<view class="member-item-time " style="text-align: right;" style="width:20%">
 			<text class="color42 font26">{{item.count}}</text>
@@ -85,8 +86,8 @@
 			<view class="color426 font24"  style="height:100%;line-height: 120rpx;">{{item.create_time}}</view>
 		</view>
 		<view class="member-item-name" style="text-align:center">
-			<view class="color42 font26" style="margin-top: 30rpx;">{{item.order[0].products[0].snap_product.title}}等</view>
-			<view class="color426 font24"  >￥{{item.order[0].price}}</view>
+			<!-- <view class="color42 font26" style="margin-top: 30rpx;">{{item.order[0].products[0].snap_product.title}}等</view>
+			<view class="color426 font24"  >￥{{item.order[0].price}}</view> -->
 		</view>
 		<view class="member-item-time " style="text-align: right;">
 			<text class="color42 font26" >+{{item.count}}</text>

@@ -39,7 +39,7 @@ Page({
 			coupon: []
 		},
 		couponTotalPrice: 0,
-		showCoupon: false
+		showCoupon: true
 
 	},
 
@@ -61,9 +61,9 @@ Page({
 		getApp().globalData.address_id = '';
 		self.getMainData();
 		self.userCouponGet();
-		if (wx.getStorageSync('info').parent_no != '') {
+		
 			self.distributionGet();
-		}
+		
 		
 
 	},
@@ -159,10 +159,13 @@ Page({
 	userCouponGet() {
 
 		const self = this;
+		var now = Date.parse(new Date());
 		const postData = {};
 		postData.tokenFuncName = 'getProjectToken';
 		postData.searchItem = {
-			behavior: 2
+			behavior: 2,
+			use_step:1,
+			invalid_time:['>',now]
 		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
@@ -261,15 +264,15 @@ Page({
 		postData.payAfter = [];
 
 		if (self.data.distributionData&&self.data.distributionData.info.data.length > 0) {
-			if (self.data.pay.wxPay && self.data.pay.wxPay.price && self.data.pay.wxPay.price > 0 && self.data.mainData.shop_ratio >
-				0) {
+			if (self.data.pay.wxPay && self.data.pay.wxPay.price && self.data.pay.wxPay.price > 0 && self.data.mainData.shop_ratio >0) {
+
+
 				postData.payAfter.push({
 					tableName: 'FlowLog',
 					FuncName: 'add',
 					data: {
 						relation_user: wx.getStorageSync('info').user_no,
-						count: 1000,
-						/* self.data.pay.wxPay.price / self.data.mainData.shop_ratio */
+						count: self.data.pay.wxPay.price*(self.data.mainData.shop_ratio/100),
 						trade_info: '下级分润',
 						user_no: self.data.distributionData.info.data[0].parent_no,
 						type: 2,
@@ -288,8 +291,7 @@ Page({
 					FuncName: 'add',
 					data: {
 						relation_user: wx.getStorageSync('info').user_no,
-						count: 1000,
-						/* self.data.pay.wxPay.price / self.data.mainData.shop_ratio */
+						count: self.data.pay.wxPay.price*(self.data.mainData.shop_ratio/100),
 						trade_info: '下级分润',
 						user_no: self.data.distributionData.info.data[0].partner.parent_no,
 						type: 2,
@@ -335,7 +337,8 @@ Page({
 		const postData = {};
 		postData.tokenFuncName = 'getProjectToken';
 		postData.searchItem = {
-			child_no: wx.getStorageSync('info').user_no
+			child_no: wx.getStorageSync('info').user_no,
+			level:1
 		};
 		postData.getAfter = {
 			partner: {
@@ -363,28 +366,36 @@ Page({
 
 	useCoupon(e) {
 		const self = this;
-		var id = api.getDataSet(e, 'id');
+		self.data.couponIndex = api.getDataSet(e, 'index');
+		console.log(api.getDataSet(e, 'index'))
+		
+		var id = self.data.couponData[self.data.couponIndex].id;
 		var findCoupon = api.findItemInArray(self.data.couponData, 'id', id);
 		var findItem = api.findItemInArray(self.data.pay.coupon, 'id', id);
 		console.log('findCoupon', findCoupon)
+		if(self.data.pay.coupon.length>=1){
+			self.data.pay.coupon = []
+		};
 		if (findCoupon) {
 			findCoupon = findCoupon[1];
 			var findSameCoupon = api.findItemsInArray(self.data.pay.coupon, 'product_id', id);
 		} else {
-			api.showToast('优惠券错误', 'error');
+			api.showToast('优惠券错误', 'none');
 			return;
 		};
 		if (findItem) {
 			self.data.pay.coupon.splice(findItem[0], 1);
 		} else {
 			if ((self.data.price - self.data.couponTotalPrice) < findCoupon.condition) {
-				api.showToast('金额不达标', 'error');
+				api.showToast('金额不达标', 'none');
+			
 				return;
 			};
 			console.log('findCoupon.limit', findCoupon.limit)
 			console.log('findSameCoupon.length', findSameCoupon.length)
 			if (self.data.pay.coupon.length >= 1) {
-				api.showToast('叠加使用超限', 'error');
+				api.showToast('叠加使用超限', 'none');
+			
 				return;
 			};
 			if (findCoupon.type == 1) {
@@ -402,7 +413,10 @@ Page({
 				id: id,
 				price: couponPrice,
 			});
-
+			self.data.showCoupon = false
+			self.setData({
+				web_couponIndex:self.data.couponIndex
+			});
 		};
 		self.countPrice();
 	},
@@ -416,6 +430,9 @@ Page({
 	inputBind(e) {
 		const self = this;
 		api.fillChange(e, self, 'sForm');
+		if(self.data.sForm.score==''){
+			self.data.sForm.score = 0
+		};
 		console.log('inputBind', self.data.sForm.score);
 		console.log('inputBind', self.data.userData.score)
 		if (parseInt(self.data.sForm.score) > parseInt(self.data.userData.score) || parseInt(self.data.sForm.score) >
@@ -461,7 +478,8 @@ Page({
 				price: wxPay.toFixed(2),
 			};
 		} else {
-			delete self.data.pay.wxPay;
+			  delete self.data.pay.wxPay;
+			 
 		};
 
 		console.log('countPrice-wxPay', wxPay);
@@ -469,7 +487,9 @@ Page({
 		self.setData({
 			web_couponPrice: parseFloat(self.data.couponTotalPrice).toFixed(2),
 			web_price: parseFloat(self.data.price).toFixed(2),
-			web_pay: self.data.pay
+			web_pay: self.data.pay,
+		
+			web_showCoupon: self.data.showCoupon
 		});
 
 	},

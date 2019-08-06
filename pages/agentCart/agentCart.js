@@ -12,9 +12,9 @@ const token = new Token();
 Page({
 	data: {
 
-
+		array: [],
 		mainData: [],
-		isFirstLoadAllStandard: ['getMainData','getUserData']
+		isFirstLoadAllStandard: ['getMainData', 'getUserData']
 	},
 
 
@@ -26,56 +26,56 @@ Page({
 		self.getUserData();
 		self.getMainData();
 		self.getLabelData();
-		var week = new Date().getDay(); 
-		console.log('week',week)
-		self.setData({
-			web_week:week,		
-		})	
-	},
-	
 
-	
+	},
+
+
+
 	getLabelData() {
 		const self = this;
-	
+
 		const postData = {};
-	
+
 		postData.searchItem = {
-			title:'合伙人下单图'
+			title: '合伙人下单图'
 		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
-				self.data.labelData = res.info.data[0]			
-			} 
+				self.data.labelData = res.info.data[0]
+			}
 			self.setData({
 				web_labelData: self.data.labelData,
 			})
 		};
 		api.labelGet(postData, callback);
 	},
-	
-	
-	getUserData(){
+
+
+	getUserData() {
 		const self = this;
 		const postData = {};
 		postData.tokenFuncName = 'getThreeToken';
-		postData.searchItem={
-			user_no:wx.getStorageSync('threeInfo').user_no
+		postData.searchItem = {
+			user_no: wx.getStorageSync('threeInfo').user_no
 		};
-		const callback = (res)=>{
-		  if(res.solely_code==100000){
-		    self.data.userData = res.info.data[0]
-		  }else{
-		    api.showToast('网络故障','none')
-		  }
-		  api.checkLoadAll(self.data.isFirstLoadAllStandard,'getUserData',self);
-		  self.setData({
-			web_array:(self.data.userData.order_limit).split(','),
-		    web_userData:self.data.userData,
-		  });  
-		  console.log((self.data.userData.order_limit).split(','))
+		const callback = (res) => {
+			if (res.solely_code == 100000) {
+				self.data.userData = res.info.data[0],
+					self.data.array = self.data.userData.order_limit.split(',');
+			} else {
+				api.showToast('网络故障', 'none')
+			}
+			var week = new Date().getDay().toString();
+			console.log(self.data.array.indexOf(week))
+			var canOrder = self.data.array.indexOf(week);
+			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getUserData', self);
+			self.setData({
+				web_canOrder: canOrder,
+				web_userData: self.data.userData,
+			});
+			console.log((self.data.userData.order_limit).split(','))
 		};
-		api.userGet(postData,callback)
+		api.userGet(postData, callback)
 	},
 
 	getMainData(isNew) {
@@ -109,11 +109,11 @@ Page({
 		api.productGet(postData, callback);
 	},
 
-	showMsg(){
+	showMsg() {
 		const self = this;
-		api.showToast('今日限制下单','none');
+		api.showToast('今日限制下单', 'none');
 	},
-	
+
 	choose(e) {
 		const self = this;
 		const index = api.getDataSet(e, 'index');
@@ -149,63 +149,218 @@ Page({
 	countTotalPrice() {
 		const self = this;
 		self.data.totalPrice = 0;
+		self.data.shopTotalPrice=0;
+		self.data.minScore = 0;
+		self.data.scorePay=0;
+		console.log(self.data.mainData)
 		for (var i = 0; i < self.data.mainData.length; i++) {
 			if (self.data.mainData[i].isSelect) {
+				console.log(111)
+				self.data.shopTotalPrice +=self.data.mainData[i].shop_price * self.data.mainData[i].count;
 				self.data.totalPrice += self.data.mainData[i].partner_price * self.data.mainData[i].count;
+				self.data.minScore += (parseFloat(self.data.mainData[i].shop_price) - parseFloat(self.data.mainData[i].partner_price))*self.data.mainData[i].count;
+				self.data.scorePay += parseFloat(self.data.mainData[i].partner_price)*self.data.mainData[i].count;
+
 			};
+
 		};
 		console.log(self.data.totalPrice)
-
+		console.log('minScore', self.data.scorePay)
+		console.log('self.data.scorePay', self.data.scorePay)
 	},
-	
+
 	addOrder(e) {
 		const self = this;
-		api.buttonCanClick(self);
-		self.data.minScore = 0;
 		var key = api.getDataSet(e, 'key');
 		console.log('key', key)
-		const productData = [];
-		for (var i = 0; i < self.data.mainData.length; i++) {
-			if (self.data.mainData[i].isSelect) {
-				self.data.minScore += parseFloat(self.data.mainData[i].shop_price) - parseFloat(self.data.mainData[i].partner_price);
-				productData.push({
-					id: self.data.mainData[i].id,
-					count: self.data.mainData[i].count,			
-				})
+		self.data.pay = {};
+		if (key == "wx") {
+			self.data.pay.wxPay = {
+				price: self.data.totalPrice.toFixed(2)
 			}
-		
-		};
-		console.log('productData',productData)
-	
-		if (productData.length == 0) {
-			api.buttonCanClick(self, true);
-			api.showToast('没有选择商品', 'none');
-			return
-		};
-		var orderList = [{
-			product: productData,
-			type:1
-		}];
-		console.log('self.data.minScore', self.data.minScore)
-		const postData = {
-			tokenFuncName: 'getThreeToken',
-			orderList: orderList,
-			/* data:{
-				shop_no:wx.getStorageSync('threeInfo').parent_no
-			} */
-		};
-		const callback = (res) => {
-			if (res && res.solely_code == 100000) {
-				self.data.orderId = res.info.id;
-				self.getOrderData(key);
+		} else if (key == "balance") {
+			var ratio = wx.getStorageSync('threeInfo').thirdApp.custom_rule.balanceDiscount;
+			if (ratio && ratio > 0) {
+				self.data.pay = {
+					balance: (self.data.totalPrice * (ratio / 100)).toFixed(2),
+					other: {
+						price: (self.data.totalPrice - self.data.totalPrice * (ratio / 100)).toFixed(2)
+					}
+				}
 			} else {
-				api.showToast(res.msg, 'none')
+				api.buttonCanClick(self, true);
+				api.showToast('折扣设置错误', 'none');
+				return
+			}
+			wx.showModal({
+				title: '确认订单',
+				content: '使用余额支付优惠' + (self.data.totalPrice * (ratio / 100)).toFixed(2) + '元' ,
+				cancelText: '取消',
+				confirmText: '确认',
+				success(res) {
+					if (res.cancel) {
+			
+					} else if (res.confirm) {
+						api.buttonCanClick(self);
+			
+						const productData = [];
+						for (var i = 0; i < self.data.mainData.length; i++) {
+							if (self.data.mainData[i].isSelect) {
+			
+								productData.push({
+									id: self.data.mainData[i].id,
+									count: self.data.mainData[i].count,
+								})
+							}
+			
+						};
+						console.log('productData', productData)
+			
+						if (productData.length == 0) {
+							api.buttonCanClick(self, true);
+							api.showToast('没有选择商品', 'none');
+							return
+						};
+						var orderList = [{
+							product: productData,
+							type: 1
+						}];
+						console.log('self.data.minScore', self.data.minScore)
+						const postData = {
+							tokenFuncName: 'getThreeToken',
+							orderList: orderList,
+							/* data:{
+								shop_no:wx.getStorageSync('threeInfo').parent_no
+							} */
+							data:{
+								express_info:self.data.pay.balance
+							}
+						};
+						const callback = (res) => {
+							if (res && res.solely_code == 100000) {
+								self.data.orderId = res.info.id;
+								self.getOrderData(key);
+							} else {
+								api.showToast(res.msg, 'none')
+							};
+						};
+						api.addOrder(postData, callback);
+			
+					}
+				}
+			})
+		} else if (key == "score") {
+			self.data.pay = {
+				score: self.data.totalPrice,
+			}
+		}
+		if (key == 'score') {
+			wx.showModal({
+				title: '确认订单',
+				content: '门店采购价'+self.data.shopTotalPrice+'元，合伙人采购价' + self.data.scorePay + '元。合伙人本次分润' + self.data.minScore + '元',
+				cancelText: '取消',
+				confirmText: '确认',
+				success(res) {
+					if (res.cancel) {
+
+					} else if (res.confirm) {
+						api.buttonCanClick(self);
+
+						const productData = [];
+						for (var i = 0; i < self.data.mainData.length; i++) {
+							if (self.data.mainData[i].isSelect) {
+
+								productData.push({
+									id: self.data.mainData[i].id,
+									count: self.data.mainData[i].count,
+								})
+							}
+
+						};
+						console.log('productData', productData)
+
+						if (productData.length == 0) {
+							api.buttonCanClick(self, true);
+							api.showToast('没有选择商品', 'none');
+							return
+						};
+						var orderList = [{
+							product: productData,
+							type: 1
+						}];
+						console.log('self.data.minScore', self.data.minScore)
+						const postData = {
+							tokenFuncName: 'getThreeToken',
+							orderList: orderList,
+							/* data:{
+								shop_no:wx.getStorageSync('threeInfo').parent_no
+							} */
+							data:{
+								express_info:self.data.shopTotalPrice
+							}
+						};
+						const callback = (res) => {
+							if (res && res.solely_code == 100000) {
+								self.data.orderId = res.info.id;
+								self.getOrderData(key);
+							} else {
+								api.showToast(res.msg, 'none')
+							};
+						};
+						api.addOrder(postData, callback);
+
+					}
+				}
+			})
+		} else {
+			api.buttonCanClick(self);
+
+			const productData = [];
+			for (var i = 0; i < self.data.mainData.length; i++) {
+				if (self.data.mainData[i].isSelect) {
+
+					productData.push({
+						id: self.data.mainData[i].id,
+						count: self.data.mainData[i].count,
+					})
+				}
+
 			};
-		};
-		api.addOrder(postData, callback);
+			console.log('productData', productData)
+
+			if (productData.length == 0) {
+				api.buttonCanClick(self, true);
+				api.showToast('没有选择商品', 'none');
+				return
+			};
+			var orderList = [{
+				product: productData,
+				type: 1
+			}];
+			console.log('self.data.minScore', self.data.minScore)
+			const postData = {
+				tokenFuncName: 'getThreeToken',
+				orderList: orderList,
+				/* data:{
+					shop_no:wx.getStorageSync('threeInfo').parent_no
+				} */
+				data:{
+					express_info:self.data.pay.wxPay.price
+				}
+			};
+			const callback = (res) => {
+				if (res && res.solely_code == 100000) {
+					self.data.orderId = res.info.id;
+					self.getOrderData(key);
+				} else {
+					api.showToast(res.msg, 'none')
+				};
+			};
+			api.addOrder(postData, callback);
+		}
 	},
 
-	
+
 
 	getOrderData(key) {
 		const self = this;
@@ -240,33 +395,10 @@ Page({
 
 	pay(key) {
 		const self = this;
-		self.data.pay = {};
-		if (key == "wx") {
-			self.data.pay.wxPay = {
-				price: self.data.totalPrice.toFixed(2)
-			}
-		} else if (key == "balance") {
-			var ratio = wx.getStorageSync('threeInfo').thirdApp.custom_rule.balanceDiscount;
-			if (ratio && ratio > 0) {
-				self.data.pay = {
-					balance: self.data.totalPrice * (ratio / 100),
-					other: {
-						price:self.data.totalPrice - self.data.totalPrice * (ratio / 100)
-					}
-				}
-			} else {
-				api.buttonCanClick(self, true);
-				api.showToast('折扣设置错误', 'none');
-				return
-			}
-		} else if (key == "score") {
-			self.data.pay = {
-				score: self.data.totalPrice,
-			}
-		}
+		
 		console.log('self.data.pay', self.data.pay)
 		const postData = self.data.pay;
-
+		postData.openid = wx.getStorageSync('info').openid;
 		postData.tokenFuncName = 'getThreeToken';
 		postData.searchItem = {
 			id: self.data.orderId
@@ -286,7 +418,7 @@ Page({
 					thirdapp_id: getApp().globalData.thirdapp_id,
 					relation_id: self.data.mainData.id,
 					income_type: 4,
-					order_no:self.data.orderData.order_no
+					order_no: self.data.orderData.order_no
 				}
 			});
 		};

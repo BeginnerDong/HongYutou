@@ -1,16 +1,12 @@
 <!--index3.wxml-->
 <view style="width:100%;">
-	<view class="credit_top">
-		<view class="flexCenter" style="margin-top:50rpx;">
-			<view class="credit_top-img">
-				<image src="/images/about-icon2.png"></image>
-			</view>	
-			<view class=" font26" style="margin-left:20rpx;">
-			   薯币
-			</view>
-		</view>
-		<view class="font28" style="text-align: center;margin-top:10rpx;">
-		   ¥{{web_count}}
+	<view class="credit_top" style="display: flex;align-items: center;justify-content: center;">
+		
+		<view class="font28" style="text-align: center;font-size:80rpx;color: #fff;">
+		   ¥{{web_userInfoData.score}}
+		   <view class=" font26" style="color: #fff;">
+		      薯币
+		   </view>
 		</view>
 	</view>
 	<block wx:for="{{web_mainData}}" wx:key="id">
@@ -19,7 +15,7 @@
 				<view class="credit_item">
 					<view class="credit_left">
 						<view class="credit_reson font26">
-						   {{item.store.login_name?item.store.login_name:'平台'}}
+						   {{item.store.shop_name?item.store.shop_name:'红芋头线下体验店'}}
 						</view>
 						<view class="credit_dates font28 color9" style="margin-top: 20rpx;">
 							{{item.create_time}}

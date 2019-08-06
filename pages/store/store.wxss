@@ -25,7 +25,8 @@ page{
 	text-align: center;
 	width:120rpx;
 	height:120rpx;
-	border-radius:50%
+	border-radius:50%;
+	overflow:hidden
 }
 .openData-head{
 	

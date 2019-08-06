@@ -9,33 +9,33 @@
 	</view>
 	<view class="form" wx:if="{{num==0}}">
 		<view class="form-item flex">
-			<view class="font26 color42 form-item-title">门店名称</view>
-			<input class="font24 color426" placeholder="请输入门店名称" placeholder-class="place-holder"
-			data-key="login_name" bindblur="changeBind"  value="{{web_sForm.login_name}}"></input>
+			<view class="font32 color42 form-item-title">门店名称</view>
+			<input class="font28 color426" placeholder="请输入门店名称" placeholder-class="place-holder"
+			data-key="shop_name" bindblur="changeBind"  value="{{web_sForm.shop_name}}"></input>
 		</view>
 		<view class="form-item flex">
-			<view class="font26 color42 form-item-title">门店负责人</view>
-			<input class="font24 color426"  placeholder="请输入门店负责人" placeholder-class="place-holder"
+			<view class="font32 color42 form-item-title">门店负责人</view>
+			<input class="font28 color426"  placeholder="请输入门店负责人" placeholder-class="place-holder"
 			data-key="name" bindblur="changeBind"  value="{{web_sForm.name}}"></input>
 		</view>
 		<view class="form-item flex">
-			<view class="font26 color42 form-item-title">联系方式</view>
-			<input class="font24 color426" type="number" placeholder="请输入门店负责人的联系方式" placeholder-class="place-holder"
+			<view class="font32 color42 form-item-title">联系方式</view>
+			<input class="font28 color426" type="number" placeholder="请输入门店负责人的联系方式" placeholder-class="place-holder"
 			data-key="phone" bindblur="changeBind"  value="{{web_sForm.phone}}"></input>
 		</view>
 		<view class="form-item flex">
-			<view class="font26 color42 form-item-title">门店地址</view>
-			<input class="font24 color426"  placeholder="请输入门店地址" placeholder-class="place-holder"
+			<view class="font32 color42 form-item-title">门店地址</view>
+			<input class="font28 color426"  placeholder="请输入门店地址" placeholder-class="place-holder"
 			data-key="address" bindblur="changeBind"  value="{{web_sForm.address}}"></input>
 		</view>
 		<view class="form-item flex">
-			<view class="font26 color42 form-item-title">合伙人ID</view>
-			<input class="font24 color426" disabled="disabled"  placeholder="请输入合伙人ID" placeholder-class="place-holder"
+			<view class="font32 color42 form-item-title">合伙人ID</view>
+			<input class="font28 color426" disabled="disabled"  placeholder="请输入合伙人ID" placeholder-class="place-holder"
 			data-key="parent_no" bindblur="changeBind"  value="{{web_sForm.parent_no}}"></input>
 		</view>
 		<view class="form-item flex">
-			<view class="font26 color42 form-item-title">店铺余额</view>
-			<input class="font24 color426" disabled="disabled"  placeholder-class="place-holder"
+			<view class="font32 color42 form-item-title">店铺余额</view>
+			<input class="font28 color426" disabled="disabled"  placeholder-class="place-holder"
 			data-key="balance" bindblur="changeBind"  value="{{web_sForm.balance}}"></input>
 		</view>
 	</view>
@@ -52,11 +52,11 @@
 					<view class="avoidOverflow2 font28" style="height:35%">{{item.title}}</view>
 					<view class="font26" style="height:45%;"></view>
 					<view class="font26 flexRowBetween" style="height:30%">
-						<view class="font26" style="color: rgb(255,59,59);" wx:if="{{!web_isEdit[index]}}">{{item.price}}</view>
-						<input placeholder="请输入商品价格" data-key="price"  bindblur="changeBind"  value="{{web_sForm.price}}" style="border:1px solid #f4f4f4;height:40rpx;width:50%;font-size:20rpx" wx:else/>
+						<view class="font26" style="color: rgb(255,59,59);" wx:if="{{!web_isEdit[index]}}">{{item.passage1}}</view>
+						<input placeholder="请输入商品价格" data-key="passage1"  bindblur="changeBind"  value="{{web_sForm.passage1}}" style="border:1px solid #f4f4f4;height:40rpx;width:50%;font-size:20rpx" wx:else/>
 						<view class="submit_info" 
-						style="margin-top:0;width:35%;height:40rpx;line-height: 40rpx;font-size:20rpx;border-radius: 20rpx;" bindtap="{{web_isEdit[index]?'submitTwo':'edit'}}" data-index="{{index}}">
-							{{web_isEdit[index]?'提交':'编辑'}}
+						style="margin-top:0;width:35%;height:50rpx;line-height: 50rpx;font-size:24rpx;border-radius: 20rpx;" bindtap="{{web_isEdit[index]?'submitTwo':'edit'}}" data-index="{{index}}">
+							{{web_isEdit[index]?'保存':'编辑'}}
 						</view>
 					</view>
 				</view>

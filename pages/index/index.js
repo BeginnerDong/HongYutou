@@ -11,7 +11,7 @@ const token = new Token();
 Page({
 	data: {
 		background: ['/images/banner.png', '/images/banner.png', '/images/banner.png'],
-		indicatorDots: false,
+		indicatorDots: true,
 		vertical: false,
 		autoplay: true,
 		circular: true,
@@ -19,10 +19,14 @@ Page({
 		duration: 500,
 		previousMargin: 0,
 		nextMargin: 0,
-		isFirstLoadAllStandard: ['storeDataGet', 'groupDataGet', 'onlineDataGet','getSliderData'],
+		isFirstLoadAllStandard: ['groupDataGet', 'onlineDataGet','getSliderData'],
 		groupData: [],
 		onlineData: [],
-		endTimeList: []
+		endTimeList: [],
+		sliderData:[],
+		la1:'',
+		lo1:'',
+		order:{}
 	},
 
 
@@ -39,32 +43,37 @@ Page({
 
 	onShow() {
 		const self = this;
-		self.storeDataGet();
+
 
 	},
 
-	getLocation() {
-		const self = this;
-		const callback = (res) => {
-			if (res.errMsg == "getLocation:ok") {
-				self.data.location = res
-			}
-		};
-		api.getLocation('getGeocoder', callback)
-	},
+
 
 	getSliderData() {
 		const self = this;
 		const postData = {};
 		postData.searchItem = {
 			thirdapp_id: getApp().globalData.thirdapp_id,
-			title: '首页轮播'
+			
+		};
+		postData.getBefore = {
+			parent:{
+				tableName:'Label',
+				middleKey:'parentid',
+				key:'id',
+				searchItem:{
+					status:['in',[1]],
+					title:['in',['首页轮播']]
+				},
+				condition:'in'
+			}
 		};
 		const callback = (res) => {
 			console.log(1000, res);
 			if (res.info.data.length > 0) {
-				self.data.sliderData = res.info.data[0];
+				self.data.sliderData.push.apply(self.data.sliderData,res.info.data);
 			}
+			console.log(self.data.sliderData)
 			self.setData({
 				web_sliderData: self.data.sliderData,
 			});
@@ -72,31 +81,76 @@ Page({
 		};
 		api.labelGet(postData, callback);
 	},
-
+	
+	getLocation() {
+		const self = this;
+		const callback = (res) => {
+			if (res.errMsg == "getLocation:ok") {
+					self.data.la1 = res.latitude;
+					self.data.lo1 = res.longitude
+			}
+			console.log(res)
+			self.storeDataGet()
+		};
+		api.getLocation('getGeocoder', callback)
+	},
+	
+	
 	storeDataGet() {
 		const self = this;
+		var lat = self.data.la1;
+		var lon = self.data.lo1;
+		var orderKey = 'ACOS(SIN(('+ lat +'* 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) +COS(('+ lat +' * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(('+ lon +' * 3.1415) / 180 - (longitude * 3.1415) / 180 ) ) * 6379';
+		self.data.order[orderKey]= 'asc';
 		const postData = {};
+		postData.paginate = api.cloneForm(self.data.paginate);
 		postData.tokenFuncName = 'getProjectToken';
 		postData.searchItem = {
-			user_type: 1,
-			primary_scope: 30
+			user_type:1
+		}
+		postData.order = api.cloneForm(self.data.order);
+		
+		postData.order = api.cloneForm(self.data.order)
+		postData.getBefore = {
+			shop: {
+				tableName: 'User',
+				middleKey: 'status',
+				key: 'status',
+				searchItem: {
+					primary_scope: ['in', [30]],
+				},
+				condition: 'in'
+			}
 		};
-		postData.refreshToken = true;
-
+/* 		postData.getAfter = {
+			user: {
+				tableName: 'User',
+				middleKey: 'user_no',
+				key: 'user_no',
+				searchItem: {
+					status:1
+				},
+				condition: 'in'
+			}
+		}; */
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
-				self.data.storeData = res.info.data[0];
-				self.data.storeData.distance = api.distance(self.data.location.latitude, self.data.location.longitude, self.data
-					.storeData.info.latitude, self.data.storeData.info.longitude);
-			};
-			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'storeDataGet', self);
+				self.data.storeData = res.info.data[0]
+				
+					self.data.storeData.distance =
+						api.distance(self.data.la1, self.data.lo1, self.data.storeData.latitude, self.data.storeData.longitude)
+					console.log('self.data.storeData[i].distance', self.data.storeData.distance)
+					
+			}
 			self.setData({
 				web_storeData: self.data.storeData,
+				//web_testObject:testObject
 			});
-			console.log('self.data.storeData', self.data.storeData)
+			console.log(self.data.mainData)
 		};
-		api.userGet(postData, callback);
+		api.userInfoGet(postData, callback);
 	},
+
 
 	groupDataGet() {
 		const self = this;

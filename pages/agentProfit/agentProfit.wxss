@@ -18,14 +18,14 @@ page{
 	width:50%;
 }
 .piece_top{
-	height:180rpx;
+	height:360rpx;
 	width:100%;
+	background: #FF7F23;
 }
 .piece_main{
 	width:92%;
 	margin: 0 4%;
-	height:120rpx;
-	box-shadow:0 0 1px #FF7F23;
+
 }
 .tab{
 	height:80rpx;

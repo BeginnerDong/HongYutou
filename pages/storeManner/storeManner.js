@@ -18,12 +18,12 @@ Page({
 			phone: '',
 			address: '',
 			balance: '',
-			login_name: '',
+			shop_name: '',
 			parent_no: '',
 			/*    level:'',
 			    passage1:'',
 			    idCard:'' */
-			price:[]
+			passage1:[]
 		},
 		mainData: [],
 		
@@ -34,6 +34,9 @@ Page({
 
 	onLoad: function() {
 		const self = this;
+		wx.setNavigationBarTitle({
+			title: '门店管理',
+		});
 		api.commonInit(self);
 		self.userInfoGet();
 		self.getMainData()
@@ -51,7 +54,7 @@ Page({
 				self.data.sForm.phone = res.info.data[0].info.phone;
 				self.data.sForm.address = res.info.data[0].info.address;
 				self.data.sForm.balance = res.info.data[0].info.balance;
-				self.data.sForm.login_name = res.info.data[0].login_name;
+				self.data.sForm.shop_name = res.info.data[0].info.shop_name;
 				self.data.sForm.parent_no = res.info.data[0].parent_no;
 			};
 
@@ -120,8 +123,9 @@ Page({
 			name: self.data.sForm.name,
 			phone: self.data.sForm.phone,
 			address: self.data.sForm.address,
+			shop_name:self.data.sForm.shop_name
 		};
-		postData.saveAfter = [{
+/* 		postData.saveAfter = [{
 			tableName: 'User',
 			FuncName: 'update',
 			searchItem: {
@@ -130,7 +134,7 @@ Page({
 			data: {
 				login_name: self.data.sForm.login_name,
 			}
-		}];
+		}]; */
 		const callback = (data) => {
 			api.buttonCanClick(self, true);
 			if (data.solely_code == 100000) {
@@ -155,14 +159,14 @@ Page({
 			id:self.data.mainData[index].id
 		},
 	  postData.data = {
-			price:self.data.sForm.price
+			passage1:self.data.sForm.passage1
 		};
 	  const callback = (data)=>{
 			 api.buttonCanClick(self,true);
 	    if(data.solely_code==100000){
 	      api.showToast('修改成功','none');
 				self.data.isEdit[index] = false;
-				self.data.mainData[index].price = self.data.sForm.price;
+				self.data.mainData[index].passage1 = self.data.sForm.passage1;
 	    }else{
 	      api.showToast(data.msg,'none')
 	    };

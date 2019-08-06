@@ -18,7 +18,10 @@ Page({
 			phone: '',
 			password: '',
 			address: '',
-			code: ''
+			code: '',
+			shop_name:'',
+			longitude:'',
+			latitude:'',
 		},
 		isFirstLoadAllStandard: ['getMainData'],
 		region: '',
@@ -36,6 +39,9 @@ Page({
 
 		self.data.type = options.type;
 		console.log(options);
+		self.setData({
+			web_type:self.data.type
+		});
 		api.commonInit(self);
 		self.getMainData();
 
@@ -134,7 +140,7 @@ Page({
 
 
 
-changeBind(e) {
+	changeBind(e) {
 		const self = this;
 		api.fillChange(e, self, 'sForm');
 		console.log(self.data.sForm);
@@ -173,22 +179,50 @@ changeBind(e) {
 		api.register(postData, callback);
 	},
 
-
+	 chooseLocation(e){
+	  var self = this;
+	  wx.chooseLocation({
+	    success: function(res){
+	      self.data.sForm.address = res.address,
+	      self.data.sForm.longitude = res.longitude,
+	      self.data.sForm.latitude = res.latitude,
+	 
+		self.setData({
+			web_sForm:self.data.sForm
+		})
+	    
+	    },
+	    fail: function() {
+	    // fail
+	    },
+	    complete: function() {
+	    // complete
+	    }
+	  })
+	},
 
 	submit() {
 		const self = this;
 		api.buttonCanClick(self);
 		var phone = self.data.sForm.phone;
-		self.data.sForm.address = self.data.region + self.data.sForm.address;
+		var newObject = api.cloneForm(self.data.sForm);
+		if (self.data.type != 'store') {
+			self.data.sForm.address = self.data.region + self.data.sForm.address;
+			delete newObject.shop_name;
+			delete newObject.longitude;
+			delete newObject.latitude;
+		};
 
-		const pass = api.checkComplete(self.data.sForm);
+		const pass = api.checkComplete(newObject);
 		console.log('pass', self.data.sForm)
 		if (pass) {
-			if (self.data.region.length == 0) {
-				api.buttonCanClick(self, true);
-				api.showToast('请选择省市区', 'none');
-				return
-			};
+			if (self.data.type != 'store') {
+				if (self.data.region.length == 0) {
+					api.buttonCanClick(self, true);
+					api.showToast('请选择省市区', 'none');
+					return
+				}
+			}
 			if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
 				api.buttonCanClick(self, true);
 				api.showToast('手机格式错误', 'none')

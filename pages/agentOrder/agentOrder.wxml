@@ -3,9 +3,9 @@
     <view class="tab_item " data-num="0" bindtap="{{web_buttonCanClick?'menuClick':''}}">
         <text class="{{num ==0?'tab_this':''}}">全部</text>
     </view>
-    <view class="tab_item " data-num="1" bindtap="{{web_buttonCanClick?'menuClick':''}}">
+  <!--  <view class="tab_item " data-num="1" bindtap="{{web_buttonCanClick?'menuClick':''}}">
         <text class="{{num ==1?'tab_this':''}}">待付款</text>
-    </view>
+    </view> -->
     <view class="tab_item" data-num="2" bindtap="{{web_buttonCanClick?'menuClick':''}}">
         <text class="{{num ==2?'tab_this':''}}">待发货</text>
     </view>
@@ -46,7 +46,7 @@
 			<view class="order_handle flexRowBetween">
 				 
 				  <view class="submit_info font24 color426" data-id="{{item.id}}" data-price="{{item.price}}" bindtap="pay" wx:if="{{item.pay_status==0}}">去支付</view>
-				 
+					 <view class="submit_info font24 color426">实付款:¥{{item.express_info}}</view>
 					
 			</view>
 		</view>

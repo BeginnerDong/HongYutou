@@ -1,6 +1,6 @@
 <!--index3.wxml-->
 <view class="search flexRowBetween">
-	<view class="search-input">
+	<view class="search-input"  bindtap="intoPath" data-path="/pages/agentSelectStore/agentSelectStore">
 		<image src="/images/search.png"></image>
 		<input placeholder="搜索"  style="border:1px solid #f4f4f4;font-size:26rpx;border-radius:15rpx;padding: 0 60rpx;"/>
 		
@@ -28,12 +28,12 @@
 <block wx:for="{{web_mainData}}" wx:key="id">
 <view class="product">
     <view class="order_tlt w690 flexRowBetween bg1">
-		<view class="font26 color42" style="width:20%">{{item.user.login_name}}</view>
+		<view class="font26 color42" style="width:20%">{{item.userInfo.shop_name}}</view>
         <view class="font26 color426" style="width:65%">{{item.create_time}}</view>
-        <view class=" tlt_right colorFF3B3B font26"  style="width:35%" >XXXXXX</view>
-        <!-- <view class="tlt_left tlt_right color5"  wx:if="{{item.order_step=='3'}}">已完成</view>
-        <view class="tlt_left tlt_right color5"  wx:if="{{item.pay_status == '1'&&item.transport_status =='0'}}">等待卖家发货</view>
-        <view class="tlt_left tlt_right color5"  wx:if="{{item.pay_status == '1'&&item.order_step=='0'&&item.transport_status =='1'}}">物流配送中</view> -->
+       
+        <view class="tlt_left tlt_right color5"  wx:if="{{item.order_step=='3'}}">已完成</view>
+        <view class="tlt_left tlt_right color5"  wx:if="{{item.pay_status == '1'&&item.transport_status =='0'}}">待发货</view>
+        <view class="tlt_left tlt_right color5"  wx:if="{{item.pay_status == '1'&&item.transport_status =='1'}}">物流配送中</view>
     </view>
      <view class="order_tlt w690 flexRowBetween bg1">
     	<view class="font26 color42" >负责人：{{item.userInfo.name}}</view>

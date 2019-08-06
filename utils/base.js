@@ -18,7 +18,7 @@ class Base {
 	request(params) {
 		var that = this;
 		getApp().globalData.buttonClick = true;
-		var baseRestUrl = 'http://193.112.45.34/api/public/index.php/api/v1/';
+		var baseRestUrl = 'https://www.hongyutou.cn/api/public/index.php/api/v1/';
 		var url = baseRestUrl + params.url;
 		const callback = (res) => {
 			if (res) {
@@ -96,7 +96,7 @@ class Base {
 			};
 		};
 		wx.uploadFile({
-			url: 'http://193.112.45.34/api/public/index.php/api/v1/Base/FtpFile/upload',
+			url: 'https://www.hongyutou.cn/api/public/index.php/api/v1/Base/FtpFile/upload',
 			filePath: filePath,
 			name: name,
 			formData: formData,

@@ -22,6 +22,9 @@ Page({
 
 	onLoad() {
 		const self = this;
+		wx.setNavigationBarTitle({
+			title: '我的收益',
+		});
 		api.commonInit(self);
 		self.getMainData();
 		self.setData({
@@ -84,7 +87,7 @@ Page({
 			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getMainData', self);
 			self.setData({
 				web_mainData: self.data.mainData,
-				web_count:self.data.count
+				web_count:self.data.count.toFixed(2)
 			});
 		};
 		api.flowLogGet(postData, callback);

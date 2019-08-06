@@ -34,6 +34,7 @@ Page({
 
   getMainData(isNew){
     const self = this;
+	var now = Date.parse(new Date());
 		api.buttonCanClick(self);	
     if(isNew){
       api.clearPageIndex(self);  
@@ -43,6 +44,7 @@ Page({
     postData.tokenFuncName = 'getProjectToken';
     postData.searchItem = api.cloneForm(self.data.searchItem);
 		postData.searchItem.type=['in',[1,2]]
+	
     postData.order = {
       create_time:'desc'
     }
@@ -84,7 +86,7 @@ Page({
     });
     self.data.searchItem = {};
     if(num=='0'){
-		
+		self.data.searchItem.use_step =1
     }else if(num=='1'){
      self.data.searchItem.use_step =2
     }else if(num=='2'){
@@ -94,6 +96,17 @@ Page({
       web_mainData:[],
     });
     self.getMainData(true);
+  },
+  
+  showToast(e){
+	  const self = this;
+	  if(api.getDataSet(e,'num')==0){
+		  api.pathTo(api.getDataSet(e,'path'),'nav');
+	  }else if(api.getDataSet(e,'num')==1){
+		  api.showToast('优惠券已使用','none')
+	  }else if(api.getDataSet(e,'num')==2){
+		  api.showToast('优惠券已过期','none') 
+	  }
   },
 
   

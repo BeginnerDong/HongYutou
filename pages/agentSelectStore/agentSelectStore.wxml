@@ -1,0 +1,24 @@
+<!--groupStore.wxml-->
+<view style="width:100%">
+	<view class="search flexRowBetween">
+		<view class="search-input">
+			<image src="/images/icon6.png"></image>
+			<input placeholder="请输入您要进的店"  style="border:1px solid rgba(45,15,6,0.6);font-size:26rpx;border-radius:15rpx;padding: 0 60rpx;"
+			data-key="shop_name" value="{{web_submitData.shop_name}}" bindblur="changeBind"/>
+			
+		</view>
+		
+	</view>
+	<block wx:for="{{web_mainData}}" wx:key="id" wx:if="{{index<10}}">
+		<view class="form-item" bindtap="choose" data-user_no="{{item.user_no}}" data-name="{{item.shop_name}}">
+			<view class="font26 color42 form-item-title flex" >
+				<view class="form-item-title-img" style="width:8%;margin-top: 26rpx;"><image src="/images/icon5.png" /></view>
+				<view class="color42 font32" style="height:65rpx;line-height: 84rpx;width:72%">{{item.shop_name}}</view>
+				
+			</view>
+			<view class="color426 font24 avoidOverflow" style="height:65rpx;line-height: 50rpx;">地址：{{item.address}}</view>
+			
+		</view>
+		
+	</block>
+</view>
