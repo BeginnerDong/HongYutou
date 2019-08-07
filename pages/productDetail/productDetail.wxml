@@ -5,9 +5,9 @@
 	<view class="store-infomation">
 		<view class="font30" >{{web_mainData.title}}</view>
 		
-		<view class="font28 flexRowBetween" style="height:60rpx;line-height: 60rpx;">
+		<view class="font28 flexRowBetween" style="height:60rpx;line-height: 60rpx;padding-top:10rpx;">
 			<view class="title-left flexRowBetween">
-				<span class="font24" style="color: rgb(255,59,59);">¥{{web_mainData.price}}</span>
+				<span class="font30" style="color: rgb(255,59,59);">¥{{web_mainData.price}}</span>
 			</view>
 			
 		</view>
@@ -144,12 +144,12 @@
 		</view>
 		
 		<view  style="float: right;width:50%;">
-			<view class="submit_info" style="{{web_mainData.is_group==1?'background: #969696;':'background:#FF9F5A'}}float: left;width:50%;margin-top: 0;height: 102rpx;line-height: 50rpx;font-size:26rpx"   
+			<view class="submit_info" style="{{web_mainData.is_group==1?'background: #969696;':'background:#FF9F5A'}};float: left;width:50%;margin-top: 0;height: 102rpx;line-height: 40rpx;font-size:26rpx;padding:10rpx 0;box-sizing:border-box; "   
 			bindtap="{{web_mainData.is_group==1?'showToast':'intoPath'}}" data-path="/pages/confirmOrder/confirmOrder?id={{web_mainData.id}}&type=group" >
 				拼团购买
 				<view style="font-size:26rpx">¥{{web_mainData.group_price}}</view>
 			</view>
-			<view class="submit_info" bindtap="intoPath" data-path="/pages/confirmOrder/confirmOrder?id={{web_mainData.id}}" style="float: left;width:50%;margin-top: 0;height: 102rpx;line-height:50rpx;font-size:26rpx">
+			<view class="submit_info" bindtap="intoPath" data-path="/pages/confirmOrder/confirmOrder?id={{web_mainData.id}}" style="float: left;width:50%;margin-top: 0;height: 102rpx;line-height:40rpx;font-size:26rpx;padding:10rpx 0;box-sizing:border-box;">
 				单独购买
 				<view style="font-size:26rpx">¥{{web_mainData.price}}</view>
 			</view>

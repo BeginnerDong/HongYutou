@@ -1,15 +1,28 @@
-@import "../../wxParse/wxParse.wxss"
+@import "../../wxParse/wxParse.wxss";
 page{
 	min-height:100%;
 	background-color:#F4F4F4 ;
 }
 .banner{
-	height:330rpx;
-	width:100%
+	height:750rpx;
+	width:100%;
 }
 .banner image{
 	height:100%;
-	width:100%
+	width:100%;
+  display: block;
+}
+.group-detail-detail .wxParse-h1{ 
+  margin:0;
+}
+.group-detail-detail .wxParse-img{ 
+  width: 100%; 
+  display: block;
+}
+.wxParse-h1 .WxEmojiView{
+  font-size:28rpx;
+  line-height: 40rpx;
+  display: inline-block;
 }
 .store-infomation{
 	height:180rpx;

@@ -3,12 +3,13 @@ page{
 	background-color:#F4F4F4 ;
 }
 .banner{
-	height:330rpx;
+	height:750rpx;
 	width:100%
 }
 .banner image{
 	height:100%;
-	width:100%
+	width:100%;
+  display: block;
 }
 
 .store-product{
@@ -18,7 +19,7 @@ page{
 }
 .group-main{
 	width:100%;
-	height:270rpx;
+	height:300rpx;
 	background: #fff;
 	border-radius:15rpx;
 	margin-bottom: 20rpx;
@@ -28,31 +29,33 @@ page{
 	height:100%;
 }
 .group-main-img image{
-	width:30rpx;
-	height:30rpx
+	width:34rpx;
+	height:34rpx
 }
 .group-main-left{
-	width:40%;
-	height:100%;
+	width:240rpx;
+	height:240rpx;
 }
 .group-main-right{
-	width:50%;
-	height:80%;
-	padding: 0 5%;
+	width:410rpx;
+	height:240rpx;
+	padding: 20rpx;
+  box-sizing: border-box;
 }
 .group-main-left image{
 	width:100%;
-	height:80%;
+	height:100%;
+  display: block;
 }
 .edit_number{
-	width:140rpx;
-	height:40rpx;
-	line-height:42rpx;
+	width:200rpx;
+	height:50rpx;
+	line-height:50rpx;
 	border:solid 1px #e5e5e5;
-	font-size:20rpx;
+	font-size:26rpx;
 }
 .edit_number .minus,.edit_number .add{
-	width:40rpx;
+	width:80rpx;
 	height:100%;
 	text-align:center;
 	color:#aeaeae;
@@ -60,7 +63,7 @@ page{
 	background:#e8e9e9;
 }
 .number{
-	width:50rpx;
+	width:80rpx;
 	text-align:center;
 	color:#878787;
 	

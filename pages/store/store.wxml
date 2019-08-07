@@ -14,15 +14,15 @@
 		<view class="flexRowBetween store-main">
 			<view class="store-main-item">
 				<view class="font28 color426">收益总金额</view>
-				<view class="font26 colorFF3B3B" >¥{{web_mainData.Payment.payment}}</view>
+				<view class="colorFF3B3B" >¥{{web_mainData.Payment.payment}}</view>
 			</view>
 			<view class="store-main-item">
 				<view class="font28 color426">账户余额</view>
-				<view class="font26 colorFF3B3B" >¥{{web_mainData.info.balance}}</view>
+				<view class="colorFF3B3B" >¥{{web_mainData.info.balance}}</view>
 			</view>
 			<view class="store-main-item">
 				<view class="font28 color426">提现总金额</view>
-				<view class="font26 colorFF3B3B" >¥{{web_mainData.Payment.withdraw}}</view>
+				<view class=" colorFF3B3B" >¥{{web_mainData.Payment.withdraw}}</view>
 			</view>
 		</view>
 	</view>

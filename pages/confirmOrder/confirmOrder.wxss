@@ -12,18 +12,21 @@ page{
 	width:100%;
 	height:200rpx;
 }
+
 .product_left{
 	width:35%;
-	height:200rpx;
+	height:220rpx;
 }
 .product_left image{
-	width:200rpx;
-	height:200rpx;
+	width:220rpx;
+	height:220rpx;
+  display: block;
 }
 .product_right{
 	width:65%;
 	height:200rpx;
 }
+
 .order_handle{
 
 	float:right;
@@ -149,9 +152,9 @@ page{
  .form-item-title{
 	 width:25%
  }
- .form-item input{
+ /* .form-item input{
 	 width:75%
- }
+ } */
  .manage_cont{
  	width:50%;
  	font-size:34rpx;
@@ -164,14 +167,14 @@ page{
  	text-align:right;
  }
  .edit_number{
- 	width:140rpx;
- 	height:40rpx;
- 	line-height:42rpx;
+ 	width:200rpx;
+ 	height:50rpx;
+ 	line-height:50rpx;
  	border:solid 1px #e5e5e5;
- 	font-size:20rpx;
+ 	font-size:26rpx;
  }
  .edit_number .minus,.edit_number .add{
- 	width:40rpx;
+ 	width:100rpx;
  	height:100%;
  	text-align:center;
  	color:#aeaeae;
@@ -179,8 +182,16 @@ page{
  	background:#e8e9e9;
  }
  .number{
- 	width:50rpx;
+ 	width:100rpx;
  	text-align:center;
  	color:#878787;
  	border-right:solid 1px #e5e5e5; 
  	}
+
+  .allMny{
+   font-size: 36rpx;
+  }
+  .allMny::before{
+    content: "￥";
+    font-size: 26rpx;
+  }

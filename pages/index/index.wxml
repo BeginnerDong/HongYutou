@@ -31,45 +31,44 @@
 				<div class="outLineStory-infomation-item flexRowBetween">
 					<view class=" flexRowBetween" style="height:100%;width:80%">
 						<!-- <image src="/images/index-icon3.png"></image> -->
-						<span class="font20 colorfff avoidOverflow">{{web_storeData.address}}</span>
+						<span class="font24 colorfff avoidOverflow">{{web_storeData.address}}</span>
 					</view>
 					<view class=" flexRowBetween" style="height:100%">
 						<!-- <image src="/images/index-icon3.png"></image> -->
-						<span class="font20 colorfff">{{web_storeData.distance}}km</span>
+						<span class="font24 colorfff">{{web_storeData.distance}}km</span>
 					</view>
 				</div>
 			</div>
 		</view>
 	</view>
-	<view style="width:100%;height:20rpx;background: #e5e5e5;"></view>
+	<view style="width:100%;height:20rpx;background: #f5f5f5;"></view>
 	<view class="group">
 		<view class="flexRowBetween outLineStory-title">
 			<view class="title-left flexRowBetween" style="width:100%">
 				<image src="/images/index-icon4.png" style="width:35rpx;height:35rpx"></image>
-				<span class="font32" style="margin-left: 20rpx;font-weight: 700;">社区团购<span style="font-size: 24rpx;color: rgba(37,18,4,0.7);margin-left:5rpx">(同住一个小区，团购更便宜)</span></span>
+				<span class="font32" style="margin-left: 20rpx;font-weight: 700;">社区团购<span style="font-size: 24rpx;color: rgba(37,18,4,0.7);margin-left:10rpx">(同住一个小区，团购更便宜)</span></span>
 			</view>
 		</view>
 		<block wx:for="{{web_groupData}}" wx:key="id" >	
-			<view class="flexRowBetween group-main" bindtap="intoPath" data-path="/pages/groupDetail/groupDetail?id={{item.id}}">
+			<view class=" group-main oh" bindtap="intoPath" data-path="/pages/groupDetail/groupDetail?id={{item.id}}">
 				<view class="group-main-left flex">
 					<image src="{{item.mainImg[0].url}}"></image>
 				</view>
-				<view class="group-main-left">
-					<view class="avoidOverflow2 font28" style="height:35%">{{item.title}}</view>
-					<view class="avoidOverflow2 font24" style="height:20%;color: #999;">{{item.description}}</view>
-					<view class="font26" style="height:30%;line-height:88rpx;">团购倒计时
-					
+				<view class="group-main-right">
+					<view class="avoidOverflow2 font28 oh" style="height:76rpx;">{{item.title}}</view>
+					<view class="avoidOverflow font24" style="color: #999;height:40rpx; line-height:40rpx;">{{item.description}}</view>
+					<view class="font26" style="height:30rpx;margin:20rpx 0 10rpx 0;line-height:30rpx;color:#999;">团购倒计时
 					<span style="color: rgb(255,127,35);margin-left: 20rpx;">{{countDownList[index].hou}}:{{countDownList[index].min}}:{{countDownList[index].sec}}</span>
-					
 					</view>
 					
-					<view class="font26" style="height:30%">{{item.standard}}人成团<span style="color: rgb(255,59,59);margin-left: 20rpx;">团购：¥{{item.price}}</span></view>
+					<view class="font26" >{{item.standard}}人成团</view>
+          <view class="font26" style="color: rgb(255,59,59);margin-top:10rpx; ">团购：¥ <text class="font28">{{item.price}}</text></view>
 				</view>
 			</view>
 		</block>
 		
 	</view>
-	<view style="width:100%;height:20rpx;background: #e5e5e5;"></view>
+	<view style="width:100%;height:20rpx;background: #f5f5f5;"></view>
 	<view class="product">
 		<view class="flexRowBetween outLineStory-title">
 			<view class="title-left flexRowBetween" style="width:100%">
@@ -85,8 +84,8 @@
 					</view>
 					<view class="product-item-text">
 						<view class="avoidOverflow font28" >{{item.title}}</view>
-						<view class="avoidOverflow font24" style="height:45%;color: #999;">{{item.description}}</view>
-						<view class=" font24" style="color: rgb(255,59,59);">¥{{item.price}}</view>
+						<view class="avoidOverflow font24" style="height:35%;color: #999;">{{item.description}}</view>
+						<view class=" font28" style="color: rgb(255,59,59);">¥{{item.price}}</view>
 					</view>
 				</view>
 			</block>

@@ -9,3 +9,40 @@
 .form-item-title{
 	 width:25%
  }
+
+
+ .shop_adr_lis{
+   width: 94%; 
+   margin: 0 auto;
+   padding:20rpx 0;
+   border-bottom: 1px solid #f4f4f4;
+   padding-left: 50rpx;
+   box-sizing:border-box;
+   position: relative;
+ }
+  .shop_adr_lis .selBtn{
+    position: absolute;
+    left: 0rpx;
+    top: 50%;
+    transform: translateY(-50%);
+ }
+ .leftCont{
+   width: 80%;
+   left: left;
+   border-right: 1px solid #FF7F23;
+   padding-right:10rpx;
+   box-sizing:border-box;
+ }
+ .shop_name{ 
+   font-size:28rpx; 
+   padding-bottom: 10rpx;
+  }
+  .leftCont .address{
+    color: #666;
+    line-height: 40rpx;
+    font-size: 24rpx;
+  }
+ .rightIcon{
+   width: 20%;
+   justify-content: flex-end;
+ }

@@ -1,8 +1,10 @@
 /**app.wxss**/
 page{
 	width:100%;
-
 } 
+.oh{ 
+  overflow: hidden;
+}
 .flexRowBetween{
 	display:flex;
 	flex-direction:row;

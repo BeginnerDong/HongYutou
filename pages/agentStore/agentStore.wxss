@@ -1,5 +1,5 @@
 page{
-
+padding-bottom: 240rpx;
 }
 .search{
 	width:100%;
@@ -83,3 +83,23 @@ page{
 	border: 1px solid #f4f4f4;
 	box-shadow:0px 12px 10px -12px #999;
 }
+.addShopBtn{
+  background: #FF7F23; 
+  position: fixed; 
+  bottom: 0; 
+  left: 0;
+  width: 100%;
+  box-shadow: 0 -2rpx 5rpx rgba(0,0,0,0.1);
+}
+.submit_info{
+  width:60%;
+  border-radius:40rpx;
+  margin:30rpx auto;
+  font-size: 32rpx;
+  /* background: #FF7F23; */
+  color: #FF7F23;
+  background: #fff; 
+  line-height: 80rpx;
+  height: 80rpx;
+}
+

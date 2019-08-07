@@ -61,8 +61,8 @@
 			</view>
 		</block>
 	</view>
-	<view class="submit_info" style="width:60%;border-radius:40rpx;margin:150rpx 20% 50rpx 20%;font-size: 32rpx;" 
-	data-path="/pages/agentAddStore/agentAddStore" bindtap="intoPath">
-		添加门店
-	</view>
+  <view class="addShopBtn">
+    <view class="submit_info" data-path="/pages/agentAddStore/agentAddStore" bindtap="intoPath">	添加门店</view>
+  </view>
+	
 </view>

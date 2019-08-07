@@ -29,7 +29,7 @@
 			<view class="edit color4" data-path="/pages/userNewAddress/userNewAddress?id={{item.id}}" bindtap="intoPath">
 				<image src="/images/edit.jpg"></image> 编辑
 			</view>
-			<view class="edit color4" data-id="{{item.id}}" bindtap="{{web_buttonCanClick?'deleteAddress':''}}">
+			<view class="edit color4" data-id="{{item.id}}" bindtap="{{web_buttonCanClick?'deleteAddress':''}}" style="margin-left:20rpx;">
 				<image src="/images/del.jpg"></image> 删除
 			</view>
 		</view>
