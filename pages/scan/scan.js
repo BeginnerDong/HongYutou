@@ -27,21 +27,21 @@ Page({
 		freeCouponData: [],
 		isDiscount: false,
 		freeCouponId: [],
-		isDiscount1:false,
-		
+		isDiscount1: false,
+
 	},
 
 	onLoad(options) {
 		const self = this;
 		api.commonInit(self);
-		if(options.scene){
-			var scene=decodeURIComponent(options.scene);
-			console.log('scene',scene)
+		if (options.scene) {
+			var scene = decodeURIComponent(options.scene);
+			console.log('scene', scene)
 			self.data.user_no = scene
 		};
 		self.getUserData();
 		self.getFreeCouponData();
-		
+
 		self.getCouponData();
 		self.setData({
 			web_isDiscount1: self.data.isDiscount1,
@@ -49,8 +49,8 @@ Page({
 			web_pay: self.data.pay
 		})
 	},
-	
-	
+
+
 	/* getUserCouponData() {
 		const self = this;
 		const postData = {};
@@ -72,7 +72,7 @@ Page({
 		};
 		api.userCouponGet(postData, callback);
 	}, */
-	
+
 	getCouponData() {
 		const self = this;
 		const postData = {};
@@ -91,7 +91,7 @@ Page({
 		};
 		api.couponGet(postData, callback);
 	},
-	
+
 	couponAdd1(e) {
 		const self = this;
 		api.buttonCanClick(self);
@@ -116,10 +116,10 @@ Page({
 			} else {
 				api.showToast(res.msg, 'none')
 			}
-			
+
 		};
 		api.couponAdd(postData, callback);
-	
+
 	},
 
 	getUserData() {
@@ -176,9 +176,9 @@ Page({
 		postData.tokenFuncName = 'getProjectToken';
 		postData.searchItem = {
 			behavior: 1,
-			use_step:1,
-			
-			type:['in',[1,2]]
+			use_step: 1,
+
+			type: ['in', [1, 2]]
 		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
@@ -199,7 +199,7 @@ Page({
 			return
 		};
 		var id = api.getDataSet(e, 'id');
-		console.log('self.data.pay.coupon',self.data.pay.coupon)
+		console.log('self.data.pay.coupon', self.data.pay.coupon)
 		var findCoupon = api.findItemInArray(self.data.couponData, 'id', id);
 		var findItem = api.findItemInArray(self.data.pay.coupon, 'id', id);
 		console.log('findCoupon', findCoupon)
@@ -245,13 +245,12 @@ Page({
 		console.log('self.data.couponTotalPrice', self.data.couponTotalPrice)
 		if (wxPay > 0) {
 			self.data.pay.wxPay = {
-					price: wxPay.toFixed(2),		
+				price: wxPay.toFixed(2),
 			};
 			self.data.pay.wxPayStatus = 0
 			/* self.data.pay.score = wxPay.toFixed(2); */
-		}
-		else{
-		  delete self.data.pay.wxPay;
+		} else {
+			delete self.data.pay.wxPay;
 		};
 		self.setData({
 			web_pay: self.data.pay
@@ -265,18 +264,20 @@ Page({
 		const self = this;
 		api.buttonCanClick(self);
 		var ratio = wx.getStorageSync('info').thirdApp.custom_rule.shubi;
+
+		var ratioPt = wx.getStorageSync('info').thirdApp.custom_rule.tax;
 		const postData = {};
 		postData.pay = self.data.pay;
 		postData.tokenFuncName = 'getProjectToken';
-		if(!wx.getStorageSync('info')||!wx.getStorageSync('info').headImgUrl){
-		  postData.refreshToken = true;
+		if (!wx.getStorageSync('info') || !wx.getStorageSync('info').headImgUrl) {
+			postData.refreshToken = true;
 		};
 		postData.data = {
 			shop_no: self.data.user_no,
 			price: self.data.submitData.price
 		}
 
-	
+
 		if (JSON.stringify(postData.pay) == '{}') {
 			api.buttonCanClick(self, true);
 			api.showToast('空白充值', 'error');
@@ -286,7 +287,7 @@ Page({
 				tableName: 'FlowLog',
 				FuncName: 'add',
 				data: {
-					count: self.data.pay.wxPay.price*(100/ratio),
+					count: self.data.pay.wxPay.price * (ratio / 100),
 					/* count:self.data.pay.score*(100/ratio), */
 					type: 3,
 					user_no: wx.getStorageSync('info').user_no,
@@ -298,7 +299,19 @@ Page({
 				tableName: 'FlowLog',
 				FuncName: 'add',
 				data: {
-					count: self.data.pay.wxPay.price*(100/ratio),
+					count: -self.data.pay.wxPay.price * (ratioPt / 100),
+					type: 2,
+					user_no: self.data.user_no,
+					thirdapp_id: 2,
+					relation_user: wx.getStorageSync('info').user_no,
+					income_type: 1
+				}
+			},
+			{
+				tableName: 'FlowLog',
+				FuncName: 'add',
+				data: {
+					count: self.data.pay.wxPay.price * (ratio / 100) - self.data.pay.wxPay.price * (ratioPt / 100),
 					type: 2,
 					user_no: self.data.user_no,
 					thirdapp_id: 2,
@@ -396,17 +409,17 @@ Page({
 		wx.removeStorageSync('token');
 		self.getMeData()
 	},
-	
+
 	getMeData() {
 		const self = this;
-		
+
 		const postData = {};
 		postData.tokenFuncName = 'getProjectToken';
 		postData.refreshToken = true;
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
 				setTimeout(function() {
-					api.pathTo('/pages/index/index','rela')
+					api.pathTo('/pages/index/index', 'rela')
 				}, 1000)
 			};
 		};
