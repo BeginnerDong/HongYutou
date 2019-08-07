@@ -25,7 +25,7 @@ page{
   display: inline-block;
 }
 .store-infomation{
-	height:180rpx;
+	/* height:180rpx; */
 	width:92%;
 	padding: 20rpx 4%;
 	background: #fff;
