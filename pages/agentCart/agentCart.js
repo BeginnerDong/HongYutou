@@ -145,6 +145,20 @@ Page({
 			web_mainData: self.data.mainData
 		})
 	},
+	
+	bindManual(e) {
+	  const self = this;
+	  const index = api.getDataSet(e,'index');
+	  var num = e.detail.value;
+	  if(!num||num<1){
+	    num = 1;
+	  };
+	  self.data.mainData[index].count = num;
+	  self.setData({
+	    num: num,
+	    web_mainData:self.data.mainData
+	  });
+	}, 
 
 	countTotalPrice() {
 		const self = this;
@@ -174,6 +188,24 @@ Page({
 		var key = api.getDataSet(e, 'key');
 		console.log('key', key)
 		self.data.pay = {};
+		const productData = [];
+		for (var i = 0; i < self.data.mainData.length; i++) {
+			if (self.data.mainData[i].isSelect) {
+					
+				productData.push({
+					id: self.data.mainData[i].id,
+					count: self.data.mainData[i].count,
+				})
+			}
+					
+		};
+		console.log('productData', productData)
+					
+		if (productData.length == 0) {
+			api.buttonCanClick(self, true);
+			api.showToast('没有选择商品', 'none');
+			return
+		};
 		if (key == "wx") {
 			self.data.pay.wxPay = {
 				price: self.data.totalPrice.toFixed(2)
@@ -199,28 +231,11 @@ Page({
 				confirmText: '确认',
 				success(res) {
 					if (res.cancel) {
-			
+						api.buttonCanClick(self,true);
 					} else if (res.confirm) {
 						api.buttonCanClick(self);
 			
-						const productData = [];
-						for (var i = 0; i < self.data.mainData.length; i++) {
-							if (self.data.mainData[i].isSelect) {
-			
-								productData.push({
-									id: self.data.mainData[i].id,
-									count: self.data.mainData[i].count,
-								})
-							}
-			
-						};
-						console.log('productData', productData)
-			
-						if (productData.length == 0) {
-							api.buttonCanClick(self, true);
-							api.showToast('没有选择商品', 'none');
-							return
-						};
+						
 						var orderList = [{
 							product: productData,
 							type: 1
@@ -262,28 +277,11 @@ Page({
 				confirmText: '确认',
 				success(res) {
 					if (res.cancel) {
-
+						api.buttonCanClick(self,true);
 					} else if (res.confirm) {
 						api.buttonCanClick(self);
 
-						const productData = [];
-						for (var i = 0; i < self.data.mainData.length; i++) {
-							if (self.data.mainData[i].isSelect) {
-
-								productData.push({
-									id: self.data.mainData[i].id,
-									count: self.data.mainData[i].count,
-								})
-							}
-
-						};
-						console.log('productData', productData)
-
-						if (productData.length == 0) {
-							api.buttonCanClick(self, true);
-							api.showToast('没有选择商品', 'none');
-							return
-						};
+						
 						var orderList = [{
 							product: productData,
 							type: 1
@@ -312,27 +310,10 @@ Page({
 					}
 				}
 			})
-		} else {
+		} else if(key=='wx') {
 			api.buttonCanClick(self);
 
-			const productData = [];
-			for (var i = 0; i < self.data.mainData.length; i++) {
-				if (self.data.mainData[i].isSelect) {
-
-					productData.push({
-						id: self.data.mainData[i].id,
-						count: self.data.mainData[i].count,
-					})
-				}
-
-			};
-			console.log('productData', productData)
-
-			if (productData.length == 0) {
-				api.buttonCanClick(self, true);
-				api.showToast('没有选择商品', 'none');
-				return
-			};
+			
 			var orderList = [{
 				product: productData,
 				type: 1

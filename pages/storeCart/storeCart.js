@@ -137,12 +137,46 @@ Page({
 		console.log(self.data.totalPrice)
 
 	},
+	
+	bindManual(e) {
+	  const self = this;
+	  const index = api.getDataSet(e,'index');
+	  var num = e.detail.value;
+	  if(!num||num<1){
+	    num = 1;
+	  };
+	  self.data.mainData[index].count = num;
+	  self.setData({
+	    num: num,
+	    web_mainData:self.data.mainData
+	  });
+	}, 
 
 	addOrder(e) {
 		const self = this;
 
 		
 		var key = api.getDataSet(e, 'key');
+		const productData = [];
+		for (var i = 0; i < self.data.mainData.length; i++) {
+			if (self.data.mainData[i].isSelect) {
+				productData.push({
+					id: self.data.mainData[i].id,
+					count: self.data.mainData[i].count,
+		
+				})
+			}
+		
+		};
+		var orderList = [{
+			product: productData,
+		
+		}];
+		if (productData.length == 0) {
+			api.buttonCanClick(self, true);
+			api.showToast('没有选择商品', 'none');
+			return
+		};
 		if (self.data.orderId) {
 			self.pay(key)
 		}
@@ -152,26 +186,7 @@ Page({
 			self.data.pay.wxPay = {
 				price: self.data.totalPrice.toFixed(2)
 			}
-			const productData = [];
-			for (var i = 0; i < self.data.mainData.length; i++) {
-				if (self.data.mainData[i].isSelect) {
-					productData.push({
-						id: self.data.mainData[i].id,
-						count: self.data.mainData[i].count,
-
-					})
-				}
-
-			};
-			var orderList = [{
-				product: productData,
-
-			}];
-			if (productData.length == 0) {
-				api.buttonCanClick(self, true);
-				api.showToast('没有选择商品', 'none');
-				return
-			};
+			
 			const postData = {
 				tokenFuncName: 'getThreeToken',
 				orderList: orderList,
@@ -216,26 +231,7 @@ Page({
 			
 					} else if (res.confirm) {
 						api.buttonCanClick(self);
-						const productData = [];
-						for (var i = 0; i < self.data.mainData.length; i++) {
-							if (self.data.mainData[i].isSelect) {
-								productData.push({
-									id: self.data.mainData[i].id,
-									count: self.data.mainData[i].count,
 						
-								})
-							}
-						
-						};
-						var orderList = [{
-							product: productData,
-						
-						}];
-						if (productData.length == 0) {
-							api.buttonCanClick(self, true);
-							api.showToast('没有选择商品', 'none');
-							return
-						};
 						const postData = {
 							tokenFuncName: 'getThreeToken',
 							orderList: orderList,

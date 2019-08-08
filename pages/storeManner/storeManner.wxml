@@ -23,10 +23,10 @@
 			<input class="font28 color426" type="number" placeholder="请输入门店负责人的联系方式" placeholder-class="place-holder"
 			data-key="phone" bindblur="changeBind"  value="{{web_sForm.phone}}"></input>
 		</view>
-		<view class="form-item flex">
+		<view class="form-item flex" bindtap="chooseLocation">
 			<view class="font32 color42 form-item-title">门店地址</view>
 			<input class="font28 color426"  placeholder="请输入门店地址" placeholder-class="place-holder"
-			data-key="address" bindblur="changeBind"  value="{{web_sForm.address}}"></input>
+			data-key="address" disabled="true" bindblur="changeBind"  value="{{web_sForm.address}}"></input>
 		</view>
 		<view class="form-item flex">
 			<view class="font32 color42 form-item-title">合伙人ID</view>

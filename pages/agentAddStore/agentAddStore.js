@@ -149,11 +149,7 @@ Page({
 		const pass = api.checkComplete(self.data.sForm);
 		console.log('pass', self.data.sForm)
 		if (pass) {
-			if(self.data.region.length==0){
-				api.buttonCanClick(self, true);
-				api.showToast('请选择省市区','none');
-				return
-			};
+			
 			if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
 				api.buttonCanClick(self, true);
 				api.showToast('手机格式错误', 'none')

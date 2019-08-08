@@ -23,10 +23,12 @@ Page({
 			/*    level:'',
 			    passage1:'',
 			    idCard:'' */
-			passage1:[]
+			passage1: [],
+			latitude:'',
+			longitude:''
 		},
 		mainData: [],
-		
+
 		isEdit: [],
 		isFirstLoadAllStandard: ['userInfoGet', 'getMainData'],
 	},
@@ -42,7 +44,27 @@ Page({
 		self.getMainData()
 	},
 
+	chooseLocation(e) {
+		var self = this;
+		wx.chooseLocation({
+			success: function(res) {
+				self.data.sForm.address = res.address,
+					self.data.sForm.longitude = res.longitude,
+					self.data.sForm.latitude = res.latitude,
 
+					self.setData({
+						web_sForm: self.data.sForm
+					})
+
+			},
+			fail: function() {
+				// fail
+			},
+			complete: function() {
+				// complete
+			}
+		})
+	},
 
 	userInfoGet() {
 		const self = this;
@@ -56,6 +78,8 @@ Page({
 				self.data.sForm.balance = res.info.data[0].info.balance;
 				self.data.sForm.shop_name = res.info.data[0].info.shop_name;
 				self.data.sForm.parent_no = res.info.data[0].parent_no;
+				self.data.sForm.latitude = res.info.data[0].info.latitude;
+				self.data.sForm.longitude = res.info.data[0].info.longitude;
 			};
 
 
@@ -83,7 +107,7 @@ Page({
 			if (res.info.data.length > 0) {
 				self.data.mainData.push.apply(self.data.mainData, res.info.data);
 				for (var i = 0; i < self.data.mainData.length; i++) {
-					 self.data.isEdit.push(false)
+					self.data.isEdit.push(false)
 				}
 			};
 			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getMainData', self);
@@ -98,7 +122,7 @@ Page({
 	changeBind(e) {
 		const self = this;
 		console.log(e)
-		if(api.getDataSet(e, 'key')=='price'){
+		if (api.getDataSet(e, 'key') == 'price') {
 			self.data.sForm.price[api.getDataSet(e, 'index')] = api.getDataSet(e, 'value');
 		};
 		if (api.getDataSet(e, 'value')) {
@@ -123,18 +147,18 @@ Page({
 			name: self.data.sForm.name,
 			phone: self.data.sForm.phone,
 			address: self.data.sForm.address,
-			shop_name:self.data.sForm.shop_name
+			shop_name: self.data.sForm.shop_name
 		};
-/* 		postData.saveAfter = [{
-			tableName: 'User',
-			FuncName: 'update',
-			searchItem: {
-				user_no: wx.getStorageSync('threeInfo').user_no
-			},
-			data: {
-				login_name: self.data.sForm.login_name,
-			}
-		}]; */
+		/* 		postData.saveAfter = [{
+					tableName: 'User',
+					FuncName: 'update',
+					searchItem: {
+						user_no: wx.getStorageSync('threeInfo').user_no
+					},
+					data: {
+						login_name: self.data.sForm.login_name,
+					}
+				}]; */
 		const callback = (data) => {
 			api.buttonCanClick(self, true);
 			if (data.solely_code == 100000) {
@@ -150,32 +174,32 @@ Page({
 		};
 		api.userInfoUpdate(postData, callback);
 	},
-	
-	productUpdate(index){
-	  const self = this;
-	  const postData = {};
-	  postData.tokenFuncName = 'getThreeToken';
+
+	productUpdate(index) {
+		const self = this;
+		const postData = {};
+		postData.tokenFuncName = 'getThreeToken';
 		postData.searchItem = {
-			id:self.data.mainData[index].id
-		},
-	  postData.data = {
-			passage1:self.data.sForm.passage1
-		};
-	  const callback = (data)=>{
-			 api.buttonCanClick(self,true);
-	    if(data.solely_code==100000){
-	      api.showToast('修改成功','none');
+				id: self.data.mainData[index].id
+			},
+			postData.data = {
+				passage1: self.data.sForm.passage1
+			};
+		const callback = (data) => {
+			api.buttonCanClick(self, true);
+			if (data.solely_code == 100000) {
+				api.showToast('修改成功', 'none');
 				self.data.isEdit[index] = false;
 				self.data.mainData[index].passage1 = self.data.sForm.passage1;
-	    }else{
-	      api.showToast(data.msg,'none')
-	    };
+			} else {
+				api.showToast(data.msg, 'none')
+			};
 			self.setData({
-				web_isEdit:self.data.isEdit,
-				web_mainData:self.data.mainData
+				web_isEdit: self.data.isEdit,
+				web_mainData: self.data.mainData
 			})
-	  };
-	  api.productUpdate(postData,callback);
+		};
+		api.productUpdate(postData, callback);
 	},
 
 	submit() {
@@ -183,8 +207,9 @@ Page({
 		api.buttonCanClick(self);
 		var phone = self.data.sForm.phone;
 		var newObject = api.cloneForm(self.data.sForm);
-		delete newObject.price;
-		const pass = api.checkComplete(self.data.sForm);
+		delete newObject.passage1;
+		const pass = api.checkComplete(newObject);
+	
 		if (pass) {
 			if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
 				api.buttonCanClick(self, true);
@@ -200,25 +225,25 @@ Page({
 
 		};
 	},
-	
+
 	submitTwo(e) {
 		const self = this;
 		api.buttonCanClick(self);
-		var index = api.getDataSet(e,'index');
-		if (self.data.sForm.price!='') {
+		var index = api.getDataSet(e, 'index');
+		if (self.data.sForm.price != '') {
 
-				self.productUpdate(index);
-		
+			self.productUpdate(index);
+
 		} else {
 			api.buttonCanClick(self, true);
-			api.showToast('请输入价格', 'none');	
+			api.showToast('请输入价格', 'none');
 		};
 	},
 
 	edit(e) {
 		const self = this;
 		console.log(e);
-		var index = api.getDataSet(e,'index');
+		var index = api.getDataSet(e, 'index');
 		self.data.isEdit[index] = true;
 		self.setData({
 			web_isEdit: self.data.isEdit
