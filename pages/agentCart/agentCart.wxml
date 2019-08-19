@@ -16,7 +16,7 @@
 				</view>
 				<view class="group-main-right">
 					<view class="avoidOverflow2 font28" style="height:35%">{{item.title}}</view>
-					<view class="font26" style="height:45%;"></view>
+					<view class="font26 " style="height:45%;">{{item.description}}</view>
 					<view class="flexRowBetween" style="height:30%">
 						<view class="font32" style="color:rgb(255,59,59)">¥{{item.partner_price}}</view>
 						<view class="edit_number flexRowBetween">

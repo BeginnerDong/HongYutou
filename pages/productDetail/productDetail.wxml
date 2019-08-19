@@ -125,7 +125,7 @@
 	<view style="position: fixed;bottom: 0;width:100%;">
 
 		<view class="navbar flex" style="width: 50%;">
-			<view class="navbar_item" style="width:50%">
+			<view class="navbar_item" style="width:50%" data-path="/pages/index/index" bindtap="intoPathRela">
 				<view class="nav_img bg1">
 					<image src="/images/icon3.png" ></image>
 				</view>

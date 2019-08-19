@@ -51,7 +51,7 @@ Page({
 	},
 
 
-	/* getUserCouponData() {
+	checkCouponData() {
 		const self = this;
 		const postData = {};
 		postData.tokenFuncName = 'getProjectToken';
@@ -61,9 +61,9 @@ Page({
 		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
-	
+			
 			} else {
-				self.data.isDiscount = true;
+				self.data.isDiscount1 = true;
 				self.setData({
 					web_isDiscount1: self.data.isDiscount1
 				})
@@ -71,7 +71,7 @@ Page({
 			}
 		};
 		api.userCouponGet(postData, callback);
-	}, */
+	},
 
 	getCouponData() {
 		const self = this;
@@ -108,7 +108,8 @@ Page({
 		const callback = (res) => {
 			api.buttonCanClick(self, true);
 			if (res && res.solely_code == 100000) {
-				api.showToast('领取成功！', 'none', 2000)
+				api.showToast('领取成功！', 'none', 2000);
+				self.getUserCouponData();
 				self.data.isDiscount1 = false;
 				self.setData({
 					web_isDiscount1: self.data.isDiscount1
@@ -134,6 +135,7 @@ Page({
 				self.data.userData = res.info.data[0];
 			};
 			self.getUserCouponData();
+			self.checkCouponData();
 			self.setData({
 				web_userData: self.data.userData
 			})
@@ -283,43 +285,46 @@ Page({
 			api.showToast('空白充值', 'error');
 			return;
 		};
-		postData.data.payAfter = [{
-				tableName: 'FlowLog',
-				FuncName: 'add',
-				data: {
-					count: self.data.pay.wxPay.price * (ratio / 100),
-					/* count:self.data.pay.score*(100/ratio), */
-					type: 3,
-					user_no: wx.getStorageSync('info').user_no,
-					thirdapp_id: 2,
-					relation_user: self.data.user_no
-				}
-			},
-			{
-				tableName: 'FlowLog',
-				FuncName: 'add',
-				data: {
-					count: -self.data.pay.wxPay.price * (ratioPt / 100),
-					type: 2,
-					user_no: self.data.user_no,
-					thirdapp_id: 2,
-					relation_user: wx.getStorageSync('info').user_no,
-					income_type: 1
-				}
-			},
-			{
-				tableName: 'FlowLog',
-				FuncName: 'add',
-				data: {
-					count: self.data.pay.wxPay.price * (ratio / 100) - self.data.pay.wxPay.price * (ratioPt / 100),
-					type: 2,
-					user_no: self.data.user_no,
-					thirdapp_id: 2,
-					relation_user: wx.getStorageSync('info').user_no,
-					income_type: 1
-				}
-			},
-		];
+		if(self.data.pay.wxPay&&self.data.pay.wxPay.price&&self.data.pay.wxPay.price>0){
+			postData.data.payAfter = [{
+					tableName: 'FlowLog',
+					FuncName: 'add',
+					data: {
+						count: self.data.pay.wxPay.price * (ratio / 100),
+						/* count:self.data.pay.score*(100/ratio), */
+						type: 3,
+						user_no: wx.getStorageSync('info').user_no,
+						thirdapp_id: 2,
+						relation_user: self.data.user_no
+					}
+				},
+				{
+					tableName: 'FlowLog',
+					FuncName: 'add',
+					data: {
+						count: -self.data.pay.wxPay.price * (ratioPt / 100),
+						type: 2,
+						user_no: self.data.user_no,
+						thirdapp_id: 2,
+						relation_user: wx.getStorageSync('info').user_no,
+						income_type: 1
+					}
+				},
+				{
+					tableName: 'FlowLog',
+					FuncName: 'add',
+					data: {
+						count: self.data.pay.wxPay.price,
+						type: 2,
+						user_no: self.data.user_no,
+						thirdapp_id: 2,
+						relation_user: wx.getStorageSync('info').user_no,
+						income_type: 1
+					}
+				},
+			];
+		}
+		
 		const callback = (res) => {
 			console.log(res)
 			api.buttonCanClick(self, true)

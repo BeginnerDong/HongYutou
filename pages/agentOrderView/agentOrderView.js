@@ -22,22 +22,23 @@ Page({
 	onLoad(options) {
 		const self = this;
 		api.commonInit(self);
-		
+
 
 
 	},
 
 	onShow() {
 		const self = this;
-		if (getApp().globalData.user_no) {
+		console.log(getApp().globalData.name)
+		if (getApp().globalData.user_no != '') {
 			self.data.searchItem.user_no = getApp().globalData.user_no;
-			
+			self.data.searchItem.user_type = 1
 		}
-		if (getApp().globalData.name) {
+		if (getApp().globalData.name != '') {
 			self.data.name = getApp().globalData.name;
 		}
 		self.setData({
-			web_name:self.data.name
+			web_name: self.data.name
 		})
 		self.getMainData(true)
 	},
@@ -72,7 +73,7 @@ Page({
 				}
 			}
 		};
-		postData.getBefore = {
+		/* postData.getBefore = {
 			user: {
 				tableName: 'Distribution',
 				middleKey: 'user_no',
@@ -82,7 +83,7 @@ Page({
 				},
 				condition: 'in',
 			}
-		}
+		} */
 		postData.getAfter = {
 			userInfo: {
 				tableName: 'UserInfo',
@@ -92,7 +93,7 @@ Page({
 					status: 1
 				},
 				condition: '=',
-				info: ['name','phone','shop_name']
+				info: ['name', 'phone', 'shop_name']
 			}
 		};
 		const callback = (res) => {
@@ -104,7 +105,11 @@ Page({
 					self.data.isLoadAll = true;
 					api.showToast('没有更多了', 'none', 1000);
 				};
-
+				setTimeout(function()
+				{
+				  wx.hideNavigationBarLoading();
+				  wx.stopPullDownRefresh();
+				},300);
 				api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getMainData', self);
 				self.setData({
 					web_mainData: self.data.mainData,
@@ -175,7 +180,26 @@ Page({
 		api.orderUpdate(postData, callback);
 	},
 
+	bindTimeChange(e) {
+		const self = this;
 
+		self.data.startTime = new Date(e.detail.value).getTime() / 1000;
+		
+		self.data.searchItem.create_time = ['between', [self.data.startTime, self.data.startTime+86400]];
+		
+		self.getMainData(true);
+	},
+	
+	onPullDownRefresh(){
+	  const self = this;
+	  wx.showNavigationBarLoading(); 
+	  delete self.data.searchItem.create_time;
+	  delete self.data.searchItem.user_no;
+	  self.setData({
+	    web_name:'',
+	  });
+	  self.getMainData(true);
+	},
 
 	pay(e) {
 		const self = this;
@@ -197,7 +221,7 @@ Page({
 		this.setData({
 			num: num
 		});
-		self.data.searchItem = {};
+
 		if (num == '0') {
 
 		} else if (num == '1') {

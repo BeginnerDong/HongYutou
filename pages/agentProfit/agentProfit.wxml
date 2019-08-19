@@ -1,6 +1,6 @@
 <view class="piece_top flex">
     <view class="piece_main">
-		<view class="color42 font34" style="text-align:center;margin-top: 20rpx;font-size:80rpx;color: #fff;">¥{{web_count}}</view>
+		<view class="color42 font34" style="text-align:center;margin-top: 20rpx;font-size:80rpx;color: #fff;">¥{{web_totalCount}}</view>
         <view class="piece_row flexCenter">
             <view class="color428 font24"  wx:if="{{web_num==0}}" style="color: #fff;">总采购收益</view>
 			<view class="color428 font24"  wx:if="{{web_num==1}}" style="color: #fff;">总购买收益</view>

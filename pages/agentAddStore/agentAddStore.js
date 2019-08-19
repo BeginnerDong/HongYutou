@@ -172,7 +172,7 @@ Page({
 	  const callback = (res)=>{
 	    console.log('res',res)
 	    if(res.solely_code==100000){
-	      self.data.sForm.mainImg.push({url:res.info.url})
+	      self.data.sForm.mainImg.push({url:res.info.url,type:'image'})
 	      self.setData({
 	        web_sForm:self.data.sForm
 	      });

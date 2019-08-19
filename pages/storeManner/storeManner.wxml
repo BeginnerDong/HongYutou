@@ -38,6 +38,11 @@
 			<input class="font28 color426" disabled="disabled"  placeholder-class="place-holder"
 			data-key="balance" bindblur="changeBind"  value="{{web_sForm.balance}}"></input>
 		</view>
+		<view class="form-item flex">
+			<view class="font32 color42 form-item-title">店铺收款码</view>
+			<input class="font28 color426" disabled="true" bindtap="previewImg"  placeholder-class="place-holder"
+			data-key="balance" placeholder="点击查看"></input>
+		</view>
 	</view>
 	<view class="submit_info" style="position: fixed;bottom:0" wx:if="{{num==0}}" bindtap="{{web_buttonCanClick?'submit':''}}">
 		提交

@@ -18,8 +18,13 @@ Page({
 		const self = this;
 		api.commonInit(self);
 
-		self.getMainData()
+		
 
+	},
+	
+	onShow(){
+		const self = this;
+		self.getMainData()
 	},
 
 	getMainData() {
@@ -48,6 +53,28 @@ Page({
 							count: ['>', 0]
 						}
 					],
+					withdraw: [
+						'sum',
+						'count',
+						{
+							status: 1,
+							count: ['<', 0],
+							withdraw: 1
+						}
+					],
+				}
+			},
+			withdraw: {
+				tableName: 'FlowLog',
+				middleKey: 'user_no',
+				key: 'user_no',
+				condition: '=',
+				searchItem: {
+					status: 1,
+					count: ['<', 0]
+				},
+				compute: {
+
 					withdraw: [
 						'sum',
 						'count',

@@ -25,12 +25,13 @@ Page({
 			    idCard:'' */
 			passage1: [],
 			latitude:'',
-			longitude:''
+			longitude:'',
+			
 		},
 		mainData: [],
-
+		QrData:[],
 		isEdit: [],
-		isFirstLoadAllStandard: ['userInfoGet', 'getMainData'],
+		isFirstLoadAllStandard: ['userInfoGet', 'getMainData','getQrData'],
 	},
 
 
@@ -41,7 +42,8 @@ Page({
 		});
 		api.commonInit(self);
 		self.userInfoGet();
-		self.getMainData()
+		self.getMainData();
+		self.getQrData()
 	},
 
 	chooseLocation(e) {
@@ -173,6 +175,41 @@ Page({
 
 		};
 		api.userInfoUpdate(postData, callback);
+	},
+	
+	getQrData() {
+		const self = this;
+		const postData = {};
+		postData.tokenFuncName = 'getThreeToken'
+		postData.qrInfo = {
+			scene: wx.getStorageSync('threeInfo').user_no,
+			page: 'pages/scan/scan',
+		};
+		postData.output = 'url';
+		postData.ext = 'png';
+		const callback = (res) => {
+			if (res.solely_code == 100000) {
+				self.data.QrData.push(res.info.url);
+			} else {
+				api.showToast(res.msg, 'none')
+			}
+			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getQrData', self)
+			self.setData({
+				web_QrData: self.data.QrData,
+			});
+		};
+		api.getQrCode(postData, callback);
+	},
+	
+	previewImg(e) {
+		const self = this;
+		wx.previewImage({
+			current: 0,
+			urls: self.data.QrData,
+			success: function(res) {},
+			fail: function(res) {},
+			complete: function(res) {},
+		})
 	},
 
 	productUpdate(index) {

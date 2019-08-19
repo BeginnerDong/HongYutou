@@ -226,7 +226,7 @@ Page({
 			}
 			wx.showModal({
 				title: '确认订单',
-				content: '使用余额支付优惠' + (self.data.totalPrice * (ratio / 100)).toFixed(2) + '元' ,
+				content: '使用余额支付优惠' + self.data.pay.other.price + '元' ,
 				cancelText: '取消',
 				confirmText: '确认',
 				success(res) {

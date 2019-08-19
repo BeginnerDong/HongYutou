@@ -39,7 +39,7 @@
 	<view class="coupon" wx:if="{{web_isDiscount1}}">
 		<image src="/images/img4.png"></image>
 		<view>
-			<view class="font28 colorfff">赠送抵扣券{{web_couponData.value}}元</view>
+			<view class="font28 colorfff">赠送抵扣券{{web_couponData1.value}}元</view>
 			<view class="font24 colorfff">仅限现金支付时使用</view>
 		</view>
 		<view class="submit_info" style="width:40%;margin: 50rpx auto;border-radius:10rpx" bindtap="{{web_buttonCanClick?'couponAdd1':''}}" data-id="{{web_couponData1.id}}">

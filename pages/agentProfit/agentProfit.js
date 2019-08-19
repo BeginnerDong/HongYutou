@@ -82,7 +82,14 @@ Page({
 		postData.order = {
 			create_time: 'desc',
 		};
-
+		postData.compute = {
+		  totalCount:[
+			'sum',
+			'count',
+			{user_no:wx.getStorageSync('threeInfo').user_no,type:2,income_type:self.data.searchItem.income_type}
+		  ],
+		  
+		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
 				self.data.mainData.push.apply(self.data.mainData, res.info.data);
@@ -98,7 +105,8 @@ Page({
 			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getMainData', self);
 			self.setData({
 				web_mainData: self.data.mainData,
-				web_count: self.data.count
+				web_count: self.data.count,
+				web_totalCount: res.info.compute.totalCount,
 			});
 		};
 		api.flowLogGet(postData, callback);
