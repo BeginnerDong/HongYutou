@@ -23,7 +23,7 @@
 			</view>
 		</view>
 		<view class="flexRowBetween outLineStory-mainImg" bindtap="intoPath" data-path="/pages/storeDetail/storeDetail?user_no={{web_storeData.user_no}}">
-			<image src="{{web_storeData.mainImg[0].url}}"></image>
+			<image src="{{web_shopImgData.mainImg[0].url}}"></image>
 			<div class="outLineStory-infomation">
 				<div class="outLineStory-infomation-item font28 colorfff">
 					红芋头线下体验店

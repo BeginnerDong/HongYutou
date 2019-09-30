@@ -15,7 +15,7 @@
 				</view>
 				<view class="group-main-right">
 					<view class="avoidOverflow2 font28" style="height:35%">{{item.title}}</view>
-					<view class="font26" style="height:40%;"></view>
+					<view class="font26" style="height:40%;">{{item.description}}</view>
 					<view class="flexRowBetween" style="height:30%">
 						<view class="font32" style="color:rgb(255,59,59)">¥{{item.shop_price}}</view>
 						<view class="edit_number flexRowBetween">
@@ -29,9 +29,10 @@
 			</view>
 		</block>
 	</view>
+	<!-- style="{{web_buttonCanClick?'background: #FF9F5A':'background:#999'}}" -->
 	<view style="width:100%;height:115rpx"></view>
 	<view class="flex" style="position: fixed;bottom: 0;width:100%">
-		<view class="submit_info" bindtap="{{web_canOrder?'addOrder':'showMsg'}}"  data-key="wx" style="{{web_canOrder?'background: #FF9F5A':'background:#999'}}">微信支付</view>
-		<view class="submit_info" bindtap="{{web_canOrder?'addOrder':'showMsg'}}"  data-key="balance" style="{{web_canOrder?'background: #FF9F5A':'background:#999'}}">余额支付</view>	
+		<view class="submit_info" bindtap="{{web_buttonCanClick?'addOrder':''}}"  data-key="wx" >微信支付</view>
+		<view class="submit_info" bindtap="{{web_buttonCanClick?'addOrder':''}}"  data-key="balance" >余额支付</view>	
 	</view>
 </view>

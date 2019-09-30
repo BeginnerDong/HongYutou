@@ -19,7 +19,7 @@ Page({
 		duration: 500,
 		previousMargin: 0,
 		nextMargin: 0,
-		isFirstLoadAllStandard: ['groupDataGet', 'onlineDataGet','getSliderData'],
+		isFirstLoadAllStandard: ['groupDataGet', 'onlineDataGet','getSliderData','getShopImgData'],
 		groupData: [],
 		onlineData: [],
 		endTimeList: [],
@@ -39,6 +39,7 @@ Page({
 		self.getLocation();
 		self.groupDataGet();
 		self.onlineDataGet();
+		self.getShopImgData()
 	},
 
 	onShow() {
@@ -47,7 +48,25 @@ Page({
 
 	},
 
-
+	getShopImgData() {
+		const self = this;
+		const postData = {};
+		postData.searchItem = {
+			thirdapp_id: getApp().globalData.thirdapp_id,
+			title:'首页店铺图'
+		};
+		const callback = (res) => {
+			console.log(1000, res);
+			if (res.info.data.length > 0) {
+				self.data.shopImgData = res.info.data[0];
+			}
+			self.setData({
+				web_shopImgData: self.data.shopImgData,
+			});
+			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getShopImgData', self);
+		};
+		api.labelGet(postData, callback);
+	},
 
 	getSliderData() {
 		const self = this;

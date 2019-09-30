@@ -84,11 +84,8 @@ Page({
 	},
 
 	getMainData(isNew) {
-
 		const self = this;
-
 		const postData = {};
-
 		postData.searchItem = {
 			id: self.data.id
 		};
@@ -103,7 +100,6 @@ Page({
 			});
 			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getMainData', self);
 			self.countPrice()
-
 		};
 		api.productGet(postData, callback);
 
@@ -312,13 +308,13 @@ Page({
 			};
 		}
 		if (self.data.parentStoreData && self.data.parentStoreData.partner.parent_no) {
-				if (self.data.pay.wxPay && self.data.pay.wxPay.price && self.data.pay.wxPay.price > 0 && self.data.mainData.shop_ratio >0) {
+				if (self.data.pay.wxPay && self.data.pay.wxPay.price && self.data.pay.wxPay.price > 0 && self.data.mainData.partner_ratio >0) {
 				postData.payAfter.push({
 					tableName: 'FlowLog',
 					FuncName: 'add',
 					data: {
 						relation_user: wx.getStorageSync('info').user_no,
-						count: self.data.pay.wxPay.price*(self.data.mainData.shop_ratio/100),
+						count: self.data.pay.wxPay.price*(self.data.mainData.partner_ratio/100),
 						trade_info: '下级分润',
 						user_no: self.data.parentStoreData.partner.parent_no,
 						type: 2,
@@ -383,7 +379,7 @@ Page({
 			console.log('(self.data.price - self.data.couponTotalPrice)',self.data.price - self.data.couponTotalPrice)
 			console.log('findCoupon.condition',findCoupon.condition)
 			if ((self.data.price - self.data.couponTotalPrice) < findCoupon.condition) {
-				api.showToast('金额不达标', 'none');
+				api.showToast('未达满减标准', 'none');
 				return;
 			};
 			console.log('findCoupon.limit', findCoupon.limit)
@@ -393,10 +389,9 @@ Page({
 				return;
 			};
 			if (findCoupon.type == 1) {
-				var couponPrice = findCoupon.discount;
+				var couponPrice = findCoupon.value;
 				console.log('findCoupon.discount', findCoupon.discount)
 			} else if (findCoupon.type == 2) {
-
 				var couponPrice = parseFloat(self.data.price).toFixed(2) - parseFloat(findCoupon.discount / 100 * self.data.price)
 					.toFixed(2);
 			};

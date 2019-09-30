@@ -1,79 +1,95 @@
 @import "../../wxParse/wxParse.wxss";
-page{
-	min-height:100%;
-	background-color:#F4F4F4 ;
+
+page {
+	min-height: 100%;
+	background-color: #F4F4F4;
 }
-.banner{
-	height:750rpx;
-	width:100%;
+
+.banner {
+	height: 750rpx;
+	width: 100%;
 }
-.banner image{
-	height:100%;
-	width:100%;
-  display: block;
+
+.banner image {
+	height: 100%;
+	width: 100%;
+	display: block;
 }
-.group-detail-detail .wxParse-h1{ 
-  margin:0;
+
+.group-detail-detail .wxParse-h1 {
+	margin: 0;
 }
-.group-detail-detail .wxParse-img{ 
-  width: 100%; 
-  display: block;
+
+.group-detail-detail .wxParse-img {
+	width: 100%;
+	display: block;
 }
-.wxParse-h1 .WxEmojiView{
-  font-size:28rpx;
-  line-height: 40rpx;
-  display: inline-block;
+
+.wxParse-h1 .WxEmojiView {
+	font-size: 28rpx;
+	line-height: 40rpx;
+	display: inline-block;
 }
-.store-infomation{
+
+.store-infomation {
 	/* height:180rpx; */
-	width:92%;
+	width: 92%;
 	padding: 20rpx 4%;
 	background: #fff;
 	position: relative;
 }
-.title-left{
+
+.title-left {
 	justify-content: flex-start;
-	width:50%
+	width: 50%
 }
-.title-left image{
-	width:30rpx;
-	height:30rpx
+
+.title-left image {
+	width: 30rpx;
+	height: 30rpx
 }
-.title-right image{
-	width:20rpx;
-	height:20rpx
+
+.title-right image {
+	width: 20rpx;
+	height: 20rpx
 }
-.title-right{
+
+.title-right {
 	justify-content: flex-end;
-	width:50%
-}	
-.group-detail{
-	margin-top: 20rpx;
-	width:100%;
-	background: #fff;
-	
+	width: 50%
 }
-.group-detail-title{
-	height:100rpx;
+
+.group-detail {
+	margin-top: 20rpx;
+	width: 100%;
+	background: #fff;
+
+}
+
+.group-detail-title {
+	height: 100rpx;
 	line-height: 100rpx;
 	padding: 0 4%;
 }
-.group-detail-detail{
-	
-}
-.share{
+
+.group-detail-detail {}
+
+.share {
 	position: absolute;
-	top:5%;
-	right:5%
+	top: 5%;
+	right: 5%
 }
-.share-img image{
-	width:40rpx;
-	height:40rpx
+
+.share-img image {
+	width: 40rpx;
+	height: 40rpx
 }
+
 .button-hover {
-	color:rgba(0, 0, 0, 0.6);
-	background-color:none;
+	color: rgba(0, 0, 0, 0.6);
+	background-color: none;
 }
-button{
+
+button {
 	line-height: 1;
 }

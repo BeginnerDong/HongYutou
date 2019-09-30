@@ -15,10 +15,10 @@
 					<image src="{{item.mainImg[0].url}}"></image>
 				</view>
 				<view class="group-main-right">
-					<view class="avoidOverflow2 font28" style="height:35%">{{item.title}}</view>
-					<view class="font26 " style="height:45%;">{{item.description}}</view>
-					<view class="flexRowBetween" style="height:30%">
-						<view class="font32" style="color:rgb(255,59,59)">¥{{item.partner_price}}</view>
+					<view class="avoidOverflow1 font28" style="height:25%">{{item.title}}</view>
+					<view class="font26 avoidOverflow1" style="height:20%;">{{item.description}}</view>
+					<view class="" style="height:40%">
+						<view class="font30"  style="color:rgb(255,59,59);height:100%">合伙人:¥{{item.partner_price}}/门店:¥{{item.shop_price}}</view>
 						<view class="edit_number flexRowBetween">
 							<view class="minus" style="line-height:45rpx;border-right: solid 1px #e5e5e5;" data-type="-" bindtap="counter"
 							 data-index="{{index}}">-</view>

@@ -49,7 +49,7 @@
 			<view class="order_handle flexRowBetween">
 				 
 				  <view class="submit_info font24 color426" data-id="{{item.id}}" data-price="{{item.price}}" bindtap="pay" wx:if="{{item.pay_status==0}}">去支付</view>
-				 <view class="submit_info font24 color426">实付款:¥{{item.express_info}}</view>
+				 <view class="submit_info font24 color426"  style="width: auto;padding: 0 10px;">实付款:¥{{item.express_info}}</view>
 					
 			</view>
 		</view>

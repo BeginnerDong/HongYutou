@@ -77,11 +77,11 @@ page{
 #detail image{
 	width:100%;
 	height:100%;
-	margin:60rpx auto 40rpx auto;
+
 	display:block;
 }
 .detail_show{
-	padding-top:30rpx;
+	
 	height:auto;
 }
 #detail{

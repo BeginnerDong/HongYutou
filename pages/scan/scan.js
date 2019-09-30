@@ -41,7 +41,7 @@ Page({
 		};
 		self.getUserData();
 		self.getFreeCouponData();
-
+		
 		self.getCouponData();
 		self.setData({
 			web_isDiscount1: self.data.isDiscount1,
@@ -167,6 +167,7 @@ Page({
 				web_selectFreeCouponData: self.data.selectFreeCouponData,
 				web_freeCouponData: self.data.freeCouponData,
 			});
+			
 		};
 		api.couponGet(postData, callback);
 	},
@@ -197,7 +198,7 @@ Page({
 	useCoupon(e) {
 		const self = this;
 		if (self.data.submitData.price == '') {
-			api.showToast('请输入金额');
+			api.showToast('请输入金额','none');
 			return
 		};
 		var id = api.getDataSet(e, 'id');
@@ -210,13 +211,20 @@ Page({
 			findCoupon = findCoupon[1];
 
 		} else {
-			api.showToast('优惠券错误', 'error');
+			api.showToast('优惠券错误', 'none');
 			return;
 		};
 		if (findItem) {
 			self.data.pay.coupon.splice(findItem[0], 1);
 		} else {
-
+			console.log('self.data.price',self.data.submitData.price);
+			
+			console.log('findCoupon.condition',findCoupon.condition)
+			if (self.data.submitData.price < findCoupon.condition) {
+				api.showToast('未达满减标准', 'none');
+			
+				return;
+			};
 			if (findCoupon.type == 1) {
 				var couponPrice = findCoupon.value;
 
@@ -285,6 +293,7 @@ Page({
 			api.showToast('空白充值', 'error');
 			return;
 		};
+		
 		if(self.data.pay.wxPay&&self.data.pay.wxPay.price&&self.data.pay.wxPay.price>0){
 			postData.data.payAfter = [{
 					tableName: 'FlowLog',
@@ -298,23 +307,12 @@ Page({
 						relation_user: self.data.user_no
 					}
 				},
+				
 				{
 					tableName: 'FlowLog',
 					FuncName: 'add',
 					data: {
-						count: -self.data.pay.wxPay.price * (ratioPt / 100),
-						type: 2,
-						user_no: self.data.user_no,
-						thirdapp_id: 2,
-						relation_user: wx.getStorageSync('info').user_no,
-						income_type: 1
-					}
-				},
-				{
-					tableName: 'FlowLog',
-					FuncName: 'add',
-					data: {
-						count: self.data.pay.wxPay.price,
+						count: self.data.pay.wxPay.price - self.data.pay.wxPay.price * (ratioPt / 100),
 						type: 2,
 						user_no: self.data.user_no,
 						thirdapp_id: 2,
@@ -324,7 +322,23 @@ Page({
 				},
 			];
 		}
-		
+		if(ratioPt>0){
+			postData.data.payAfter = [
+				{
+					tableName: 'FlowLog',
+					FuncName: 'add',
+					data: {
+						count: -self.data.pay.wxPay.price * (ratioPt / 100),
+						type: 2,
+						user_no: 'U910872296194660',
+						thirdapp_id: 2,
+						trade_info:'平台抽成',
+						income_type: 1
+					}
+				},
+			];
+			
+		}
 		const callback = (res) => {
 			console.log(res)
 			api.buttonCanClick(self, true)

@@ -42,8 +42,9 @@ Page({
 		const self = this;
 		const postData = {};
 		postData.tokenFuncName = 'getThreeToken';
-		postData.searchItem={
-			user_no:wx.getStorageSync('threeInfo').user_no
+		postData.searchItem = {
+			user_no:wx.getStorageSync('threeInfo').user_no,
+			// withdraw:1
 		};
 		postData.getAfter = {
 			Payment: {

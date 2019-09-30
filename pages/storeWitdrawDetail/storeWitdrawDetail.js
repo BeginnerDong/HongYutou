@@ -26,8 +26,25 @@ Page({
 	onLoad(options) {
 		const self = this;
 		api.commonInit(self);
-		self.getUserInfoData()
-
+		const callback = (res) =>{
+			var array = wx.getStorageSync('info').thirdApp.custom_rule.withdrawLimit.split(',');
+			console.log('array',array)
+			var day = new Date().getDate().toString();
+			console.log('day',day)
+			var pisition = array.indexOf(day);
+			console.log('array.indexOf(day)',array.indexOf(day))
+			if(pisition>0){
+				self.data.canWithdraw = true
+			}else{
+				self.data.canWithdraw = false
+			}
+			self.setData({
+				web_canWithdraw:self.data.canWithdraw
+			});
+			self.getUserInfoData()		
+		};
+		token.getProjectToken(callback,{refreshToken:true})
+		
 	},
 
 	getUserInfoData() {
@@ -70,11 +87,7 @@ Page({
 			}
 		};
 		postData.tokenFuncName = 'getThreeToken';
-		if (self.data.userInfoData.bank_code.length == 0) {
-			api.buttonCanClick(self, true);
-			api.showToast('请绑定银行卡', 'none');
-			return;
-		};
+		
 		const callback = (res) => {
 			api.buttonCanClick(self, true)
 			if (res.solely_code == 100000) {
@@ -92,9 +105,26 @@ Page({
 	submit() {
 		const self = this;
 		api.buttonCanClick(self);
+		if (self.data.userInfoData.bank_code.length == 0) {
+			api.buttonCanClick(self, true);
+			api.showToast('请绑定银行卡', 'none');
+			return;
+		};
 		const pass = api.checkComplete(self.data.submitData);
 		console.log('pass', pass)
 		if (pass) {
+			if(parseInt(self.data.submitData.count)>parseInt(self.data.userInfoData.balance)){
+				api.buttonCanClick(self, true);
+				
+				api.showToast('余额不足', 'none');
+				return
+			}else if(parseInt(self.data.submitData.count)<100&&wx.getStorageSync('threeInfo').primary_scope==30){
+				api.buttonCanClick(self, true);
+				
+				api.showToast('至少提现100元', 'none');
+				return
+			}
+			
 			self.flowLogAdd()
 		} else {
 			api.buttonCanClick(self, true);

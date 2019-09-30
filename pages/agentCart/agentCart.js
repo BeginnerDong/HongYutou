@@ -154,6 +154,7 @@ Page({
 	    num = 1;
 	  };
 	  self.data.mainData[index].count = num;
+	  self.countTotalPrice();
 	  self.setData({
 	    num: num,
 	    web_mainData:self.data.mainData
@@ -386,26 +387,23 @@ Page({
 		};
 
 		postData.payAfter = [];
-
-		if (self.data.minScore && self.data.minScore > 0) {
-			postData.payAfter.push({
-				tableName: 'FlowLog',
-				FuncName: 'add',
-				data: {
-					count: self.data.minScore,
-					trade_info: '差价奖励余额',
-					user_no: wx.getStorageSync('threeInfo').user_no,
-					type: 2,
-					thirdapp_id: getApp().globalData.thirdapp_id,
-					relation_id: self.data.mainData.id,
-					income_type: 4,
-					order_no: self.data.orderData.order_no
-				}
-			});
-		};
-
 		if (key == "score") {
-
+			if (self.data.minScore && self.data.minScore > 0) {
+				postData.payAfter.push({
+					tableName: 'FlowLog',
+					FuncName: 'add',
+					data: {
+						count: self.data.minScore,
+						trade_info: '差价奖励余额',
+						user_no: wx.getStorageSync('threeInfo').user_no,
+						type: 2,
+						thirdapp_id: getApp().globalData.thirdapp_id,
+						relation_id: self.data.mainData.id,
+						income_type: 4,
+						order_no: self.data.orderData.order_no
+					}
+				});
+			};
 			postData.payAfter.push({
 				tableName: 'FlowLog',
 				FuncName: 'add',
@@ -418,7 +416,6 @@ Page({
 					thirdapp_id: getApp().globalData.thirdapp_id,
 				}
 			});
-
 		}
 		const callback = (res) => {
 			if (res.solely_code == 100000) {

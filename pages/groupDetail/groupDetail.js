@@ -10,15 +10,7 @@ const token = new Token();
 
 Page({
 	data: {
-		background: ['/images/banner.png', '/images/banner.png', '/images/banner.png'],
-		indicatorDots: false,
-		vertical: false,
-		autoplay: true,
-		circular: true,
-		interval: 2000,
-		duration: 500,
-		previousMargin: 0,
-		nextMargin: 0,
+		
 		isFirstLoadAllStandard: ['getMainData']
 
 	},
@@ -105,11 +97,13 @@ Page({
 				sec: '00'
 			}
 		}
-		self.data.mainData.countDownList = obj
-		
-		self.setData({
+		self.data.countDownList = obj
+		this.setData({
+			web_countDownList: self.data.countDownList
+		})
+		/* self.setData({
 			web_mainData:self.data.mainData
-		});
+		}); */
 		setTimeout(this.countDown, 1000);
 	},
 
@@ -123,8 +117,9 @@ Page({
 			self.data.shareBtn = false;
 		}
 		return {
-			title: '红芋头',
-			path: 'pages/groupDetail/group[Detail]?id=' + self.data.id + '&&user_no=' + wx.getStorageSync('threeInfo').user_no,
+			title: self.data.mainData.title,
+			path: 'pages/groupDetail/groupDetail?id=' + self.data.id + '&&user_no=' + wx.getStorageSync('threeInfo').user_no,
+		
 			success: function(res) {
 				console.log(res);
 				console.log(parentNo)

@@ -18,7 +18,7 @@ Page({
 		mainData: [],
 		isFirstLoadAllStandard: ['getMainData'],
 		searchItem:{
-	
+			user_type:1
 		},
 		searchItemTwo:{
 			status:1
@@ -55,11 +55,11 @@ Page({
 				middleKey: 'user_no',
 				key: 'child_no',
 				searchItem: {
-					parent_no: ['=', [wx.getStorageSync('threeInfo').user_no]]
-				},
+					parent_no: ['in', [wx.getStorageSync('threeInfo').user_no]],		
+				},			
 				condition: 'in',
 			}
-		}
+		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
 				self.data.mainData.push.apply(self.data.mainData, res.info.data);

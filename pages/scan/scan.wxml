@@ -15,7 +15,7 @@
 				<view class="flexCenter cash_can-img" bindtap="useCoupon" data-id="{{item.id}}">
 					<image src="{{web_pay.coupon.length>0?'/images/icon2.png':'/images/icon.png'}}" />
 				</view>
-				<view class="font24 color426">抵扣卷-{{item.discount}}元</view>
+				<view class="font24 color426">抵扣券-{{item.value}}元</view>
 			</view>
 			<view class="cash_cont bg1" style="padding-top:70rpx;padding-bottom:30rpx;">
 				<button class="submit_info bg2" style="height:80rpx;line-height: 80rpx;font-size:28rpx" open-type="getUserInfo"
@@ -27,7 +27,7 @@
 	<view class="coupon" wx:if="{{web_isDiscount}}">
 		<image src="/images/img4.png"></image>
 		<view style="margin-top: 100rpx;">
-			<view class="font28 color42" wx:if="{{web_selectFreeCouponData.type==1}}">赠送抵扣券{{web_selectFreeCouponData.discount}}元</view>
+			<view class="font28 color42" wx:if="{{web_selectFreeCouponData.type==1}}">赠送抵扣券{{web_selectFreeCouponData.value}}元</view>
 			<view class="font28 color42" wx:if="{{web_selectFreeCouponData.type==2}}">赠送折扣券{{web_selectFreeCouponData.discount/10}}折</view>
 			<view class="font24 color426">仅限线上商品使用</view>
 		</view>

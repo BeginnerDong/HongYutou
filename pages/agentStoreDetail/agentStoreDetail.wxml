@@ -3,7 +3,7 @@
 		
 	<view class="form">
 		<view class="store-img flex">
-			<image src="/images/index-img1.png" />
+			<image src="{{web_mainData.info.mainImg[0].url}}"/>
 		</view>
 		<view class="form-item flex">
 			<view class="font26 color42 form-item-title">门店名称：</view>
@@ -12,7 +12,7 @@
 
 		<view class="form-item flex">
 			<view class="font26 color42 form-item-title">门店地址：</view>
-			<view class="font26 color426" >{{web_mainData.info.address}}</view>
+			<view class="font26 color426" style="width: 75%;line-height: 20px;">{{web_mainData.info.address}}</view>
 		</view>
 		<view class="form-item flex">
 			<view class="font26 color42 form-item-title">负责人：</view>

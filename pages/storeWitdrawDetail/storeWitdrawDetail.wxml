@@ -7,7 +7,7 @@
   <view class="cash">
       <view class="case_box">
         <view class="cash_tlt color42 font28 bg1">
-            提现金额
+            提现金额<span class="font24 color426">（至少提现100元）</span>
         </view>
         <view class="cash_input flexRowBetween bg1">
             <view class="input_masks color2">¥</view>
@@ -17,8 +17,10 @@
             本次可提现<text>¥{{web_userInfoData.balance}}</text>
             <view class="font24 color42" bindtap="allOut">全部提现</view>
         </view>
+		
         <view class="cash_cont bg1" style="padding-top:70rpx;padding-bottom:30rpx;">
-            <button class="submit_info bg2" style="height:80rpx;line-height: 80rpx;font-size:28rpx" bindtap="{{web_buttonCanClick?'submit':''}}">提现</button>
+            <button class="submit_info bg2" style="height:80rpx;line-height: 80rpx;font-size:28rpx;{{!web_canWithdraw?'background:#999':''}}" 
+			bindtap="{{web_buttonCanClick?(web_canWithdraw?'submit':''):''}}">{{web_canWithdraw?'提现':'非提现日期'}}</button>
         </view>
       </view>
   </view>

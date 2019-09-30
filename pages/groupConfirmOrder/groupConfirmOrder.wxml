@@ -61,7 +61,7 @@
 				<image src="{{web_couponIndex==index?'/images/icon2.png':'/images/icon.png'}}" style="width:34rpx;height:34rpx"/>
 			</view>
 			<view style="width:50%" class="font26 color42">
-				{{item.type==2?'抵扣券':'折扣券'}}{{item.type==2?item.discount/10+'折':item.discount+'元'}}
+				{{item.type==2?'折扣券':'抵扣券'}}{{item.type==2?item.discount/10+'折':item.value+'元'}}
 			</view>
 			<view style="width:25%;">
 			</view>

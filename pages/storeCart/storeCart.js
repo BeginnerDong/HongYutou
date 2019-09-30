@@ -146,6 +146,7 @@ Page({
 	    num = 1;
 	  };
 	  self.data.mainData[index].count = num;
+	  self.countTotalPrice();
 	  self.setData({
 	    num: num,
 	    web_mainData:self.data.mainData
@@ -154,8 +155,6 @@ Page({
 
 	addOrder(e) {
 		const self = this;
-
-		
 		var key = api.getDataSet(e, 'key');
 		const productData = [];
 		for (var i = 0; i < self.data.mainData.length; i++) {
@@ -177,9 +176,9 @@ Page({
 			api.showToast('没有选择商品', 'none');
 			return
 		};
-		if (self.data.orderId) {
+		/* if (self.data.orderId) {
 			self.pay(key)
-		}
+		} */
 		self.data.pay = {};
 		if (key == "wx") {
 			api.buttonCanClick(self);

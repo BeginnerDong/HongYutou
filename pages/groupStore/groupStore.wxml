@@ -44,4 +44,18 @@
 			</view>
 		</view> -->
 	</block>
+	<view class="mask" wx:if="{{is_show}}">
+		<view class="confirm bg1">
+			<view class="confirm_tlt" style="font-weight: 700;">
+				是否授权当前位置
+			</view>
+			<view class="confirm_notice font26 color6">
+				需要获取您的地理位置，请确认授权，否则您无法获取所需数据
+			</view>
+			<view class="confirm_btn flex">
+				<view class="confirm_item font26 color6" bindtap="cancle">取消</view>
+				<button class="confirm_item font26 color" open-type='openSetting' style="border:none;background: #fff;height:95rpx" bindopensetting="{{web_buttonCanClick?'cancle':''}}">确认</button>
+			</view>
+		</view>	
+	</view>
 </view>

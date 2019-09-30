@@ -64,7 +64,6 @@
 		<view class="font26 color42 form-item-title"  style="width:110rpx;">薯币：</view>
 		<input class="font24 color426" type="number" placeholder="请输入您想使用的薯币数量" placeholder-class="place-holder" value="{{web_sForm.score}}"
 		 bindblur="inputBind" data-key="score"></input>
-
 	</view>
 	<view class="form-item oh ">
 		<view class="font26 color42 form-item-title" style="float:left;">购买数量：</view>

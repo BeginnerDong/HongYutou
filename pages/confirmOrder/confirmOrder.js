@@ -214,6 +214,12 @@ Page({
 				return;
 			}
 		};
+		if (self.data.addressData.length==0) {
+			api.buttonCanClick(self, true);
+			api.showToast('请选择收货地址', 'none', 1000);
+			return;
+
+		};
 		const postData = {
 			tokenFuncName: 'getProjectToken',
 			
@@ -228,8 +234,10 @@ Page({
 			],
 			type: 3,
 			data: {
+				
 				standard: self.data.mainData.standard,
-			}
+			},
+			snap_address:self.data.addressData,
 		};
 		if(!wx.getStorageSync('info')||!wx.getStorageSync('info').headImgUrl){
 		  postData.refreshToken = true;
@@ -284,14 +292,14 @@ Page({
 			};
 		}
 		if (self.data.distributionData&&self.data.distributionData.info.data[0].partner.parent_no) {
-			if (self.data.pay.wxPay && self.data.pay.wxPay.price && self.data.pay.wxPay.price > 0 && self.data.mainData.shop_ratio >
+			if (self.data.pay.wxPay && self.data.pay.wxPay.price && self.data.pay.wxPay.price > 0 && self.data.mainData.partner_ratio >
 				0) {
 				postData.payAfter.push({
 					tableName: 'FlowLog',
 					FuncName: 'add',
 					data: {
 						relation_user: wx.getStorageSync('info').user_no,
-						count: self.data.pay.wxPay.price*(self.data.mainData.shop_ratio/100),
+						count: self.data.pay.wxPay.price*(self.data.mainData.partner_ratio/100),
 						trade_info: '下级分润',
 						user_no: self.data.distributionData.info.data[0].partner.parent_no,
 						type: 2,
@@ -386,8 +394,10 @@ Page({
 		if (findItem) {
 			self.data.pay.coupon.splice(findItem[0], 1);
 		} else {
+			console.log('self.data.price - self.data.couponTotalPrice',self.data.price - self.data.couponTotalPrice);
+			console.log('findCoupon.condition',findCoupon.condition);
 			if ((self.data.price - self.data.couponTotalPrice) < findCoupon.condition) {
-				api.showToast('金额不达标', 'none');
+				api.showToast('未达满减标准', 'none');
 			
 				return;
 			};
@@ -399,7 +409,7 @@ Page({
 				return;
 			};
 			if (findCoupon.type == 1) {
-				var couponPrice = findCoupon.discount;
+				var couponPrice = findCoupon.value;
 				console.log('findCoupon.discount', findCoupon.discount)
 			} else if (findCoupon.type == 2) {
 

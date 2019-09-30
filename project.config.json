@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 49,
+			"current": 51,
 			"list": [
 				{
 					"id": -1,
@@ -50,7 +50,7 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "团购详情",
 					"pathName": "pages/groupDetail/groupDetail",
 					"query": "",
@@ -389,6 +389,20 @@
 					"id": -1,
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/groupDetail/groupDetail",
+					"pathName": "pages/groupDetail/groupDetail",
+					"query": "id=36",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/agentCart/agentCart",
+					"pathName": "pages/agentCart/agentCart",
 					"scene": null
 				}
 			]

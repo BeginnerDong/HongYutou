@@ -1,6 +1,6 @@
 <view style="width:100%;height: 100%;">
 	<view class="login">
-		<image src="/images/login.png"></image>
+		<image src="/images/login.jpg"></image>
 		<view class="login-card">
 			<view class="login-card-input flex" style="margin-top:60rpx;">
 				<view class="login-card-input-image flex" >
