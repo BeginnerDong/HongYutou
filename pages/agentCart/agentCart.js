@@ -210,6 +210,9 @@ Page({
 		if (key == "wx") {
 			self.data.pay.wxPay = {
 				price: self.data.totalPrice.toFixed(2)
+			};
+			self.data.pay.other = {
+				price: (self.data.shopTotalPrice - self.data.totalPrice).toFixed(2)
 			}
 		} else if (key == "balance") {
 			var ratio = wx.getStorageSync('threeInfo').thirdApp.custom_rule.balanceDiscount;
@@ -217,7 +220,7 @@ Page({
 				self.data.pay = {
 					balance: (self.data.totalPrice * (ratio / 100)).toFixed(2),
 					other: {
-						price: (self.data.totalPrice - self.data.totalPrice * (ratio / 100)).toFixed(2)
+						price: (self.data.shopTotalPrice - self.data.totalPrice * (ratio / 100)).toFixed(2)
 					}
 				}
 			} else {
@@ -267,7 +270,7 @@ Page({
 			})
 		} else if (key == "score") {
 			self.data.pay = {
-				score: self.data.totalPrice,
+				score: self.data.shopTotalPrice,
 			}
 		}
 		if (key == 'score') {
@@ -404,7 +407,7 @@ Page({
 					}
 				});
 			};
-			postData.payAfter.push({
+			/* postData.payAfter.push({
 				tableName: 'FlowLog',
 				FuncName: 'add',
 				data: {
@@ -415,7 +418,7 @@ Page({
 					type: 3,
 					thirdapp_id: getApp().globalData.thirdapp_id,
 				}
-			});
+			}); */
 		}
 		const callback = (res) => {
 			if (res.solely_code == 100000) {

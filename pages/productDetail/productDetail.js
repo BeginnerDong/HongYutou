@@ -277,7 +277,29 @@ Page({
 		})
 	},
 
-
+	onShareAppMessage(res) {
+		const self = this;
+		return {
+			title:self.data.mainData.title,
+			desc:self.data.mainData.description,
+			images:self.data.mainData.mainImg[0].url,
+			path: 'pages/productDetail/productDetail?id='+self.data.mainData.id,
+			success: function(res) {
+				console.log(res);
+				console.log(parentNo)
+				if (res.errMsg == 'shareAppMessage:ok') {
+					console.log('分享成功')
+				} else {
+					wx.showToast({
+						title: '分享失败',
+					})
+				}
+			},
+			fail: function(res) {
+				console.log(res)
+			}
+		}
+	},
 
 	select_this(e) {
 		const self = this;

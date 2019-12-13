@@ -47,7 +47,8 @@ Page({
 						'count',
 						{
 							status: 1,
-							count: ['>', 0]
+							count: ['>', 0],
+							income_type:['in',[2,3,4]]
 						}
 					],
 					withdraw: [

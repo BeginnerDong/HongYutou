@@ -18,10 +18,14 @@
             <view class="font24 color42" bindtap="allOut">全部提现</view>
         </view>
 		
-        <view class="cash_cont bg1" style="padding-top:70rpx;padding-bottom:30rpx;">
+        <view class="cash_cont bg1" style="padding-top:70rpx;padding-bottom:30rpx;" wx:if="{{!web_isStore}}">
             <button class="submit_info bg2" style="height:80rpx;line-height: 80rpx;font-size:28rpx;{{!web_canWithdraw?'background:#999':''}}" 
 			bindtap="{{web_buttonCanClick?(web_canWithdraw?'submit':''):''}}">{{web_canWithdraw?'提现':'非提现日期'}}</button>
         </view>
+		<view class="cash_cont bg1" style="padding-top:70rpx;padding-bottom:30rpx;" wx:else>
+		    <button class="submit_info bg2" style="height:80rpx;line-height: 80rpx;font-size:28rpx}}" 
+			bindtap="{{web_buttonCanClick?'submit':''}}">提现</button>
+		</view>
       </view>
   </view>
   

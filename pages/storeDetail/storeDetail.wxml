@@ -12,7 +12,7 @@
 				<image src="/images/phone.png" style="height:40rpx;width: 40rpx;"></image>			
 			</view>
 		</view>
-		<view class="font28 flexRowBetween" style="height:60rpx;line-height: 60rpx;">
+		<view class="font28 flexRowBetween" style="height:60rpx;line-height: 60rpx;" bindtap="intoMap">
 			<view class="title-left flexRowBetween">
 				<image src="/images/about-icon5.png"></image>
 				<span class="font24 avoidOverflow" style="margin-left: 20rpx;">{{web_mainData.info.address}}</span>

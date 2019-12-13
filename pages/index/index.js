@@ -19,14 +19,14 @@ Page({
 		duration: 500,
 		previousMargin: 0,
 		nextMargin: 0,
-		isFirstLoadAllStandard: ['groupDataGet', 'onlineDataGet','getSliderData','getShopImgData'],
+		isFirstLoadAllStandard: ['groupDataGet', 'onlineDataGet', 'getSliderData', 'getShopImgData'],
 		groupData: [],
 		onlineData: [],
 		endTimeList: [],
-		sliderData:[],
-		la1:'',
-		lo1:'',
-		order:{}
+		sliderData: [],
+		la1: '',
+		lo1: '',
+		order: {}
 	},
 
 
@@ -48,12 +48,34 @@ Page({
 
 	},
 
+	onShareAppMessage(res) {
+		const self = this;
+		return {
+			title: '红芋头',
+			path: 'pages/index/index',
+			success: function(res) {
+				console.log(res);
+				console.log(parentNo)
+				if (res.errMsg == 'shareAppMessage:ok') {
+					console.log('分享成功')
+				} else {
+					wx.showToast({
+						title: '分享失败',
+					})
+				}
+			},
+			fail: function(res) {
+				console.log(res)
+			}
+		}
+	},
+
 	getShopImgData() {
 		const self = this;
 		const postData = {};
 		postData.searchItem = {
 			thirdapp_id: getApp().globalData.thirdapp_id,
-			title:'首页店铺图'
+			title: '首页店铺图'
 		};
 		const callback = (res) => {
 			console.log(1000, res);
@@ -73,24 +95,24 @@ Page({
 		const postData = {};
 		postData.searchItem = {
 			thirdapp_id: getApp().globalData.thirdapp_id,
-			
+
 		};
 		postData.getBefore = {
-			parent:{
-				tableName:'Label',
-				middleKey:'parentid',
-				key:'id',
-				searchItem:{
-					status:['in',[1]],
-					title:['in',['首页轮播']]
+			parent: {
+				tableName: 'Label',
+				middleKey: 'parentid',
+				key: 'id',
+				searchItem: {
+					status: ['in', [1]],
+					title: ['in', ['首页轮播']]
 				},
-				condition:'in'
+				condition: 'in'
 			}
 		};
 		const callback = (res) => {
 			console.log(1000, res);
 			if (res.info.data.length > 0) {
-				self.data.sliderData.push.apply(self.data.sliderData,res.info.data);
+				self.data.sliderData.push.apply(self.data.sliderData, res.info.data);
 			}
 			console.log(self.data.sliderData)
 			self.setData({
@@ -100,35 +122,37 @@ Page({
 		};
 		api.labelGet(postData, callback);
 	},
-	
+
 	getLocation() {
 		const self = this;
 		const callback = (res) => {
 			if (res.errMsg == "getLocation:ok") {
-					self.data.la1 = res.latitude;
-					self.data.lo1 = res.longitude
+				self.data.la1 = res.latitude;
+				self.data.lo1 = res.longitude
 			}
 			console.log(res)
 			self.storeDataGet()
 		};
 		api.getLocation('getGeocoder', callback)
 	},
-	
-	
+
+
 	storeDataGet() {
 		const self = this;
 		var lat = self.data.la1;
 		var lon = self.data.lo1;
-		var orderKey = 'ACOS(SIN(('+ lat +'* 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) +COS(('+ lat +' * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(('+ lon +' * 3.1415) / 180 - (longitude * 3.1415) / 180 ) ) * 6379';
-		self.data.order[orderKey]= 'asc';
+		var orderKey = 'ACOS(SIN((' + lat + '* 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) +COS((' + lat +
+			' * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS((' + lon +
+			' * 3.1415) / 180 - (longitude * 3.1415) / 180 ) ) * 6379';
+		self.data.order[orderKey] = 'asc';
 		const postData = {};
 		postData.paginate = api.cloneForm(self.data.paginate);
 		postData.tokenFuncName = 'getProjectToken';
 		postData.searchItem = {
-			user_type:1
+			user_type: 1
 		}
 		postData.order = api.cloneForm(self.data.order);
-		
+
 		postData.order = api.cloneForm(self.data.order)
 		postData.getBefore = {
 			shop: {
@@ -141,25 +165,25 @@ Page({
 				condition: 'in'
 			}
 		};
-/* 		postData.getAfter = {
-			user: {
-				tableName: 'User',
-				middleKey: 'user_no',
-				key: 'user_no',
-				searchItem: {
-					status:1
-				},
-				condition: 'in'
-			}
-		}; */
+		/* 		postData.getAfter = {
+					user: {
+						tableName: 'User',
+						middleKey: 'user_no',
+						key: 'user_no',
+						searchItem: {
+							status:1
+						},
+						condition: 'in'
+					}
+				}; */
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
 				self.data.storeData = res.info.data[0]
-				
-					self.data.storeData.distance =
-						api.distance(self.data.la1, self.data.lo1, self.data.storeData.latitude, self.data.storeData.longitude)
-					console.log('self.data.storeData[i].distance', self.data.storeData.distance)
-					
+
+				self.data.storeData.distance =
+					api.distance(self.data.la1, self.data.lo1, self.data.storeData.latitude, self.data.storeData.longitude)
+				console.log('self.data.storeData[i].distance', self.data.storeData.distance)
+
 			}
 			self.setData({
 				web_storeData: self.data.storeData,
@@ -217,8 +241,8 @@ Page({
 		let newTime = new Date().getTime();
 		let endTimeList = self.data.endTimeList;
 		let countDownArr = [];
-		
-		
+
+
 		// 对结束时间进行处理渲染到页面
 		for (var i = 0; i < self.data.endTimeList.length; i++) {
 
@@ -226,7 +250,7 @@ Page({
 			let endTime = new Date(self.data.endTimeList[i].actEndTime).getTime();
 			let obj = null;
 			// 如果活动未结束，对时间进行处理
-		
+
 			if (endTime - newTime > 0) {
 				let time = (endTime - newTime) / 1000;
 				// 获取天、时、分、秒
@@ -260,12 +284,12 @@ Page({
 
 		setTimeout(this.countDown, 1000);
 	},
-	
+
 	onUnload() {
-      const self = this;
-      //清除计时器  即清除setInter
-      clearTimeout(self.countDown())
-  },
+		const self = this;
+		//清除计时器  即清除setInter
+		clearTimeout(self.countDown())
+	},
 
 
 	onlineDataGet(isNew) {

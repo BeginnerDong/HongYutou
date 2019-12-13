@@ -63,11 +63,7 @@ Page({
 			if (res.info.data.length > 0) {
 			
 			} else {
-				self.data.isDiscount1 = true;
-				self.setData({
-					web_isDiscount1: self.data.isDiscount1
-				})
-				
+				self.getCouponData()	
 			}
 		};
 		api.userCouponGet(postData, callback);
@@ -83,6 +79,10 @@ Page({
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
 				self.data.couponData1 = res.info.data[0]
+				self.data.isDiscount1 = true;
+				self.setData({
+					web_isDiscount1: self.data.isDiscount1
+				})
 			};
 			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getCouponData', self);
 			self.setData({
@@ -406,6 +406,11 @@ Page({
 		const pass = api.checkComplete(self.data.submitData);
 		console.log('pass', pass)
 		if (pass) {
+			if(parseFloat(self.data.submitData.price)>100){
+				api.buttonCanClick(self, true);
+				api.showToast('单笔金额不能超过100元', 'none');
+				return
+			};
 			const callback = (user, res) => {
 				self.pay();
 			};

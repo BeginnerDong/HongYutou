@@ -32,7 +32,7 @@
 	<!-- style="{{web_buttonCanClick?'background: #FF9F5A':'background:#999'}}" -->
 	<view style="width:100%;height:115rpx"></view>
 	<view class="flex" style="position: fixed;bottom: 0;width:100%">
-		<view class="submit_info" bindtap="{{web_buttonCanClick?'addOrder':''}}"  data-key="wx" >微信支付</view>
-		<view class="submit_info" bindtap="{{web_buttonCanClick?'addOrder':''}}"  data-key="balance" >余额支付</view>	
+		<view class="submit_info" style="{{web_canOrder?'background: #FF9F5A':'background:#999'}}" bindtap="{{web_buttonCanClick?(web_canOrder?'addOrder':'showMsg'):''}}"  data-key="wx" >微信支付</view>
+		<view class="submit_info" style="{{web_canOrder?'background: #FF9F5A':'background:#999'}}" bindtap="{{web_buttonCanClick?(web_canOrder?'addOrder':'showMsg'):''}}"  data-key="balance" >余额支付</view>	
 	</view>
 </view>

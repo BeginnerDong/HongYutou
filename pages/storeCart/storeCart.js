@@ -24,7 +24,7 @@ Page({
 		const self = this;
 		api.commonInit(self);
 		var week = new Date().getDay().toString();
-		if(week==1||week==2){
+		if(week==1||week==0){
 			self.setData({
 				web_canOrder: true,
 			});

@@ -33,7 +33,7 @@ Page({
 
   getMainData(isNew){
     const self = this;
-		api.buttonCanClick(self);	
+	api.buttonCanClick(self);	
     if(isNew){
       api.clearPageIndex(self);  
     };

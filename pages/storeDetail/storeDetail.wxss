@@ -11,7 +11,7 @@ page{
 	width:100%
 }
 .store-infomation{
-	height:220rpx;
+	/* height:220rpx; */
 	width:92%;
 	padding: 20rpx 4%;
 	background: #fff;

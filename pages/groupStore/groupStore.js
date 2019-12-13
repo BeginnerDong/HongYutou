@@ -14,8 +14,10 @@ Page({
 	data: {
 
 		mainData: [],
-		isFirstLoadAllStandard: ['getMainData']
-
+		isFirstLoadAllStandard: ['getMainData','getLocation'],
+		La1: '',
+		lo1: '',
+		order: {},
 	},
 
 	onLoad(options) {
@@ -25,8 +27,43 @@ Page({
 		api.commonInit(self);
 		self.data.id = options.id;
 		self.data.standard = options.standard;
-		self.getMainData()
+		self.getLocation()
 
+	},
+	
+	cancle(e) {
+		const self = this;
+		self.data.is_show = false;
+		self.setData({
+			is_show: self.data.is_show
+		})
+	},
+	
+	
+	getLocation() {
+		const self = this;
+		const callback = (res) => {
+			if (res) {
+				console.log(res)
+				if(res.authSetting){
+					self.data.is_show=true;
+					self.setData({
+						is_show:self.data.is_show
+					})
+					api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getLocation', self)
+					api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getMainData', self)
+					return
+				}
+				self.data.la1 = res.latitude;
+				self.data.lo1 = res.longitude
+				
+				/* self.data.la1 = 34.23652;
+				self.data.lo1 = 108.89122 */
+			};
+			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getLocation', self)
+			self.getMainData(true);
+		};
+		api.getLocation('getGeocoder', callback);	
 	},
 
 
@@ -54,6 +91,15 @@ Page({
 	getMainData() {
 		const self = this;
 		const postData = {};
+		var lat = self.data.la1;
+		var lon = self.data.lo1;
+		var orderKey = 'ACOS(SIN((' + lat + '* 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) +COS((' + lat +
+			' * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS((' + lon +
+			' * 3.1415) / 180 - (longitude * 3.1415) / 180 ) ) * 6379';
+		
+		
+		
+		self.data.order[orderKey] = 'asc';
 		postData.paginate = api.cloneForm(self.data.paginate);
 		postData.tokenFuncName = 'getProjectToken';
 		postData.searchItem = {
@@ -73,6 +119,7 @@ Page({
 				condition: '='
 			}
 		}
+		postData.order = api.cloneForm(self.data.order)
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
 				self.data.mainData.push.apply(self.data.mainData, res.info.data);

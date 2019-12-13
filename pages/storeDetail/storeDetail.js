@@ -53,7 +53,7 @@ Page({
 		api.commonInit(self);
 		self.data.user_no = options.user_no;
 		self.getLocation();
-		self.getCouponData();
+		
 		self.getUserCouponData()
 		self.setData({
 			web_isDiscount: self.data.isDiscount
@@ -104,6 +104,26 @@ Page({
 			phoneNumber: self.data.mainData.info.phone,
 		})
 	},
+	
+	intoMap() {
+		const self = this;
+		wx.getLocation({
+			type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+			success: function(res) { //因为这里得到的是你当前位置的经纬度
+				var latitude = res.latitude
+				var longitude = res.longitude
+				wx.openLocation({ //所以这里会显示你当前的位置
+					// longitude: 109.045249,
+					// latitude: 34.325841,
+					longitude: parseFloat(self.data.mainData.longitude),
+					latitude: parseFloat(self.data.mainData.latitude),
+					name: self.data.mainData.info.shop_name,
+					address: self.data.mainData.info.address,
+					scale: 28
+				})
+			}
+		})
+	},
 
 	getProductData() {
 		const self = this;
@@ -134,12 +154,9 @@ Page({
 		};
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
-
+				api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getCouponData', self);
 			} else {
-				self.data.isDiscount = true;
-				self.setData({
-					web_isDiscount: self.data.isDiscount
-				})
+				self.getCouponData();	
 			}
 
 			self.setData({
@@ -159,6 +176,10 @@ Page({
 		const callback = (res) => {
 			if (res.info.data.length > 0) {
 				self.data.couponData = res.info.data[0]
+				self.data.isDiscount = true;
+				self.setData({
+					web_isDiscount: self.data.isDiscount
+				})
 			};
 			api.checkLoadAll(self.data.isFirstLoadAllStandard, 'getCouponData', self);
 			self.setData({

@@ -291,7 +291,7 @@ Page({
 				});
 			};
 		}
-		if (self.data.distributionData&&self.data.distributionData.info.data[0].partner.parent_no) {
+		if (self.data.distributionData&&self.data.distributionData.info.data[0]&&self.data.distributionData.info.data[0].partner&&self.data.distributionData.info.data[0].partner.parent_no) {
 			if (self.data.pay.wxPay && self.data.pay.wxPay.price && self.data.pay.wxPay.price > 0 && self.data.mainData.partner_ratio >
 				0) {
 				postData.payAfter.push({

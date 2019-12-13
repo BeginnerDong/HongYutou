@@ -93,7 +93,7 @@
 			</view>
 		</view>
 		<view class="detail_show">
-			<view id="detail" class="group-detail font28" style="border:none; {{tabCurrent == 0?'display:block':'display:none'}}">
+			<view id="detail" class="group-detail font28" style="border:none;width: 100%;padding: 0;{{tabCurrent == 0?'display:block':'display:none'}}">
 				
 					<view class="content ql-editor font26">
 						<import src="../../wxParse/wxParse.wxml" />
@@ -101,7 +101,7 @@
 					</view>
 				
 			</view>
-	
+
 			<view id="comment" style="{{tabCurrent == 1?'display:block':'display:none'}}">
 				<view class="w710 comment_cont">
 	

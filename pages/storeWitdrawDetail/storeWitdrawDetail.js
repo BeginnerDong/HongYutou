@@ -26,6 +26,15 @@ Page({
 	onLoad(options) {
 		const self = this;
 		api.commonInit(self);
+		if(wx.getStorageSync('threeInfo').primary_scope==30){
+			self.setData({
+				web_isStore:true
+			})
+		}else{
+			self.setData({
+				web_isStore:false
+			})
+		};
 		const callback = (res) =>{
 			var array = wx.getStorageSync('info').thirdApp.custom_rule.withdrawLimit.split(',');
 			console.log('array',array)
@@ -33,7 +42,7 @@ Page({
 			console.log('day',day)
 			var pisition = array.indexOf(day);
 			console.log('array.indexOf(day)',array.indexOf(day))
-			if(pisition>0){
+			if(pisition>=0){
 				self.data.canWithdraw = true
 			}else{
 				self.data.canWithdraw = false
